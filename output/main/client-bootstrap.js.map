@@ -1,0 +1,1 @@
+{"version":3,"file":"client-bootstrap.js","sourceRoot":"","sources":["../../lib/main/client-bootstrap.ts"],"names":[],"mappings":";AAAA,wCAAkC,iCAAiC,CAAC,CAAA;AACpE,gCAAiC,iBAAiB,CAAC,CAAA;AACnD,8BAAkC,eAAe,CAAC,CAAA;AAClD,2CAAwB,mCAAmC,CAAC,CAAA;AAE5D,oCAAS,CAAC,iCAAmB,EAAE,CAAC,kCAAkB,EAAE,2CAAmB,CAAC,CAAC;KACpE,KAAK,CAAC,GAAG,IAAI,OAAO,CAAC,KAAK,CAAC,GAAG,CAAC,CAAC,CAAC"}

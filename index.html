@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Dily 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+</head>
+<body>
+    <my-app><img src="loading.gif"></my-app>
+
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <script>
+        (function() {
+            var ngPackageNames = [
+                'common',
+                'compiler',
+                'core',
+                'http',
+                'platform-browser',
+                'platform-browser-dynamic',
+                'upgrade'
+            ];
+            var packages = {
+                output: {format: 'cjs', defaultExtension: 'js'},
+                rxjs: { defaultExtension: 'js' },
+                "socket.io-client": {main: 'socket.io.js', defaultExtension: 'js'}
+            };
+            ngPackageNames.forEach(function(pkgName) {
+                packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+            });
+            packages['@angular/router'] = { main: 'index.js', defaultExtension: 'js' };
+            System.config({packages: packages, map: {"@angular": "node_modules/@angular", rxjs: "node_modules/rxjs", "socket.io-client": "node_modules/socket.io-client"}});
+            System.import('output/main/client-bootstrap').catch(function(e) {console.error.apply(console, e)} );
+        })();
+    </script>
+</body>
+</html>
