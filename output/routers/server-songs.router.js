@@ -8,26 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const server_db_1 = require('../main/server-db');
+const server_songs_service_1 = require('../songs/server-songs.service');
 const core_1 = require('@angular/core');
 let SongsRouter = class SongsRouter {
-    constructor(_dbService) {
-        this._dbService = _dbService;
+    constructor(_songsService) {
+        this._songsService = _songsService;
     }
     init(app) {
         this._app = app;
-        let dbClient = this._dbService.dbClient;
-        console.log('~~dumping information_schema.tables~~');
-        dbClient
-            .query('SELECT table_schema,table_name FROM information_schema.tables;')
-            .on('row', (row) => {
-            console.log(JSON.stringify(row));
+        this._songsService.selectSongs()
+            .then((result) => {
+            console.log('rows', result.rows);
         });
     }
 };
 SongsRouter = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [server_db_1.DbService])
+    __metadata('design:paramtypes', [server_songs_service_1.SongsService])
 ], SongsRouter);
 exports.SongsRouter = SongsRouter;
 //# sourceMappingURL=server-songs.router.js.map

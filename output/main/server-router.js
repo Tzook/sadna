@@ -20,7 +20,7 @@ let Router = class Router {
             this._songsRouter,
         ];
         for (let i = 0, l = routers.length; i < l; i++) {
-            routers[i].init(app);
+            routers[i].init(this._app);
         }
     }
 };

@@ -40,8 +40,7 @@ export class ServerMain {
         // this._serverSocketService.init(io(server));
         this._dbService.connect()
             .then(() => {
-                this._router.app = this._app;
-                this._router.init();
+                this._router.init(this._app);
             })
             .catch((e)=>{console.error(e)});
 		console.log("\t+*+*+ New server on localhost:" + this._app.get('port') + " +*+*+");
