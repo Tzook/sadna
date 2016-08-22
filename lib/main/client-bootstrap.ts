@@ -1,7 +1,28 @@
-import {ClientSocketService} from '../socket/client-socket.service';
-import {appRouterProviders} from './client-routes';
-import {ClientMainComponent} from './client-main';
-import {bootstrap} from '@angular/platform-browser-dynamic';
+import {AddSongComponent} from '../songs/add-song.component';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
-bootstrap(ClientMainComponent, [appRouterProviders, ClientSocketService])
-    .catch(err => console.error(err));
+import {ClientMainComponent} from './client-main';
+import {routing} from './client-routes';
+
+@NgModule({
+	imports: [
+		BrowserModule,
+		routing
+	],
+	declarations: [
+		ClientMainComponent,
+		AddSongComponent
+	],
+	providers: [
+		// HeroService
+	],
+	bootstrap: [ ClientMainComponent ]
+})
+export class AppModule {}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+	.catch(e => {
+		console.error(e);
+	});

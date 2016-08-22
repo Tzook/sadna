@@ -1,13 +1,12 @@
-import {ChooseRoomComponent} from '../choose-room/choose-room.component';
-import {RouterConfig, provideRouter} from '@angular/router';
+import {AddSongComponent} from '../songs/add-song.component';
+import {Routes, RouterModule} from '@angular/router';
 
-const routes: RouterConfig = [
-    { path: '', component: ChooseRoomComponent },
-    //   { path: 'heroes', component: HeroListComponent },
-    //   { path: 'hero/:id', component: HeroDetailComponent },
-    //   { path: '**', component: PageNotFoundComponent }
+const routes: Routes = [
+    {
+        path: '',
+        component: AddSongComponent,
+        pathMatch: 'full'
+    }
 ];
 
-export const appRouterProviders = [
-    provideRouter(routes)
-];
+export const routing = RouterModule.forRoot(routes);;

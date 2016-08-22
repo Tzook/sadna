@@ -8,20 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const lobby_component_1 = require('../lobby/lobby.component');
 const core_1 = require('@angular/core');
-let ClientMainComponent = class ClientMainComponent {
+let LobbyComponent = class LobbyComponent {
+    constructor() {
+    }
+    ngOnInit() {
+    }
 };
-ClientMainComponent = __decorate([
+LobbyComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
+        moduleId: module.id,
+        selector: 'lobby',
         template: `
-        <lobby></lobby>
-        <router-outlet></router-outlet>
-    `,
-        directives: [lobby_component_1.LobbyComponent]
+        <nav>
+            I am navigation.
+        </nav>
+    `
     }), 
     __metadata('design:paramtypes', [])
-], ClientMainComponent);
-exports.ClientMainComponent = ClientMainComponent;
-//# sourceMappingURL=client-main.js.map
+], LobbyComponent);
+exports.LobbyComponent = LobbyComponent;
+//# sourceMappingURL=lobby.component.js.map

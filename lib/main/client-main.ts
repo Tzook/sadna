@@ -1,12 +1,12 @@
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import {LobbyComponent} from '../lobby/lobby.component';
 import {Component} from '@angular/core';
 
 @Component({
     selector: 'my-app',
     template: `
+        <lobby></lobby>
         <router-outlet></router-outlet>
     `,
-    directives: [ROUTER_DIRECTIVES]
-
+    directives: [LobbyComponent]
 })
 export class ClientMainComponent {}

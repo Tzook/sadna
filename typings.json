@@ -10,8 +10,6 @@
     "mime": "github:DefinitelyTyped/DefinitelyTyped/mime/mime.d.ts#2a24bbb7ca4f13e52c7f6a0ab6144b565bf1ef55",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#2a24bbb7ca4f13e52c7f6a0ab6144b565bf1ef55",
     "pg": "registry:dt/pg#0.0.0+20160514172051",
-    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#2a24bbb7ca4f13e52c7f6a0ab6144b565bf1ef55",
-    "socket.io": "registry:dt/socket.io#1.4.4+20160317120654",
-    "socket.io-client": "registry:dt/socket.io-client#1.4.4+20160317120654"
+    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#2a24bbb7ca4f13e52c7f6a0ab6144b565bf1ef55"
   }
 }

@@ -1,9 +1,4 @@
 "use strict";
-// import {ActiveUsersService} from '../room/active-users.service';
-// import {ActiveRoomsService} from '../room/active-rooms.service';
-// import {RoomValidatorService} from '../choose-room/room-validator.service';
-// import {EnterRoomService} from '../choose-room/enter-room.service';
-// import {ServerSocketService} from '../socket/server-socket.service';
 const server_db_1 = require('./server-db');
 const server_router_1 = require('./server-router');
 const server_main_1 = require('./server-main');

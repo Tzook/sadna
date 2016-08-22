@@ -9,13 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-let ClientSocketService = class ClientSocketService {
+let AddSongComponent = class AddSongComponent {
     constructor() {
     }
+    ngOnInit() { console.log('adding song'); }
 };
-ClientSocketService = __decorate([
-    core_1.Injectable(), 
+AddSongComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'selector',
+        template: `
+        I am add song component
+    `
+    }), 
     __metadata('design:paramtypes', [])
-], ClientSocketService);
-exports.ClientSocketService = ClientSocketService;
-//# sourceMappingURL=client-socket.js.map
+], AddSongComponent);
+exports.AddSongComponent = AddSongComponent;
+//# sourceMappingURL=add-song.component.js.map
