@@ -1,6 +1,6 @@
 "use strict";
 /// <reference path="../../typings/index.d.ts" />
-/// <reference path="../../typings/manully.d.ts" />
+/// <reference path="../../main.d.ts" />
 const shim = require("core-js");
 shim;
 const server_main_1 = require('./server-main');

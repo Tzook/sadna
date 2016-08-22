@@ -1,4 +1,3 @@
-// import {ServerSocketService} from '../socket/server-socket.service';
 import {DbService} from './server-db';
 import {Router} from './server-router';
 import * as express from 'express';
@@ -8,14 +7,12 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as http from 'http';
 import * as path from 'path';
-// import * as io from "socket.io";
 
 import {Injectable} from '@angular/core';
 
 @Injectable()
 export class ServerMain {
     private _app: any;
-    // constructor(private _serverSocketService: ServerSocketService) {
     constructor(private _dbService: DbService, private _router: Router) {
         this._app = express();
     }
@@ -36,8 +33,6 @@ export class ServerMain {
             res.sendFile('index.html', { root: rootDir });
         });
         let server = http.createServer(this._app).listen(this._app.get('port'));
-		// this._app.socketio = require('socket.io')(this.app.server);
-        // this._serverSocketService.init(io(server));
         this._dbService.connect()
             .then(() => {
                 this._router.init(this._app);

@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-// import {ServerSocketService} from '../socket/server-socket.service';
 const server_db_1 = require('./server-db');
 const server_router_1 = require('./server-router');
 const express = require('express');
@@ -18,10 +17,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http');
 const path = require('path');
-// import * as io from "socket.io";
 const core_1 = require('@angular/core');
 let ServerMain = class ServerMain {
-    // constructor(private _serverSocketService: ServerSocketService) {
     constructor(_dbService, _router) {
         this._dbService = _dbService;
         this._router = _router;
@@ -42,8 +39,6 @@ let ServerMain = class ServerMain {
             res.sendFile('index.html', { root: rootDir });
         });
         let server = http.createServer(this._app).listen(this._app.get('port'));
-        // this._app.socketio = require('socket.io')(this.app.server);
-        // this._serverSocketService.init(io(server));
         this._dbService.connect()
             .then(() => {
             this._router.init(this._app);

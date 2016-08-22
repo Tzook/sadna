@@ -1,5 +1,4 @@
-let pg = require('pg');
-
+import * as pg from "pg";
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -20,7 +19,7 @@ export class DbService {
             });
         });
     }
-    
+
     get dbClient () {
         return this.client;
     }
