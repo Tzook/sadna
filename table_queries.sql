@@ -44,7 +44,9 @@ CREATE TABLE IF NOT EXISTS "public"."word_in_song" (
 );
 
 CREATE UNIQUE INDEX word_in_song_pkey ON word_in_song USING btree (id);
-CREATE UNIQUE INDEX word_in_song_foreign ON word_in_song USING btree (song_id, word_id);
+CREATE UNIQUE INDEX word_in_song_foreign ON word_in_song USING btree (song_id, word_id, col, "row");
+CREATE UNIQUE INDEX word_in_song_foreign_house ON word_in_song USING btree (song_id, word_id, house, sentence, word_num);
+CREATE UNIQUE INDEX word_in_song_foreign_all ON word_in_song USING btree (song_id, word_id, col, "row", house, sentence, word_num);
 
 CREATE TABLE IF NOT EXISTS "public"."word_in_group" (
     "id" serial,

@@ -9,10 +9,10 @@ export class SongsRouter {
     constructor(private _songsService: SongsService) {}
 
     init (app) {
-        this._app = app;    
-        this._songsService.selectSongs()
-            .then((result: SongResult) => {
-                console.log('rows', result.rows);
-            });
+        this._app = app;
+        this._songsService.selectSongs();
+            // .then((result: SongResult) => {
+            //     console.log('rows', result.rows);
+            // });
     }  
 }

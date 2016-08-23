@@ -44,3 +44,28 @@ export interface SongResult extends Result {
     rows: Song[],
     addRow: (row: Song) => void,
 }
+
+export interface Word extends Row {
+    value: string,
+    is_punctuation?: boolean,
+}
+
+export interface WordResult extends Result {
+    rows: Word[],
+    addRow: (row: Word) => void,
+}
+
+export interface WordInSong extends Row {
+    song_id?: number,
+    word_id?: number,
+    col: number,
+    row: number,
+    house: number,
+    sentence: number,
+    word_num: number,
+} 
+
+export interface WordInSongResult extends Result {
+    rows: WordInSong[],
+    addRow: (row: WordInSong) => void,
+}
