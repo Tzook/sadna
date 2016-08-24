@@ -16,10 +16,10 @@ let SongsRouter = class SongsRouter {
     }
     init(app) {
         this._app = app;
-        this._songsService.selectSongs();
-        // .then((result: SongResult) => {
-        //     console.log('rows', result.rows);
-        // });
+        this._songsService.selectSongs()
+            .then((result) => {
+            console.log('rows', result.rows);
+        });
     }
 };
 SongsRouter = __decorate([

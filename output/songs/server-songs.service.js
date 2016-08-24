@@ -85,6 +85,33 @@ let SongsService = class SongsService {
         });
     }
     /**
+     * Insert words to words table
+     */
+    insertWords(words) {
+        console.info(`inserting words amount ${words.length}`);
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            let bindings = [], query = `
+                INSERT INTO words (value, is_punctuation)
+                    values`;
+            for (let i = 0, l = words.length * 2; i < l; i += 2) {
+                query = `${query}
+                        ($${i + 1}, $${i + 2})${i === l - 2 ? '' : ','}`;
+                bindings.push(words[i / 2].value, words[i / 2].is_punctuation || false);
+            }
+            query = `${query}
+                        ON CONFLICT DO NOTHING;`;
+            dbClient.query(query, bindings, (e, result) => {
+                if (e)
+                    reject(e);
+                else {
+                    console.info(`done inserting word ${words.length}`);
+                    resolve(result);
+                }
+            });
+        });
+    }
+    /**
      * Insert word in song safe to word_in_song table
      */
     insertWordInSong(wordInSong) {
@@ -120,6 +147,35 @@ let SongsService = class SongsService {
         });
     }
     /**
+     * Insert words to word_in_song table
+     */
+    insertWordsInSong(wordsInSong, words, song_id) {
+        console.info(`inserting word in song id: ${song_id} and words length is: ${wordsInSong.length}`);
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient, j, bindings = [], query = `
+                INSERT INTO word_in_song (song_id, word_id, col, "row", house, sentence, word_num)
+                    values`;
+            for (let i = 0, l = wordsInSong.length * 6; i < l; i += 6) {
+                j = i / 6;
+                query = `${query}
+                        (${song_id}, (SELECT id FROM words
+                            WHERE value = $${i + 1}
+                        ), $${i + 2}, $${i + 3}, $${i + 4}, $${i + 5}, $${i + 6})${i === l - 6 ? '' : ','}`;
+                bindings.push(words[j].value, wordsInSong[j].col, wordsInSong[j].row, wordsInSong[j].house, wordsInSong[j].sentence, wordsInSong[j].word_num);
+            }
+            query = `${query}
+                        ON CONFLICT DO NOTHING;`;
+            dbClient.query(query, bindings, (e, result) => {
+                if (e)
+                    reject(e);
+                else {
+                    console.info(`done inserting word in song id: ${song_id} and words length was: ${wordsInSong.length}`);
+                    resolve(result);
+                }
+            });
+        });
+    }
+    /**
      * Load a song in the DB, from a song and all it's components
      */
     loadSong(song, words, wordInSong) {
@@ -127,21 +183,12 @@ let SongsService = class SongsService {
             console.log(`start loading song ${song.name} with ${words.length} words.`);
             let promiseLand = [], wordPromises = [], song_id = null;
             promiseLand.push(this.insertSong(song));
-            for (let i = 0, l = words.length; i < l; i++) {
-                promiseLand.push(this.insertWord(words[i]));
-            }
+            promiseLand.push(this.insertWords(words));
             Promise.all(promiseLand)
                 .then(promiseLandRes => {
                 console.log(`resolved words and song for ${song.name}`);
-                let songResult = promiseLandRes.shift(), song_id = songResult.rows[0].id, wordResult, word_id;
-                for (let i = 1, l = promiseLandRes.length; i < l; i++) {
-                    wordResult = promiseLandRes[i];
-                    word_id = wordResult.rows[0].id;
-                    wordInSong[i].song_id = song_id;
-                    wordInSong[i].word_id = word_id;
-                    wordPromises.push(this.insertWordInSong(wordInSong[i]));
-                }
-                Promise.all(wordPromises)
+                let songResult = promiseLandRes.shift(), song_id = songResult.rows[0].id;
+                this.insertWordsInSong(wordInSong, words, song_id)
                     .then(wordPromisesRes => {
                     console.log(`resolved all for ${song.name}`);
                     resolve(true);
@@ -178,7 +225,7 @@ let SongsService = class SongsService {
             let words = [];
             let wordsInSong = [];
             let val = 'word';
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 50; i++) {
                 words.push({
                     value: `${val}_${i}`,
                     is_punctuation: false,
