@@ -1,0 +1,1 @@
+{"version":3,"file":"tabs.constants.js","sourceRoot":"","sources":["../../lib/navigation/tabs.constants.ts"],"names":[],"mappings":";AAAA,mCAA0C,oBAAoB,CAAC,CAAA;AAClD,YAAI,GAAG;IAChB;QACI,GAAG,EAAE,8BAAW;QAChB,IAAI,EAAE,OAAO;KAChB;IACD;QACI,GAAG,EAAE,iCAAc;QACnB,IAAI,EAAE,UAAU;KACnB;CACJ,CAAC"}

@@ -8,12 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+const lobby_component_1 = require('../lobby/lobby.component');
 const add_song_component_1 = require('../songs/add-song.component');
+const client_routes_1 = require('../navigation/client-routes');
 const core_1 = require('@angular/core');
 const platform_browser_1 = require('@angular/platform-browser');
 const platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 const client_main_1 = require('./client-main');
-const client_routes_1 = require('./client-routes');
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -24,7 +25,8 @@ AppModule = __decorate([
         ],
         declarations: [
             client_main_1.ClientMainComponent,
-            add_song_component_1.AddSongComponent
+            add_song_component_1.AddSongComponent,
+            lobby_component_1.LobbyComponent
         ],
         providers: [],
         bootstrap: [client_main_1.ClientMainComponent]

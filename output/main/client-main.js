@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const lobby_component_1 = require('../lobby/lobby.component');
+const navigation_component_1 = require('../navigation/navigation.component');
 const core_1 = require('@angular/core');
 let ClientMainComponent = class ClientMainComponent {
 };
@@ -16,10 +16,10 @@ ClientMainComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
         template: `
-        <lobby></lobby>
+        <navigation></navigation>
         <router-outlet></router-outlet>
     `,
-        directives: [lobby_component_1.LobbyComponent]
+        directives: [navigation_component_1.NavigationComponent]
     }), 
     __metadata('design:paramtypes', [])
 ], ClientMainComponent);

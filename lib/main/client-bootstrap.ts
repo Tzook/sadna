@@ -1,10 +1,11 @@
+import {LobbyComponent} from '../lobby/lobby.component';
 import {AddSongComponent} from '../songs/add-song.component';
+import {routing} from '../navigation/client-routes';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {ClientMainComponent} from './client-main';
-import {routing} from './client-routes';
 
 @NgModule({
 	imports: [
@@ -13,7 +14,8 @@ import {routing} from './client-routes';
 	],
 	declarations: [
 		ClientMainComponent,
-		AddSongComponent
+		AddSongComponent,
+		LobbyComponent
 	],
 	providers: [
 		// HeroService

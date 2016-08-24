@@ -8,22 +8,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+const tabs_constants_1 = require('./tabs.constants');
 const core_1 = require('@angular/core');
-let LobbyComponent = class LobbyComponent {
+let NavigationComponent = class NavigationComponent {
     constructor() {
+        this.links = tabs_constants_1.TABS;
     }
-    ngOnInit() {
-    }
+    ngOnInit() { }
 };
-LobbyComponent = __decorate([
+NavigationComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        selector: 'lobby',
+        selector: 'navigation',
+        styles: [`
+        ul {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+        }
+        a {
+            display: block;
+            color: white;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .active {
+            color: sandybrown;
+        }
+        a:hover {
+            background-color: #111;
+        }
+    `],
         template: `
-        lobby be here.
+        <ul>
+            <li *ngFor="let link of links">
+                <a [routerLink]="link.url" routerLinkActive="active">{{link.name}}</a>
+            </li>
+        </ul>
     `
     }), 
     __metadata('design:paramtypes', [])
-], LobbyComponent);
-exports.LobbyComponent = LobbyComponent;
-//# sourceMappingURL=lobby.component.js.map
+], NavigationComponent);
+exports.NavigationComponent = NavigationComponent;
+//# sourceMappingURL=navigation.component.js.map

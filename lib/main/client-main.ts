@@ -1,12 +1,12 @@
-import {LobbyComponent} from '../lobby/lobby.component';
+import {NavigationComponent} from '../navigation/navigation.component';
 import {Component} from '@angular/core';
 
 @Component({
     selector: 'my-app',
     template: `
-        <lobby></lobby>
+        <navigation></navigation>
         <router-outlet></router-outlet>
     `,
-    directives: [LobbyComponent]
+    directives: [NavigationComponent]
 })
-export class ClientMainComponent {}
+export class ClientMainComponent { }

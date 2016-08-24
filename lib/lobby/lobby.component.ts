@@ -4,9 +4,7 @@ import { Component, OnInit } from '@angular/core';
     moduleId: module.id,
     selector: 'lobby',
     template: `
-        <nav>
-            I am navigation.
-        </nav>
+        lobby be here.
     `
 })
 export class LobbyComponent implements OnInit {
