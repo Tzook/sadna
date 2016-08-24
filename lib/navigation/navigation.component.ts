@@ -1,26 +1,27 @@
 import {TABS} from './tabs.constants';
-import {Component, OnInit} from '@angular/core';
+import {COLORS, TAB_SPACE_AROUND} from './navigation-style.constants';
+import {Component} from '@angular/core';
 
 @Component({
     moduleId: module.id,
     selector: 'navigation',
     styles: [`
         ul {
-            background-color: #333;
+            background-color: ${COLORS.NAVIGATION_BG};
             display: flex;
             justify-content: center;
         }
         a {
             display: block;
-            color: white;
-            padding: 14px 16px;
             text-decoration: none;
+            color: ${COLORS.TEXT};
+            padding: ${TAB_SPACE_AROUND}px;
         }
         .active {
-            color: sandybrown;
+            color: ${COLORS.ACTIVE_TEXT};
         }
         a:hover {
-            background-color: #111;
+            background-color: ${COLORS.HOVER_BG};
         }
     `],
     template: `
@@ -31,11 +32,6 @@ import {Component, OnInit} from '@angular/core';
         </ul>
     `
 })
-export class NavigationComponent implements OnInit {
-    private links;
-    constructor() {
-        this.links = TABS;
-    }
-
-    ngOnInit() { }
+export class NavigationComponent {
+    private links = TABS;
 }

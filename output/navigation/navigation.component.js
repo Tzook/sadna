@@ -9,12 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const tabs_constants_1 = require('./tabs.constants');
+const navigation_style_constants_1 = require('./navigation-style.constants');
 const core_1 = require('@angular/core');
 let NavigationComponent = class NavigationComponent {
     constructor() {
         this.links = tabs_constants_1.TABS;
     }
-    ngOnInit() { }
 };
 NavigationComponent = __decorate([
     core_1.Component({
@@ -22,21 +22,21 @@ NavigationComponent = __decorate([
         selector: 'navigation',
         styles: [`
         ul {
-            background-color: #333;
+            background-color: ${navigation_style_constants_1.COLORS.NAVIGATION_BG};
             display: flex;
             justify-content: center;
         }
         a {
             display: block;
-            color: white;
-            padding: 14px 16px;
             text-decoration: none;
+            color: ${navigation_style_constants_1.COLORS.TEXT};
+            padding: ${navigation_style_constants_1.TAB_SPACE_AROUND}px;
         }
         .active {
-            color: sandybrown;
+            color: ${navigation_style_constants_1.COLORS.ACTIVE_TEXT};
         }
         a:hover {
-            background-color: #111;
+            background-color: ${navigation_style_constants_1.COLORS.HOVER_BG};
         }
     `],
         template: `
