@@ -8,27 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const add_song_router_1 = require('../add-song/add-song.router');
-const server_songs_router_1 = require('../routers/server-songs.router');
+const add_song_constants_1 = require('./add-song.constants');
 const core_1 = require('@angular/core');
-let ServerRouter = class ServerRouter {
-    constructor(songsRouter, addSongRouter) {
-        this.songsRouter = songsRouter;
-        this.addSongRouter = addSongRouter;
+let AddSongRouter = class AddSongRouter {
+    constructor() {
     }
     init(app) {
-        this.app = app;
-        let routers = [
-            this.songsRouter,
-        ];
-        for (let i = 0, l = routers.length; i < l; i++) {
-            routers[i].init(this.app);
+        app.post(add_song_constants_1.ROUTE_URL, log);
+        function log() {
+            console.log('in log!!!');
         }
     }
 };
-ServerRouter = __decorate([
+AddSongRouter = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [server_songs_router_1.SongsRouter, add_song_router_1.AddSongRouter])
-], ServerRouter);
-exports.ServerRouter = ServerRouter;
-//# sourceMappingURL=server-router.js.map
+    __metadata('design:paramtypes', [])
+], AddSongRouter);
+exports.AddSongRouter = AddSongRouter;
+//# sourceMappingURL=add-song.router.js.map

@@ -1,6 +1,6 @@
 import {ROUTE_LOBBY, ROUTE_ADD_SONG} from '../navigation/routes.constants';
 import {LobbyComponent} from '../lobby/lobby.component';
-import {AddSongComponent} from '../songs/add-song.component';
+import {AddSongComponent} from '../add-song/add-song.component';
 import {Routes, RouterModule} from '@angular/router';
 
 const routes: Routes = [

@@ -13,8 +13,8 @@
             padding: 0;
             margin: 0;
             border: 0;
+            outline: 0;
             font: 100% "Helvetica Neue", Helvetica, Arial, sans-serif;
-
         }
         html,
         body {
@@ -24,8 +24,39 @@
         body {
             -webkit-font-smoothing: antialiased;
         }
+        table {
+            width: 100%;
+            border-spacing: 0;
+        }
+        textarea {
+            resize: none;
+        }
         ul {
             list-style-type: none;
+        }
+        button[disabled] {
+            background: lightgrey;
+            cursor: not-allowed;
+        }
+        input,
+        textarea {
+            width: 100%;
+            padding: 2px 4px;
+            border-radius: 1px;
+            border: 1px solid rgba(0,0,0,.4);
+            transition: box-shadow linear .2s;
+        }
+        input:focus,
+        textarea:focus {
+            box-shadow: 0 0 2px;
+        }
+        button {
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 2px;
+            background: whitesmoke;
+            box-shadow: 1px 1px 3px -1px rgba(0,0,0,.6);
+            border: 1px solid black;
         }
     </style>
 </head>
@@ -46,6 +77,7 @@
                 'core',
                 'http',
                 'router',
+                'forms',
                 'platform-browser',
                 'platform-browser-dynamic',
                 'upgrade'
@@ -59,7 +91,7 @@
             });
             // packages['@angular/router'] = { main: 'index.js', defaultExtension: 'js' };
             System.config({packages: packages, map: {"@angular": "node_modules/@angular", rxjs: "node_modules/rxjs"}});
-            System.import('output/main/client-bootstrap').catch(function(e) {console.error.apply(console, e)} );
+            System.import('output/main/client-bootstrap');
         })();
     </script>
 </body>

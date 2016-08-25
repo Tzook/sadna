@@ -1,30 +1,11 @@
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-const song_object_1 = require('./song.object');
-const core_1 = require('@angular/core');
-let AddSongComponent = class AddSongComponent {
-    constructor() {
-        this.model = new song_object_1.SongObject();
-        this.loading = false;
-    }
-    onSubmit() {
-        this.loading = true;
-        console.log('Submitting', this.model);
-    }
-};
-AddSongComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'add-song',
-        styles: [`
+import {AddSongService} from './add-song.service';
+import {SongObject} from './song.object';
+import {Component} from '@angular/core';
+
+@Component({
+    moduleId: module.id,
+    selector: 'add-song',
+    styles: [`
         form {
             text-align: center;
             padding: 20px;
@@ -37,7 +18,7 @@ AddSongComponent = __decorate([
             text-align: left;
         }
     `],
-        template: `
+    template: `
         <form (ngSubmit)="onSubmit()" #addSongForm="ngForm">
             <table>
                 <tr>
@@ -66,9 +47,21 @@ AddSongComponent = __decorate([
                 Adding song...
             </div>
         </form>
-    `
-    }), 
-    __metadata('design:paramtypes', [])
-], AddSongComponent);
-exports.AddSongComponent = AddSongComponent;
-//# sourceMappingURL=add-song.component.js.map
+    `,
+    viewProviders: [AddSongService]
+})
+export class AddSongComponent {
+    private model: SongObject;
+    private loading: boolean;
+
+    constructor(private addSongService: AddSongService) {
+        this.model = new SongObject();
+        this.loading = false;
+    }
+
+    private onSubmit() {
+        // this.loading = true;
+        console.log('Submitting', this.model);
+        this.addSongService.addSong(this.model);
+    }
+}

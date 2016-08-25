@@ -19,9 +19,9 @@ const http = require('http');
 const path = require('path');
 const core_1 = require('@angular/core');
 let ServerMain = class ServerMain {
-    constructor(_dbService, _router) {
+    constructor(_dbService, serverRouter) {
         this._dbService = _dbService;
-        this._router = _router;
+        this.serverRouter = serverRouter;
         this._app = express();
     }
     useDependencies() {
@@ -41,7 +41,7 @@ let ServerMain = class ServerMain {
         let server = http.createServer(this._app).listen(this._app.get('port'));
         this._dbService.connect()
             .then(() => {
-            this._router.init(this._app);
+            this.serverRouter.init(this._app);
         })
             .catch((e) => { console.error(e); });
         console.log("\t+*+*+ New server on localhost:" + this._app.get('port') + " +*+*+");
@@ -55,7 +55,7 @@ let ServerMain = class ServerMain {
 };
 ServerMain = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [server_db_1.DbService, server_router_1.Router])
+    __metadata('design:paramtypes', [server_db_1.DbService, server_router_1.ServerRouter])
 ], ServerMain);
 exports.ServerMain = ServerMain;
 //# sourceMappingURL=server-main.js.map
