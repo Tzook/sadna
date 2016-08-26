@@ -27,7 +27,7 @@ let SongsService = class SongsService {
                     SELECT id, name
                     FROM songs
                     WHERE name = $1
-                ), 
+                ),
                 i_song AS (
                     INSERT INTO songs (name, path, writer, composer)
                     SELECT $1, $2, $3, $4
@@ -62,7 +62,7 @@ let SongsService = class SongsService {
                     SELECT id, value
                     FROM words
                     WHERE value = $1
-                ), 
+                ),
                 i_word AS (
                     INSERT INTO words (value, is_punctuation)
                     SELECT $1, $2

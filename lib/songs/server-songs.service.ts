@@ -22,7 +22,7 @@ export class SongsService
                     SELECT id, name
                     FROM songs
                     WHERE name = $1
-                ), 
+                ),
                 i_song AS (
                     INSERT INTO songs (name, path, writer, composer)
                     SELECT $1, $2, $3, $4
@@ -59,7 +59,7 @@ export class SongsService
                     SELECT id, value
                     FROM words
                     WHERE value = $1
-                ), 
+                ),
                 i_word AS (
                     INSERT INTO words (value, is_punctuation)
                     SELECT $1, $2
@@ -96,7 +96,7 @@ export class SongsService
             for (let i = 0, l = words.length*2; i < l; i+=2) {
                 query = `${query}
                         ($${i+1}, $${i+2})${i === l - 2 ? '' : ','}`;
-                
+
                 bindings.push(words[i/2].value, words[i/2].is_punctuation || false);
             }
             query = `${query}
@@ -164,8 +164,8 @@ export class SongsService
                         (${song_id}, (SELECT id FROM words
                             WHERE value = $${i+1}
                         ), $${i+2}, $${i+3}, $${i+4}, $${i+5}, $${i+6})${i === l - 6 ? '' : ','}`;
-                
-                bindings.push(words[j].value, wordsInSong[j].col, wordsInSong[j].row, 
+
+                bindings.push(words[j].value, wordsInSong[j].col, wordsInSong[j].row,
                     wordsInSong[j].house, wordsInSong[j].sentence, wordsInSong[j].word_num);
             }
             query = `${query}
@@ -198,7 +198,7 @@ export class SongsService
                     console.log(`resolved words and song for ${song.name}`);
                     let songResult: SongResult = promiseLandRes.shift(),
                         song_id : number = songResult.rows[0].id;
-                    
+
                     this.insertWordsInSong(wordInSong, words, song_id)
                         .then(wordPromisesRes => {
                             console.log(`resolved all for ${song.name}`);
