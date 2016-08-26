@@ -8,22 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const add_song_constants_1 = require('./add-song.constants');
-const http_1 = require('@angular/http');
+const songs_list_controller_1 = require('./songs-list.controller');
+const songs_list_constants_1 = require('./songs-list.constants');
 const core_1 = require('@angular/core');
-let AddSongService = class AddSongService {
-    constructor(http) {
-        this.http = http;
+let SongsListRouter = class SongsListRouter {
+    constructor(songsListController) {
+        this.songsListController = songsListController;
     }
-    addSong(song) {
-        let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        let options = new http_1.RequestOptions({ headers });
-        return this.http.post(add_song_constants_1.ADD_SONG_URL, JSON.stringify(song), options);
+    init(app) {
+        app.get(songs_list_constants_1.GET_SONGS_LIST_URL, this.songsListController.returnSongs.bind(this.songsListController));
     }
 };
-AddSongService = __decorate([
+SongsListRouter = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [http_1.Http])
-], AddSongService);
-exports.AddSongService = AddSongService;
-//# sourceMappingURL=add-song.service.js.map
+    __metadata('design:paramtypes', [songs_list_controller_1.SongsListController])
+], SongsListRouter);
+exports.SongsListRouter = SongsListRouter;
+//# sourceMappingURL=songs-list.router.js.map

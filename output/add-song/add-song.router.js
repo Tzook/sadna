@@ -16,7 +16,7 @@ let AddSongRouter = class AddSongRouter {
         this.addSongMiddleware = addSongMiddleware;
     }
     init(app) {
-        app.post(add_song_constants_1.ROUTE_URL, this.addSongMiddleware.validateRequest.bind(this.addSongMiddleware));
+        app.post(add_song_constants_1.ADD_SONG_URL, this.addSongMiddleware.validateRequest.bind(this.addSongMiddleware));
     }
 };
 AddSongRouter = __decorate([

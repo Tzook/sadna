@@ -1,4 +1,4 @@
-import {ROUTE_URL} from './add-song.constants';
+import {ADD_SONG_URL} from './add-song.constants';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {AddSong} from './add-song.model';
 import {Injectable} from '@angular/core';
@@ -13,6 +13,6 @@ export class AddSongService {
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
 
-        return this.http.post(ROUTE_URL, JSON.stringify(song), options);
+        return this.http.post(ADD_SONG_URL, JSON.stringify(song), options);
     }
 }

@@ -8,22 +8,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+const songs_list_service_1 = require('./songs-list.service');
 const core_1 = require('@angular/core');
 let SongsListComponent = class SongsListComponent {
-    constructor() {
+    constructor(songsListService) {
+        this.songsListService = songsListService;
     }
     ngOnInit() {
+        this.songsListService.getSongs()
+            .subscribe(success => {
+            console.log('success', success);
+            this.list = success.json();
+            console.log(this.list);
+        }, error => console.log(error));
     }
 };
 SongsListComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: 'songs-list',
+        styles: [`
+
+    `],
         template: `
         Songs list be here
-    `
+    `,
+        viewProviders: [songs_list_service_1.SongsListService]
     }), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [songs_list_service_1.SongsListService])
 ], SongsListComponent);
 exports.SongsListComponent = SongsListComponent;
 //# sourceMappingURL=songs-list.component.js.map

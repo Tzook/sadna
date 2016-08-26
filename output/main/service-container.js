@@ -1,4 +1,6 @@
 "use strict";
+const songs_list_controller_1 = require('../songs-list/songs-list.controller');
+const songs_list_router_1 = require('../songs-list/songs-list.router');
 const add_song_middleware_1 = require('../add-song/add-song.middleware');
 const add_song_router_1 = require('../add-song/add-song.router');
 const server_db_1 = require('./server-db');
@@ -13,6 +15,8 @@ exports.serviceContainer = core_1.ReflectiveInjector.resolveAndCreate([
     server_songs_router_1.SongsRouter,
     add_song_router_1.AddSongRouter,
     add_song_middleware_1.AddSongMiddleware,
+    songs_list_router_1.SongsListRouter,
+    songs_list_controller_1.SongsListController,
     server_songs_service_1.SongsService,
     server_main_1.ServerMain,
 ]);

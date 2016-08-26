@@ -6,7 +6,7 @@ import * as e from "express";
 @Injectable()
 export class AddSongMiddleware {
 
-    validateRequest(req: e.Request, res: e.Response, next: Function) {
+    public validateRequest(req: e.Request, res: e.Response, next: Function) {
         let body = req.body;
         let model = new AddSong(body.name, body.writer, body.composer, body.text);
         let error = this.validateModel(model)
