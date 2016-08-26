@@ -63,7 +63,18 @@ export interface WordInSong extends Row {
     house: number,
     sentence: number,
     word_num: number,
+}
+
+export interface CompleteSong extends WordInSong {
+    song_name: string,
+    word_value: string,
+    is_punctuation: boolean,
 } 
+
+export interface CompleteSongResult extends Result {
+    rows: CompleteSong[],
+    addRow: (row: CompleteSong) => void,
+}
 
 export interface WordInSongResult extends Result {
     rows: WordInSong[],

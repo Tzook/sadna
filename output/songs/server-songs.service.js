@@ -211,6 +211,32 @@ let SongsService = class SongsService {
             });
         });
     }
+    /**
+     * Get all the words in a song
+     */
+    getCompleteSongByName(name) {
+        return new Promise((resolve, reject) => {
+            console.log(`getting complete song for: ${name}`);
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                select w.id, s.name as song_name, w.song_id, w.word_id, ww.value as word_value, ww.is_punctuation, w.col, w."row", w.house, w.sentence, w.word_num 
+                from
+                    songs s,
+                    word_in_song w,
+                    words ww
+                where
+                    s.name = $1
+                    and ww.id = w.word_id;
+            `, [name], (e, result) => {
+                if (e)
+                    reject(e);
+                else {
+                    console.log(`done getting complete song for: ${name}`);
+                    resolve(result);
+                }
+            });
+        });
+    }
     get dbClient() {
         return this._dbClient = this._dbClient || this._dbService.dbClient;
     }
