@@ -1,5 +1,5 @@
 import {HttpModule} from '@angular/http';
-import {LobbyComponent} from '../lobby/lobby.component';
+import {SongsListComponent} from '../songs-list/songs-list.component';
 import {AddSongComponent} from '../add-song/add-song.component';
 import {routing} from '../navigation/client-routes';
 import {NgModule} from '@angular/core';
@@ -19,7 +19,7 @@ import {ClientMainComponent} from './client-main';
 	declarations: [
 		ClientMainComponent,
 		AddSongComponent,
-		LobbyComponent
+		SongsListComponent
 	],
 	providers: [
 		// HeroService

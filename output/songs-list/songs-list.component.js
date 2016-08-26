@@ -9,21 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-let LobbyComponent = class LobbyComponent {
+let SongsListComponent = class SongsListComponent {
     constructor() {
     }
     ngOnInit() {
     }
 };
-LobbyComponent = __decorate([
+SongsListComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        selector: 'lobby',
+        selector: 'songs-list',
         template: `
-        lobby be here.
+        Songs list be here
     `
     }), 
     __metadata('design:paramtypes', [])
-], LobbyComponent);
-exports.LobbyComponent = LobbyComponent;
-//# sourceMappingURL=lobby.component.js.map
+], SongsListComponent);
+exports.SongsListComponent = SongsListComponent;
+//# sourceMappingURL=songs-list.component.js.map

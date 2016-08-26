@@ -16,15 +16,9 @@ let AddSongService = class AddSongService {
         this.http = http;
     }
     addSong(song) {
-        let body = JSON.stringify({
-            name: song.name,
-            writer: song.writer,
-            composer: song.composer,
-            text: song.text,
-        });
         let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         let options = new http_1.RequestOptions({ headers });
-        return this.http.post(add_song_constants_1.ROUTE_URL, body, options);
+        return this.http.post(add_song_constants_1.ROUTE_URL, JSON.stringify(song), options);
     }
 };
 AddSongService = __decorate([

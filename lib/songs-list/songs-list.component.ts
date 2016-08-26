@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    selector: 'lobby',
+    selector: 'songs-list',
     template: `
-        lobby be here.
+        Songs list be here
     `
 })
-export class LobbyComponent implements OnInit {
+export class SongsListComponent implements OnInit {
     constructor() {
 
     }

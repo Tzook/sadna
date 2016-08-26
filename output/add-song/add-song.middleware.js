@@ -36,7 +36,7 @@ let AddSongMiddleware = class AddSongMiddleware {
     validateParams(model, params) {
         for (let param of params) {
             let name = param.name, type = param.type, min = param.min, max = param.max;
-            if (typeof model[name] !== type || model.name.length <= min || model.name.length > max) {
+            if (typeof model[name] !== type || model[name].length <= min || model[name].length > max) {
                 return `Expected field '${name}' to be a ${type} between ${min} and ${max}. Instead got ${model[name]}.`;
             }
         }

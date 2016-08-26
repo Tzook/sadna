@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const http_1 = require('@angular/http');
-const lobby_component_1 = require('../lobby/lobby.component');
+const songs_list_component_1 = require('../songs-list/songs-list.component');
 const add_song_component_1 = require('../add-song/add-song.component');
 const client_routes_1 = require('../navigation/client-routes');
 const core_1 = require('@angular/core');
@@ -30,7 +30,7 @@ AppModule = __decorate([
         declarations: [
             client_main_1.ClientMainComponent,
             add_song_component_1.AddSongComponent,
-            lobby_component_1.LobbyComponent
+            songs_list_component_1.SongsListComponent
         ],
         providers: [],
         bootstrap: [client_main_1.ClientMainComponent]

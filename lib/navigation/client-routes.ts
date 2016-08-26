@@ -1,22 +1,22 @@
-import {ROUTE_LOBBY, ROUTE_ADD_SONG} from '../navigation/routes.constants';
-import {LobbyComponent} from '../lobby/lobby.component';
+import {ROUTE_SONGS_LIST, ROUTE_ADD_SONG} from '../navigation/routes.constants';
+import {SongsListComponent} from '../songs-list/songs-list.component';
 import {AddSongComponent} from '../add-song/add-song.component';
 import {Routes, RouterModule} from '@angular/router';
 
 const routes: Routes = [
     {
-        path: '',
-        redirectTo: "/" + ROUTE_LOBBY,
-        pathMatch: 'full'
-    },
-    {
-        path: ROUTE_LOBBY,
-        component: LobbyComponent
+        path: ROUTE_SONGS_LIST,
+        component: SongsListComponent
     },
     {
         path: ROUTE_ADD_SONG,
         component: AddSongComponent
+    },
+    {
+        path: '**',
+        redirectTo: "/" + ROUTE_SONGS_LIST,
+        pathMatch: 'full'
     }
 ];
 
-export const routing = RouterModule.forRoot(routes);;
+export const routing = RouterModule.forRoot(routes);
