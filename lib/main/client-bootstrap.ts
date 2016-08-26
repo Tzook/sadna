@@ -1,3 +1,4 @@
+import {ViewSongComponent} from '../view-song/view-song.component';
 import {HttpModule} from '@angular/http';
 import {SongsListComponent} from '../songs-list/songs-list.component';
 import {AddSongComponent} from '../add-song/add-song.component';
@@ -19,7 +20,8 @@ import {ClientMainComponent} from './client-main';
 	declarations: [
 		ClientMainComponent,
 		AddSongComponent,
-		SongsListComponent
+		SongsListComponent,
+		ViewSongComponent,
 	],
 	providers: [
 		// HeroService
