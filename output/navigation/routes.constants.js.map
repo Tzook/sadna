@@ -1,1 +1,1 @@
-{"version":3,"file":"routes.constants.js","sourceRoot":"","sources":["../../lib/navigation/routes.constants.ts"],"names":[],"mappings":";AAAa,wBAAgB,GAAG,OAAO,CAAC;AAC3B,sBAAc,GAAG,UAAU,CAAC"}
+{"version":3,"file":"routes.constants.js","sourceRoot":"","sources":["../../lib/navigation/routes.constants.ts"],"names":[],"mappings":";AAAa,wBAAgB,GAAG,OAAO,CAAC;AAC3B,sBAAc,GAAG,UAAU,CAAC;AAC5B,uBAAe,GAAG,kCAAkC,CAAC"}

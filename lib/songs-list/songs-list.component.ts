@@ -1,5 +1,6 @@
 import {SongsListService} from './songs-list.service';
 import {Component, OnInit} from '@angular/core';
+import {ROUTE_VIEW_SONG} from '../navigation/routes.constants';
 import {Song} from '../db/server-db.model';
 
 @Component({
@@ -32,7 +33,7 @@ import {Song} from '../db/server-db.model';
                     <h3>Written by {{song.writer}} | Composed by {{song.composer}}</h3>
                 </span>
                 <span>
-                    <button (click)="viewSong(song)">View song</button>
+                    <button [routerLink]="getSongUrl(song)">View song</button>
                 </span>
             </div>
         </section>
@@ -54,7 +55,11 @@ export class SongsListComponent implements OnInit {
             );
     }
 
-    private viewSong(song: Song) {
-        console.log('viewing song', song);
+    private getSongUrl(song: Song): string {
+        return "/" + ROUTE_VIEW_SONG
+                        .replace(":id", "" + song.id)
+                        .replace(":name", song.name)
+                        .replace(":writer", "" + song.writer)
+                        .replace(":composer", "" + song.composer);
     }
 }

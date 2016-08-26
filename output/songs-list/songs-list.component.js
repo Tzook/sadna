@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const songs_list_service_1 = require('./songs-list.service');
 const core_1 = require('@angular/core');
+const routes_constants_1 = require('../navigation/routes.constants');
 let SongsListComponent = class SongsListComponent {
     constructor(songsListService) {
         this.songsListService = songsListService;
@@ -20,8 +21,12 @@ let SongsListComponent = class SongsListComponent {
             this.songsList = success.json();
         }, error => console.log(error));
     }
-    viewSong(song) {
-        console.log('viewing song', song);
+    getSongUrl(song) {
+        return "/" + routes_constants_1.ROUTE_VIEW_SONG
+            .replace(":id", "" + song.id)
+            .replace(":name", song.name)
+            .replace(":writer", "" + song.writer)
+            .replace(":composer", "" + song.composer);
     }
 };
 SongsListComponent = __decorate([
@@ -55,7 +60,7 @@ SongsListComponent = __decorate([
                     <h3>Written by {{song.writer}} | Composed by {{song.composer}}</h3>
                 </span>
                 <span>
-                    <button (click)="viewSong(song)">View song</button>
+                    <button [routerLink]="getSongUrl(song)">View song</button>
                 </span>
             </div>
         </section>
