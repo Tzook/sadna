@@ -8,21 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+const add_song_middleware_1 = require('./add-song.middleware');
 const add_song_constants_1 = require('./add-song.constants');
 const core_1 = require('@angular/core');
 let AddSongRouter = class AddSongRouter {
-    constructor() {
+    constructor(addSongMiddleware) {
+        this.addSongMiddleware = addSongMiddleware;
     }
     init(app) {
-        app.post(add_song_constants_1.ROUTE_URL, log);
-        function log() {
-            console.log('in log!!!');
-        }
+        app.post(add_song_constants_1.ROUTE_URL, this.addSongMiddleware.validateRequest.bind(this.addSongMiddleware));
     }
 };
 AddSongRouter = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [add_song_middleware_1.AddSongMiddleware])
 ], AddSongRouter);
 exports.AddSongRouter = AddSongRouter;
 //# sourceMappingURL=add-song.router.js.map

@@ -1,3 +1,4 @@
+import {AddSongMiddleware} from '../add-song/add-song.middleware';
 import {AddSongRouter} from '../add-song/add-song.router';
 import {DbService} from './server-db';
 import {ServerRouter} from './server-router';
@@ -11,6 +12,7 @@ export const serviceContainer = ReflectiveInjector.resolveAndCreate([
     ServerRouter,
     SongsRouter,
     AddSongRouter,
+    AddSongMiddleware,
     SongsService,
     ServerMain,
 ]);

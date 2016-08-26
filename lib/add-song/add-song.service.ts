@@ -1,7 +1,7 @@
 import {headers} from 'popsicle/dist/plugins';
 import {ROUTE_URL} from './add-song.constants';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
-import {SongObject} from './song.object';
+import {AddSong} from './add-song.model';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
@@ -12,20 +12,16 @@ export class AddSongService {
 
     }
 
-    public addSong(song: SongObject) {
+    public addSong(song: AddSong): Observable<{}> {
         let body = JSON.stringify({
-            123: 345
+            name: song.name,
+            writer: song.writer,
+            composer: song.composer,
+            text: song.text,
         });
         let headers = new Headers({'Content-Type': 'application/json'});
         let options = new RequestOptions({headers});
 
-        return this.http.post(ROUTE_URL, body, options)
-            .map(res => res.json())
-            .catch(this.handleError);
-    }
-
-    private handleError (error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || ' error');
+        return this.http.post(ROUTE_URL, body, options);
     }
 }

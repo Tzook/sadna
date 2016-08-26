@@ -11,24 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const add_song_constants_1 = require('./add-song.constants');
 const http_1 = require('@angular/http');
 const core_1 = require('@angular/core');
-const Observable_1 = require('rxjs/Observable');
 let AddSongService = class AddSongService {
     constructor(http) {
         this.http = http;
     }
     addSong(song) {
         let body = JSON.stringify({
-            123: 345
+            name: song.name,
+            writer: song.writer,
+            composer: song.composer,
+            text: song.text,
         });
         let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         let options = new http_1.RequestOptions({ headers });
-        return this.http.post(add_song_constants_1.ROUTE_URL, body, options)
-            .map(res => res.json())
-            .catch(this.handleError);
-    }
-    handleError(error) {
-        console.error(error);
-        return Observable_1.Observable.throw(error.json().error || ' error');
+        return this.http.post(add_song_constants_1.ROUTE_URL, body, options);
     }
 };
 AddSongService = __decorate([

@@ -1,5 +1,6 @@
+import {MAX_NAME_LENGTH, MIN_SONG_LENGTH, MAX_SONG_LENGTH} from './add-song.constants';
 import {AddSongService} from './add-song.service';
-import {SongObject} from './song.object';
+import {AddSong} from './add-song.model';
 import {Component} from '@angular/core';
 
 @Component({
@@ -23,19 +24,19 @@ import {Component} from '@angular/core';
             <table>
                 <tr>
                     <td><label for="name">Name:</label></td>
-                    <td><input type="text" placeholder="Name" id="name" [(ngModel)]="model.name" name="name" required></td>
+                    <td><input type="text" placeholder="Name" maxlength="${MAX_NAME_LENGTH}" id="name" [(ngModel)]="model.name" name="name" autofocus required></td>
                 </tr>
                 <tr>
                     <td><label for="writer">Writer:</label></td>
-                    <td><input type="text" placeholder="Writer" id="writer" [(ngModel)]="model.writer" name="writer" required></td>
+                    <td><input type="text" placeholder="Writer" maxlength="${MAX_NAME_LENGTH}" id="writer" [(ngModel)]="model.writer" name="writer" required></td>
                 </tr>
                 <tr>
                     <td><label for="composer">Composer:</label></td>
-                    <td><input type="text" placeholder="Composer" id="composer" [(ngModel)]="model.composer" name="composer" required></td>
+                    <td><input type="text" placeholder="Composer" maxlength="${MAX_NAME_LENGTH}" id="composer" [(ngModel)]="model.composer" name="composer" required></td>
                 </tr>
                 <tr>
                     <td><label for="text">Text:</label></td>
-                    <td><textarea placeholder="Song text (At least 20 characters)" rows="10" minlength="20" id="text" [(ngModel)]="model.text" name="text" required></textarea></td>
+                    <td><textarea placeholder="Song text (At least ${MIN_SONG_LENGTH} characters)" minlength="${MIN_SONG_LENGTH}" maxlength="${MAX_SONG_LENGTH}" rows="10" id="text" [(ngModel)]="model.text" name="text" required></textarea></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -51,17 +52,23 @@ import {Component} from '@angular/core';
     viewProviders: [AddSongService]
 })
 export class AddSongComponent {
-    private model: SongObject;
+    private model: AddSong;
     private loading: boolean;
 
     constructor(private addSongService: AddSongService) {
-        this.model = new SongObject();
+        this.model = new AddSong();
         this.loading = false;
     }
 
     private onSubmit() {
         // this.loading = true;
         console.log('Submitting', this.model);
-        this.addSongService.addSong(this.model);
+        this.addSongService.addSong(this.model)
+            .subscribe(
+                success => {
+                    console.log('success');
+                    // do a toast?
+                },
+                error => console.log(error._body));
     }
 }

@@ -17,6 +17,7 @@ export class ServerRouter {
         this.app = app;
         let routers = [
             this.songsRouter,
+            this.addSongRouter,
         ];
         for (let i = 0, l = routers.length; i < l; i++) {
             routers[i].init(this.app);

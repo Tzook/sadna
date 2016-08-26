@@ -1,4 +1,5 @@
 "use strict";
+const add_song_middleware_1 = require('../add-song/add-song.middleware');
 const add_song_router_1 = require('../add-song/add-song.router');
 const server_db_1 = require('./server-db');
 const server_router_1 = require('./server-router');
@@ -11,6 +12,7 @@ exports.serviceContainer = core_1.ReflectiveInjector.resolveAndCreate([
     server_router_1.ServerRouter,
     server_songs_router_1.SongsRouter,
     add_song_router_1.AddSongRouter,
+    add_song_middleware_1.AddSongMiddleware,
     server_songs_service_1.SongsService,
     server_main_1.ServerMain,
 ]);

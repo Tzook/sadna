@@ -1,1 +1,1 @@
-web: ./node_modules/.bin/forever -m 5 server/bootstrap/bootstrap.js
+web: ./node_modules/.bin/forever -m 5 output/main/server-bootstrap.js

@@ -8,19 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+const add_song_constants_1 = require('./add-song.constants');
 const add_song_service_1 = require('./add-song.service');
-const song_object_1 = require('./song.object');
+const add_song_model_1 = require('./add-song.model');
 const core_1 = require('@angular/core');
 let AddSongComponent = class AddSongComponent {
     constructor(addSongService) {
         this.addSongService = addSongService;
-        this.model = new song_object_1.SongObject();
+        this.model = new add_song_model_1.AddSong();
         this.loading = false;
     }
     onSubmit() {
         // this.loading = true;
         console.log('Submitting', this.model);
-        this.addSongService.addSong(this.model);
+        this.addSongService.addSong(this.model)
+            .subscribe(success => {
+            console.log('success');
+            // do a toast?
+        }, error => console.log(error._body));
     }
 };
 AddSongComponent = __decorate([
@@ -45,19 +50,19 @@ AddSongComponent = __decorate([
             <table>
                 <tr>
                     <td><label for="name">Name:</label></td>
-                    <td><input type="text" placeholder="Name" id="name" [(ngModel)]="model.name" name="name" required></td>
+                    <td><input type="text" placeholder="Name" maxlength="${add_song_constants_1.MAX_NAME_LENGTH}" id="name" [(ngModel)]="model.name" name="name" autofocus required></td>
                 </tr>
                 <tr>
                     <td><label for="writer">Writer:</label></td>
-                    <td><input type="text" placeholder="Writer" id="writer" [(ngModel)]="model.writer" name="writer" required></td>
+                    <td><input type="text" placeholder="Writer" maxlength="${add_song_constants_1.MAX_NAME_LENGTH}" id="writer" [(ngModel)]="model.writer" name="writer" required></td>
                 </tr>
                 <tr>
                     <td><label for="composer">Composer:</label></td>
-                    <td><input type="text" placeholder="Composer" id="composer" [(ngModel)]="model.composer" name="composer" required></td>
+                    <td><input type="text" placeholder="Composer" maxlength="${add_song_constants_1.MAX_NAME_LENGTH}" id="composer" [(ngModel)]="model.composer" name="composer" required></td>
                 </tr>
                 <tr>
                     <td><label for="text">Text:</label></td>
-                    <td><textarea placeholder="Song text (At least 20 characters)" rows="10" minlength="20" id="text" [(ngModel)]="model.text" name="text" required></textarea></td>
+                    <td><textarea placeholder="Song text (At least ${add_song_constants_1.MIN_SONG_LENGTH} characters)" minlength="${add_song_constants_1.MIN_SONG_LENGTH}" maxlength="${add_song_constants_1.MAX_SONG_LENGTH}" rows="10" id="text" [(ngModel)]="model.text" name="text" required></textarea></td>
                 </tr>
                 <tr>
                     <td></td>

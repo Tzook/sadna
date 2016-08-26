@@ -1,5 +1,5 @@
 "use strict";
-class SongObject {
+class AddSong {
 }
-exports.SongObject = SongObject;
+exports.AddSong = AddSong;
 //# sourceMappingURL=song.object.js.map
