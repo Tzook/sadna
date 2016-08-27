@@ -13,6 +13,7 @@ const view_song_service_1 = require('./view-song.service');
 const unique_words_service_1 = require('../words/unique-words.service');
 const word_peek_service_1 = require('../words/word-peek.service');
 const word_peek_component_1 = require('../words/word-peek.component');
+const full_song_component_1 = require('./full-song.component');
 const song_info_component_1 = require('../songs/song-info.component');
 const core_1 = require('@angular/core');
 let ViewSongComponent = class ViewSongComponent {
@@ -21,7 +22,6 @@ let ViewSongComponent = class ViewSongComponent {
         this.uniqueWordsService = uniqueWordsService;
         this.wordPeekService = wordPeekService;
         this.route = route;
-        this.words = [];
         this.uniqueWords = [];
     }
     ngOnInit() {
@@ -29,9 +29,9 @@ let ViewSongComponent = class ViewSongComponent {
         this.song = params;
         this.viewSongService.getSong(params["id"])
             .subscribe(success => {
-            this.words = success.json();
-            this.wordPeekService.words = this.words;
-            this.uniqueWords = this.uniqueWordsService.getUniqueWords(this.words, true);
+            let words = success.json();
+            this.wordPeekService.words = words;
+            this.uniqueWords = this.uniqueWordsService.getUniqueWords(words, true);
         }, error => console.log(error));
     }
 };
@@ -44,7 +44,7 @@ ViewSongComponent = __decorate([
             text-align: center;
         }
         #words {
-            margin-top: 40px;
+            margin: 40px 0 20px;
         }
         h2 {
             margin-bottom: 10px;
@@ -64,8 +64,9 @@ ViewSongComponent = __decorate([
             <h2>Words in the song:</h2>
             <word-peek *ngFor="let word of uniqueWords" [word]="word"></word-peek>
         </div>
+        <full-song *ngIf="uniqueWords.length"></full-song>
     `,
-        directives: [song_info_component_1.SongInfoComponent, word_peek_component_1.WordPeekComponent],
+        directives: [song_info_component_1.SongInfoComponent, word_peek_component_1.WordPeekComponent, full_song_component_1.FullSongComponent],
         providers: [word_peek_service_1.WordPeekService],
         viewProviders: [view_song_service_1.ViewSongService, unique_words_service_1.UniqueWordsService]
     }), 

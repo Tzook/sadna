@@ -13,16 +13,25 @@ let WordPeekService = class WordPeekService {
     constructor() {
         this.wordMap = new Map();
         this.wordsRows = [];
+        this.houseIndexes = {};
     }
     set words(words) {
         let wordsRow = [];
         let currentRow = 0;
+        let currentHouse = 0;
         for (let word of words) {
             if (word.row !== currentRow) {
-                currentRow++;
+                // push a new row
+                currentRow = word.row;
                 this.wordsRows.push(wordsRow.join(" "));
                 wordsRow = [];
             }
+            if (word.house !== currentHouse) {
+                // push a new house
+                currentHouse = word.house;
+                this.houseIndexes[word.row] = true;
+            }
+            // map word to its objects
             wordsRow.push(word.word_value);
             let wordValue = word.word_value.toLowerCase();
             let currentMapvalue = this.wordMap.get(wordValue) || [];
@@ -48,6 +57,17 @@ let WordPeekService = class WordPeekService {
             }
         }
         return strings;
+    }
+    getFullSong() {
+        let fullSong = [];
+        for (let i in this.wordsRows) {
+            let row = this.wordsRows[i];
+            if (this.houseIndexes[i]) {
+                fullSong.push("");
+            }
+            fullSong.push(row);
+        }
+        return fullSong.join("\n");
     }
 };
 WordPeekService = __decorate([

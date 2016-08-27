@@ -4,6 +4,7 @@ import {ViewSongService} from './view-song.service';
 import {UniqueWordsService} from '../words/unique-words.service';
 import {WordPeekService} from '../words/word-peek.service';
 import {WordPeekComponent} from '../words/word-peek.component';
+import {FullSongComponent} from './full-song.component';
 import {SongInfoComponent} from '../songs/song-info.component';
 import {Component, OnInit} from '@angular/core';
 import {Song} from '../db/server-db.model';
@@ -16,7 +17,7 @@ import {Song} from '../db/server-db.model';
             text-align: center;
         }
         #words {
-            margin-top: 40px;
+            margin: 40px 0 20px;
         }
         h2 {
             margin-bottom: 10px;
@@ -36,13 +37,13 @@ import {Song} from '../db/server-db.model';
             <h2>Words in the song:</h2>
             <word-peek *ngFor="let word of uniqueWords" [word]="word"></word-peek>
         </div>
+        <full-song *ngIf="uniqueWords.length"></full-song>
     `,
-    directives: [SongInfoComponent, WordPeekComponent],
+    directives: [SongInfoComponent, WordPeekComponent, FullSongComponent],
     providers: [WordPeekService], // available for children components too
     viewProviders: [ViewSongService, UniqueWordsService]
 })
 export class ViewSongComponent implements OnInit {
-    private words: CompleteSong[];
     private uniqueWords: string[];
     private song: Song;
 
@@ -50,7 +51,6 @@ export class ViewSongComponent implements OnInit {
                 private uniqueWordsService: UniqueWordsService,
                 private wordPeekService: WordPeekService,
                 private route: ActivatedRoute) {
-        this.words = [];
         this.uniqueWords = [];
     }
 
@@ -60,9 +60,9 @@ export class ViewSongComponent implements OnInit {
         this.viewSongService.getSong(params["id"])
                 .subscribe(
                     success => {
-                        this.words = success.json();
-                        this.wordPeekService.words = this.words;
-                        this.uniqueWords = this.uniqueWordsService.getUniqueWords(this.words, true);
+                        let words = success.json();
+                        this.wordPeekService.words = words;
+                        this.uniqueWords = this.uniqueWordsService.getUniqueWords(words, true);
                     },
                     error => console.log(error)
                 );
