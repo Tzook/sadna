@@ -10,6 +10,10 @@ import {ServerMain} from './server-main';
 import {SongsRouter} from '../routers/server-songs.router';
 import {SongsService} from '../songs/server-songs.service';
 import {GroupsService} from '../groups/server-groups.service';
+import {WordsService} from '../words/server-words.service';
+import {XmlRouter} from '../db/backup/xml.router';
+import {XmlController} from '../db/backup/xml.controller';
+import {XmlService} from '../db/backup/xml.service';
 import {ReflectiveInjector} from '@angular/core';
 
 export const serviceContainer = ReflectiveInjector.resolveAndCreate([
@@ -17,6 +21,7 @@ export const serviceContainer = ReflectiveInjector.resolveAndCreate([
     ServerRouter,
     SongsRouter,
     GroupsService,
+    WordsService,
     AddSongRouter,
     AddSongMiddleware,
     AddSongController,

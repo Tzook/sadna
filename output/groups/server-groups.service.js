@@ -10,12 +10,85 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const server_db_1 = require('../main/server-db');
+const server_words_service_1 = require('../words/server-words.service');
 let GroupsService = class GroupsService {
-    constructor(_dbService) {
+    constructor(_dbService, _wordsService) {
         this._dbService = _dbService;
+        this._wordsService = _wordsService;
     }
     get dbClient() {
         return this._dbClient = this._dbClient || this._dbService.dbClient;
+    }
+    /**
+     * Insert song safe to songs table
+     */
+    insertGroup(group) {
+        console.info(`inserting group ${group.name}`);
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            // running safe insert, since song name must be unique
+            dbClient.query(`
+                WITH s_group AS (
+                    SELECT id, name
+                    FROM groups
+                    WHERE name = $1
+                ),
+                i_group AS (
+                    INSERT INTO groups (name, is_expression)
+                    SELECT $1, $2
+                    WHERE NOT EXISTS (SELECT 1 FROM s_group)
+                    RETURNING id, name
+                )
+                SELECT id, name
+                FROM i_group
+                UNION ALL --only one of those will be filled
+                SELECT id, name
+                FROM s_group
+            `, [group.name, group.is_expression], (e, result) => {
+                if (e)
+                    reject(e);
+                else {
+                    console.info(`done inserting group ${group.name}`);
+                    resolve(result);
+                }
+            });
+        });
+    }
+    loadGroup(group, words) {
+        return new Promise((resolve, reject) => {
+            console.log(`start loading group ${group.name} with ${words.length} words.`);
+            let promiseLand = [], wordPromises = [], group_id = null;
+            promiseLand.push(this.insertGroup(group));
+            promiseLand.push(this._wordsService.insertWords(words));
+            Promise.all(promiseLand)
+                .then(promiseLandRes => {
+                console.log(`resolved words and group for ${group.name}`);
+                let songResult = promiseLandRes.shift(), group_id = songResult.rows[0].id;
+                this._wordsService.insertWordsInGroup(words, group_id)
+                    .then(wordPromisesRes => {
+                    console.log(`resolved all for ${group.name}`);
+                    resolve(true);
+                })
+                    .catch(reject);
+            })
+                .catch(reject);
+        });
+    }
+    /**
+     * Select all groups
+     */
+    selectGroups() {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                SELECT * FROM groups;
+            `, (e, result) => {
+                if (e)
+                    reject(e);
+                else
+                    resolve(result);
+            });
+        });
     }
     /**
      * Will get words in order in all songs
@@ -113,10 +186,29 @@ let GroupsService = class GroupsService {
             });
         });
     }
+    /**
+     * Mock to check that eveyrthing is working curretly with groups
+     */
+    mockLoader() {
+        let group = {
+            name: 'noam_group',
+            is_expression: false,
+        };
+        let words = [];
+        let val = 'word_group';
+        for (let i = 0; i < 10; i++) {
+            words.push({
+                value: `${val}_${i}`,
+                is_punctuation: false,
+            });
+        }
+        this.loadGroup(group, words)
+            .catch(err => console.log(err));
+    }
 };
 GroupsService = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [server_db_1.DbService])
+    __metadata('design:paramtypes', [server_db_1.DbService, server_words_service_1.WordsService])
 ], GroupsService);
 exports.GroupsService = GroupsService;
 //# sourceMappingURL=server-groups.service.js.map

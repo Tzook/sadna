@@ -70,6 +70,12 @@ export interface CompleteWordInSong {
     wordsInSong: WordInSong[],
 }
 
+export interface WordInSongResult extends Result {
+    rows: WordInSong[],
+    addRow: (row: WordInSong) => void,
+}
+
+// complete song is a join of all our data on this song
 export interface CompleteSong extends WordInSong {
     song_name: string,
     word_value: string,
@@ -81,7 +87,22 @@ export interface CompleteSongResult extends Result {
     addRow: (row: CompleteSong) => void,
 }
 
-export interface WordInSongResult extends Result {
-    rows: WordInSong[],
-    addRow: (row: WordInSong) => void,
+export interface Group extends Row {
+    name: string,
+    is_expression?: boolean,
+}
+
+export interface GroupResult extends Result {
+    rows: Group[],
+    addRow: (row: Group) => void,
+}
+
+export interface WordInGroup extends Row {
+    group_id: number,
+    word_id: number,
+}
+
+export interface WordInGroupResult extends Result {
+    rows: WordInGroup[],
+    addRow: (row: WordInGroup) => void,
 }

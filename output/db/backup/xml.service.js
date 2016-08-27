@@ -8,26 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const server_songs_service_1 = require('../songs/server-songs.service');
-const server_groups_service_1 = require('../groups/server-groups.service');
 const core_1 = require('@angular/core');
-let SongsRouter = class SongsRouter {
-    constructor(_songsService, _groupsService) {
+const server_songs_service_1 = require('../../songs/server-songs.service');
+const server_groups_service_1 = require('../../groups/server-groups.service');
+const server_words_service_1 = require('../../words/server-words.service');
+let XmlService = class XmlService {
+    constructor(_songsService, _groupsService, _wordsService) {
         this._songsService = _songsService;
         this._groupsService = _groupsService;
-    }
-    init(app) {
-        this._app = app;
-        // this._groupsService.mockLoader();
-        // this._songsService.selectSongs()
-        //     .then((result: SongResult) => {
-        //         console.log('rows', result.rows);
-        //     });
+        this._wordsService = _wordsService;
     }
 };
-SongsRouter = __decorate([
+XmlService = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [server_songs_service_1.SongsService, server_groups_service_1.GroupsService])
-], SongsRouter);
-exports.SongsRouter = SongsRouter;
-//# sourceMappingURL=server-songs.router.js.map
+    __metadata('design:paramtypes', [server_songs_service_1.SongsService, server_groups_service_1.GroupsService, server_words_service_1.WordsService])
+], XmlService);
+exports.XmlService = XmlService;
+//# sourceMappingURL=xml.service.js.map
