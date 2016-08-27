@@ -17,15 +17,14 @@ let AddSongComponent = class AddSongComponent {
         this.addSongService = addSongService;
         this.model = new add_song_model_1.AddSong();
         this.loading = false;
+        this.message = "";
     }
     onSubmit() {
-        // this.loading = true;
+        this.loading = true;
+        this.message = "Adding song...";
         console.log('Submitting', this.model);
         this.addSongService.addSong(this.model)
-            .subscribe(success => {
-            console.log('success');
-            // do a toast?
-        }, error => console.log(error._body));
+            .subscribe(success => this.message = "The song has been added successfully.", error => this.message = "Error: " + error._body);
     }
 };
 AddSongComponent = __decorate([
@@ -70,8 +69,8 @@ AddSongComponent = __decorate([
                 </tr>
             </table>
 
-            <div [hidden]="!loading">
-                Adding song...
+            <div [hidden]="!message">
+                {{message}}
             </div>
         </form>
     `,
