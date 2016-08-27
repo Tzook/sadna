@@ -9,5 +9,9 @@ exports.TABS = [
         url: routes_constants_1.ROUTE_ADD_SONG,
         name: "Add Song"
     },
+    {
+        url: routes_constants_1.ROUTE_XML_BACKUP,
+        name: "Backup"
+    },
 ];
 //# sourceMappingURL=tabs.constants.js.map

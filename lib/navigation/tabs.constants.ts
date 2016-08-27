@@ -1,4 +1,4 @@
-import {ROUTE_SONGS_LIST, ROUTE_ADD_SONG} from './routes.constants';
+import {ROUTE_SONGS_LIST, ROUTE_ADD_SONG, ROUTE_XML_BACKUP} from './routes.constants';
 export const TABS = [
     {
         url: ROUTE_SONGS_LIST,
@@ -7,5 +7,9 @@ export const TABS = [
     {
         url: ROUTE_ADD_SONG,
         name: "Add Song"
+    },
+    {
+        url: ROUTE_XML_BACKUP,
+        name: "Backup"
     },
 ];

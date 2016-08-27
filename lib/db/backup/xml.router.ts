@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {XmlController} from './xml.controller';
-import {XML_BACKUP_FILE_URL} from './xml.contants';
+import {XML_BACKUP_FILE_URL} from './xml.constants';
 
 @Injectable()
 export class XmlRouter {
@@ -13,7 +13,7 @@ export class XmlRouter {
         app.get(XML_BACKUP_FILE_URL,
                 this._xmlController.backupToXml.bind(this._xmlController));
 
-        app.post(XML_BACKUP_FILE_URL,
-                this._xmlController.backupFromXml.bind(this._xmlController));
+        // app.post(XML_BACKUP_FILE_URL,
+        //         this._xmlController.backupFromXml.bind(this._xmlController));
     }
 }

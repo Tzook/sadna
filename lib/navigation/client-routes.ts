@@ -1,7 +1,8 @@
 import {ViewSongComponent} from '../view-song/view-song.component';
-import {ROUTE_SONGS_LIST, ROUTE_ADD_SONG, ROUTE_VIEW_SONG} from './routes.constants';
+import {ROUTE_SONGS_LIST, ROUTE_ADD_SONG, ROUTE_VIEW_SONG, ROUTE_XML_BACKUP} from './routes.constants';
 import {SongsListComponent} from '../songs-list/songs-list.component';
 import {AddSongComponent} from '../add-song/add-song.component';
+import {XmlComponent} from '../db/backup/xml.component';
 import {Routes, RouterModule} from '@angular/router';
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
     {
         path: ROUTE_VIEW_SONG,
         component: ViewSongComponent
+    },
+    {
+        path: ROUTE_XML_BACKUP,
+        component: XmlComponent
     },
     {
         path: '**',

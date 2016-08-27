@@ -2,6 +2,7 @@ import {ViewSongComponent} from '../view-song/view-song.component';
 import {HttpModule} from '@angular/http';
 import {SongsListComponent} from '../songs-list/songs-list.component';
 import {AddSongComponent} from '../add-song/add-song.component';
+import {XmlComponent} from '../db/backup/xml.component';
 import {routing} from '../navigation/client-routes';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
@@ -22,6 +23,7 @@ import {ClientMainComponent} from './client-main';
 		AddSongComponent,
 		SongsListComponent,
 		ViewSongComponent,
+		XmlComponent,
 	],
 	providers: [
 		// HeroService

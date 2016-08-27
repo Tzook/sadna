@@ -12,6 +12,7 @@ const view_song_component_1 = require('../view-song/view-song.component');
 const http_1 = require('@angular/http');
 const songs_list_component_1 = require('../songs-list/songs-list.component');
 const add_song_component_1 = require('../add-song/add-song.component');
+const xml_component_1 = require('../db/backup/xml.component');
 const client_routes_1 = require('../navigation/client-routes');
 const core_1 = require('@angular/core');
 const platform_browser_1 = require('@angular/platform-browser');
@@ -33,6 +34,7 @@ AppModule = __decorate([
             add_song_component_1.AddSongComponent,
             songs_list_component_1.SongsListComponent,
             view_song_component_1.ViewSongComponent,
+            xml_component_1.XmlComponent,
         ],
         providers: [],
         bootstrap: [client_main_1.ClientMainComponent]

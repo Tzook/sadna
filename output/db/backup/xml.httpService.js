@@ -8,25 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-const xml_controller_1 = require('./xml.controller');
 const xml_constants_1 = require('./xml.constants');
-let XmlRouter = class XmlRouter {
-    constructor(_xmlController) {
-        this._xmlController = _xmlController;
+const http_1 = require('@angular/http');
+const core_1 = require('@angular/core');
+let XmlHttpService = class XmlHttpService {
+    constructor(http) {
+        this.http = http;
     }
-    /**
-     * List the routes
-     */
-    init(app) {
-        app.get(xml_constants_1.XML_BACKUP_FILE_URL, this._xmlController.backupToXml.bind(this._xmlController));
-        // app.post(XML_BACKUP_FILE_URL,
-        //         this._xmlController.backupFromXml.bind(this._xmlController));
+    getXmlData() {
+        console.log('calling', xml_constants_1.XML_BACKUP_FILE_URL);
+        return this.http.get(xml_constants_1.XML_BACKUP_FILE_URL);
     }
 };
-XmlRouter = __decorate([
+XmlHttpService = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [xml_controller_1.XmlController])
-], XmlRouter);
-exports.XmlRouter = XmlRouter;
-//# sourceMappingURL=xml.router.js.map
+    __metadata('design:paramtypes', [http_1.Http])
+], XmlHttpService);
+exports.XmlHttpService = XmlHttpService;
+//# sourceMappingURL=xml.httpService.js.map
