@@ -10,6 +10,9 @@ const server_songs_router_1 = require('../routers/server-songs.router');
 const server_songs_service_1 = require('../songs/server-songs.service');
 const server_groups_service_1 = require('../groups/server-groups.service');
 const server_words_service_1 = require('../words/server-words.service');
+const xml_router_1 = require('../db/backup/xml.router');
+const xml_controller_1 = require('../db/backup/xml.controller');
+const xml_service_1 = require('../db/backup/xml.service');
 const core_1 = require('@angular/core');
 exports.serviceContainer = core_1.ReflectiveInjector.resolveAndCreate([
     server_db_1.DbService,
@@ -22,6 +25,9 @@ exports.serviceContainer = core_1.ReflectiveInjector.resolveAndCreate([
     songs_list_router_1.SongsListRouter,
     songs_list_controller_1.SongsListController,
     server_songs_service_1.SongsService,
+    xml_router_1.XmlRouter,
+    xml_controller_1.XmlController,
+    xml_service_1.XmlService,
     server_main_1.ServerMain,
 ]);
 //# sourceMappingURL=service-container.js.map

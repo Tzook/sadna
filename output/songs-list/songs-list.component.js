@@ -54,7 +54,7 @@ SongsListComponent = __decorate([
     `],
         template: `
         <section>
-            <div *ngFor="let song of songsList">
+            <div *ngFor="let song of songsList" class="animated fadeInDown">
                 <span>
                     <h2>{{song.name}}</h2>
                     <h3>Written by {{song.writer}} | Composed by {{song.composer}}</h3>
