@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+const groups_component_1 = require('../groups/groups.component');
 const view_song_component_1 = require('../view-song/view-song.component');
 const http_1 = require('@angular/http');
 const songs_list_component_1 = require('../songs-list/songs-list.component');
@@ -31,8 +32,9 @@ AppModule = __decorate([
         ],
         declarations: [
             client_main_1.ClientMainComponent,
-            add_song_component_1.AddSongComponent,
             songs_list_component_1.SongsListComponent,
+            groups_component_1.GroupsComponent,
+            add_song_component_1.AddSongComponent,
             view_song_component_1.ViewSongComponent,
             xml_component_1.XmlComponent,
         ],

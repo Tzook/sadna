@@ -1,4 +1,5 @@
 "use strict";
+const groups_component_1 = require('../groups/groups.component');
 const view_song_component_1 = require('../view-song/view-song.component');
 const routes_constants_1 = require('./routes.constants');
 const songs_list_component_1 = require('../songs-list/songs-list.component');
@@ -9,6 +10,10 @@ const routes = [
     {
         path: routes_constants_1.ROUTE_SONGS_LIST,
         component: songs_list_component_1.SongsListComponent
+    },
+    {
+        path: routes_constants_1.ROUTE_GROUPS,
+        component: groups_component_1.GroupsComponent
     },
     {
         path: routes_constants_1.ROUTE_ADD_SONG,

@@ -1,3 +1,4 @@
+import {GroupsComponent} from '../groups/groups.component';
 import {ViewSongComponent} from '../view-song/view-song.component';
 import {HttpModule} from '@angular/http';
 import {SongsListComponent} from '../songs-list/songs-list.component';
@@ -20,8 +21,9 @@ import {ClientMainComponent} from './client-main';
 	],
 	declarations: [
 		ClientMainComponent,
-		AddSongComponent,
 		SongsListComponent,
+		GroupsComponent,
+		AddSongComponent,
 		ViewSongComponent,
 		XmlComponent,
 	],
