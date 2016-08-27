@@ -15,11 +15,11 @@ export class XmlController {
     }
 
     public backupFromXml(req: e.Request, res: e.Response, next: Function) {
-        console.log('starting restore from XML');
+        console.log('starting to restore from XML');
         let xmlData = req.file.buffer.toString();
         this._xmlService.backupFromXml(xmlData)
             .then(() => {
-                res.send('Successfull resotred DB from XML!');
+                res.send('Successfull restored the DB from XML!');
             })
             .catch(e => {
                 res.send(`Error occoured: ${e}`);

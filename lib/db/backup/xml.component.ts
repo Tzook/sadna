@@ -77,7 +77,6 @@ export class XmlComponent {
      * Read the XML file and upload it as multipart
      */
     private uploadFile(event: any) {
-        console.log('uploading', event);
         this._loading = true;
         let form = document.getElementsByTagName('form')[0];
         form.submit();
