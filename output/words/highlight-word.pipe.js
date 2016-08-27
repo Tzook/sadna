@@ -9,30 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-let UniqueWordsService = class UniqueWordsService {
-    constructor() {
-    }
-    getUniqueWords(words, sorted) {
-        let resultWords = [];
-        let seenWords = new Set();
-        for (let word of words) {
-            let wordValue = word.word_value.toLowerCase();
-            if (!word.is_punctuation && !seenWords.has(wordValue)) {
-                seenWords.add(wordValue);
-                resultWords.push(wordValue);
-            }
-        }
-        return sorted ? this.sortWords(resultWords) : resultWords;
-    }
-    sortWords(words) {
-        return words.sort((a, b) => {
-            return a > b ? 1 : -1;
-        });
+let HighlightWordPipe = class HighlightWordPipe {
+    transform(value, word) {
+        let regex = new RegExp(`\s${word}\s`, 'g');
+        return value.replace(regex, ` *${word}* `);
     }
 };
-UniqueWordsService = __decorate([
-    core_1.Injectable(), 
+HighlightWordPipe = __decorate([
+    core_1.Pipe({
+        name: 'highlightWord'
+    }), 
     __metadata('design:paramtypes', [])
-], UniqueWordsService);
-exports.UniqueWordsService = UniqueWordsService;
-//# sourceMappingURL=unique-words.service.js.map
+], HighlightWordPipe);
+exports.HighlightWordPipe = HighlightWordPipe;
+//# sourceMappingURL=highlight-word.pipe.js.map

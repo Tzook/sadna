@@ -2,6 +2,8 @@ import {CompleteSong} from '../db/server-db.model';
 import {ActivatedRoute} from '@angular/router';
 import {ViewSongService} from './view-song.service';
 import {UniqueWordsService} from '../words/unique-words.service';
+import {WordPeekService} from '../words/word-peek.service';
+import {WordPeekComponent} from '../words/word-peek.component';
 import {SongInfoComponent} from '../songs/song-info.component';
 import {Component, OnInit} from '@angular/core';
 import {Song} from '../db/server-db.model';
@@ -19,10 +21,10 @@ import {Song} from '../db/server-db.model';
         h2 {
             margin-bottom: 10px;
         }
-        span:not(:last-child):after {
+        word-peek:not(:last-child):after {
             content: " | ";
         }
-        span {
+        word-peek {
             font-size: 18px;
             line-height: 30px;
             letter-spacing: 2px;
@@ -32,21 +34,21 @@ import {Song} from '../db/server-db.model';
         <song-info [song]="song"></song-info>
         <div id="words">
             <h2>Words in the song:</h2>
-            <span *ngFor="let word of uniqueWords">
-                {{word.word_value}}
-            </span>
+            <word-peek *ngFor="let word of uniqueWords" [word]="word"></word-peek>
         </div>
     `,
-    directives: [SongInfoComponent],
+    directives: [SongInfoComponent, WordPeekComponent],
+    providers: [WordPeekService], // available for children components too
     viewProviders: [ViewSongService, UniqueWordsService]
 })
 export class ViewSongComponent implements OnInit {
     private words: CompleteSong[];
-    private uniqueWords: CompleteSong[];
+    private uniqueWords: string[];
     private song: Song;
 
     constructor(private viewSongService: ViewSongService,
                 private uniqueWordsService: UniqueWordsService,
+                private wordPeekService: WordPeekService,
                 private route: ActivatedRoute) {
         this.words = [];
         this.uniqueWords = [];
@@ -59,7 +61,8 @@ export class ViewSongComponent implements OnInit {
                 .subscribe(
                     success => {
                         this.words = success.json();
-                        this.uniqueWords = this.uniqueWordsService.getUniqueWords(this.words);
+                        this.wordPeekService.words = this.words;
+                        this.uniqueWords = this.uniqueWordsService.getUniqueWords(this.words, true);
                     },
                     error => console.log(error)
                 );

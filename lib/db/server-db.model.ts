@@ -77,7 +77,6 @@ export interface WordInSongResult extends Result {
 
 // complete song is a join of all our data on this song
 export interface CompleteSong extends WordInSong {
-    song_name: string,
     word_value: string,
     is_punctuation: boolean,
 }

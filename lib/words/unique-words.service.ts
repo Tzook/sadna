@@ -6,7 +6,7 @@ export class UniqueWordsService {
 
     constructor() { }
 
-    public getUniqueWords(words: CompleteSong[]): CompleteSong[] {
+    public getUniqueWords(words: CompleteSong[], sorted: boolean): string[] {
         let resultWords = [];
         let seenWords = new Set<string>();
 
@@ -14,10 +14,16 @@ export class UniqueWordsService {
             let wordValue = word.word_value.toLowerCase();
             if (!word.is_punctuation && !seenWords.has(wordValue)) {
                 seenWords.add(wordValue);
-                resultWords.push(word);
+                resultWords.push(wordValue);
             }
         }
 
-        return resultWords;
+        return sorted ? this.sortWords(resultWords) : resultWords;
+    }
+
+    private sortWords(words: string[]): string[] {
+        return words.sort((a, b) => {
+            return a > b ? 1 : -1;
+        });
     }
 }

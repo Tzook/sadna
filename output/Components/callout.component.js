@@ -9,30 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-let UniqueWordsService = class UniqueWordsService {
+let CalloutComponent = class CalloutComponent {
     constructor() {
     }
-    getUniqueWords(words, sorted) {
-        let resultWords = [];
-        let seenWords = new Set();
-        for (let word of words) {
-            let wordValue = word.word_value.toLowerCase();
-            if (!word.is_punctuation && !seenWords.has(wordValue)) {
-                seenWords.add(wordValue);
-                resultWords.push(wordValue);
-            }
-        }
-        return sorted ? this.sortWords(resultWords) : resultWords;
-    }
-    sortWords(words) {
-        return words.sort((a, b) => {
-            return a > b ? 1 : -1;
-        });
+    ngOnInit() {
     }
 };
-UniqueWordsService = __decorate([
-    core_1.Injectable(), 
+CalloutComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'callout',
+        styles: [`
+        div {
+            position: absolute;
+            width: 90%;
+            max-height: 300px;
+            overflow-y: scroll;
+            background: white;
+            border-radius: 2px;
+            padding: 20px;
+            box-shadow: 0 0 9px -1px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    `],
+        template: `
+        <div>
+            <ng-content></ng-content>
+        </div>
+    `
+    }), 
     __metadata('design:paramtypes', [])
-], UniqueWordsService);
-exports.UniqueWordsService = UniqueWordsService;
-//# sourceMappingURL=unique-words.service.js.map
+], CalloutComponent);
+exports.CalloutComponent = CalloutComponent;
+//# sourceMappingURL=callout.component.js.map
