@@ -1,3 +1,4 @@
+import {ViewSongRouter} from '../view-song/view-song.router';
 import {SongsListRouter} from '../songs-list/songs-list.router';
 import {AddSongRouter} from '../add-song/add-song.router';
 import {SongsRouter} from '../routers/server-songs.router';
@@ -12,6 +13,7 @@ export class ServerRouter {
         private songsRouter: SongsRouter,
         private addSongRouter: AddSongRouter,
         private songsListRouter: SongsListRouter,
+        private viewSongRouter: ViewSongRouter,
         private xmlRouter: XmlRouter
     ) {
 
@@ -24,6 +26,7 @@ export class ServerRouter {
             this.addSongRouter,
             this.songsListRouter,
             this.xmlRouter,
+            this.viewSongRouter,
         ];
         for (let i = 0, l = routers.length; i < l; i++) {
             routers[i].init(this.app);

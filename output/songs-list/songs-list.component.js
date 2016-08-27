@@ -17,9 +17,7 @@ let SongsListComponent = class SongsListComponent {
     }
     ngOnInit() {
         this.songsListService.getSongs()
-            .subscribe(success => {
-            this.songsList = success.json();
-        }, error => console.log(error));
+            .subscribe(success => this.songsList = success.json(), error => console.log(error));
     }
     getSongUrl(song) {
         return "/" + routes_constants_1.ROUTE_VIEW_SONG
