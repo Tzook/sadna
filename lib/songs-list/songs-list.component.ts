@@ -48,9 +48,7 @@ export class SongsListComponent implements OnInit {
     ngOnInit() {
         this.songsListService.getSongs()
             .subscribe(
-                success => {
-                    this.songsList = success.json();
-                },
+                success => this.songsList = success.json(),
                 error => console.log(error)
             );
     }

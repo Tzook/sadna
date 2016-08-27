@@ -1,4 +1,8 @@
 "use strict";
+const view_song_router_1 = require('../view-song/view-song.router');
+const view_song_controller_1 = require('../view-song/view-song.controller');
+const add_song_controller_1 = require('../add-song/add-song.controller');
+const song_analyze_service_1 = require('../songs/song-analyze.service');
 const songs_list_controller_1 = require('../songs-list/songs-list.controller');
 const songs_list_router_1 = require('../songs-list/songs-list.router');
 const add_song_middleware_1 = require('../add-song/add-song.middleware');
@@ -22,12 +26,16 @@ exports.serviceContainer = core_1.ReflectiveInjector.resolveAndCreate([
     server_words_service_1.WordsService,
     add_song_router_1.AddSongRouter,
     add_song_middleware_1.AddSongMiddleware,
+    add_song_controller_1.AddSongController,
     songs_list_router_1.SongsListRouter,
     songs_list_controller_1.SongsListController,
+    view_song_router_1.ViewSongRouter,
+    view_song_controller_1.ViewSongController,
     server_songs_service_1.SongsService,
     xml_router_1.XmlRouter,
     xml_controller_1.XmlController,
     xml_service_1.XmlService,
+    song_analyze_service_1.SongAnalyzeService,
     server_main_1.ServerMain,
 ]);
 //# sourceMappingURL=service-container.js.map

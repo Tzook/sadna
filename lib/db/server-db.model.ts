@@ -4,7 +4,7 @@ export interface Result {
     oid: string,
     fields: any[],
     rows: Row[],
-    addRow: (row: Row) => void 
+    addRow: (row: Row) => void
 }
 
 interface Row {
@@ -65,6 +65,11 @@ export interface WordInSong extends Row {
     word_num: number,
 }
 
+export interface CompleteWordInSong {
+    words: Word[],
+    wordsInSong: WordInSong[],
+}
+
 export interface WordInSongResult extends Result {
     rows: WordInSong[],
     addRow: (row: WordInSong) => void,
@@ -75,7 +80,7 @@ export interface CompleteSong extends WordInSong {
     song_name: string,
     word_value: string,
     is_punctuation: boolean,
-} 
+}
 
 export interface CompleteSongResult extends Result {
     rows: CompleteSong[],

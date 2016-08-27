@@ -45,8 +45,8 @@ import {Component} from '@angular/core';
                 </tr>
             </table>
 
-            <div [hidden]="!loading">
-                Adding song...
+            <div [hidden]="!message">
+                {{message}}
             </div>
         </form>
     `,
@@ -55,21 +55,21 @@ import {Component} from '@angular/core';
 export class AddSongComponent {
     private model: AddSong;
     private loading: boolean;
+    private message: string;
 
     constructor(private addSongService: AddSongService) {
         this.model = new AddSong();
         this.loading = false;
+        this.message = "";
     }
 
     private onSubmit() {
-        // this.loading = true;
+        this.loading = true;
+        this.message = "Adding song...";
         console.log('Submitting', this.model);
         this.addSongService.addSong(this.model)
             .subscribe(
-                success => {
-                    console.log('success');
-                    // do a toast?
-                },
-                error => console.log(error._body));
+                success => this.message = "The song has been added successfully.",
+                error => this.message = "Error: " + error._body);
     }
 }
