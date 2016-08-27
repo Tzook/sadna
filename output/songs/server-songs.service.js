@@ -95,13 +95,12 @@ let SongsService = class SongsService {
             console.log(`getting complete song for id: ${id}`);
             let dbClient = this.dbClient;
             dbClient.query(`
-                select w.id, s.name as song_name, w.song_id, w.word_id, ww.value as word_value, ww.is_punctuation, w.col, w."row", w.house, w.sentence, w.word_num
+                select w.id, w.song_id, w.word_id, ww.value as word_value, ww.is_punctuation, w.col, w."row", w.house, w.sentence, w.word_num
                 from
-                    songs s,
                     word_in_song w,
                     words ww
                 where
-                    s.id = $1
+                    w.song_id = $1
                     and ww.id = w.word_id;
             `, [id], (e, result) => {
                 if (e)
