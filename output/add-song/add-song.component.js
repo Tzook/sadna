@@ -45,7 +45,8 @@ AddSongComponent = __decorate([
         }
     `],
         template: `
-        <form (ngSubmit)="onSubmit()" #addSongForm="ngForm">
+        <form class="animated fadeIn"
+            (ngSubmit)="onSubmit()" #addSongForm="ngForm">
             <table>
                 <tr>
                     <td><label for="name">Name:</label></td>

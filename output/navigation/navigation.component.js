@@ -31,6 +31,7 @@ NavigationComponent = __decorate([
             text-decoration: none;
             color: ${navigation_style_constants_1.COLORS.TEXT};
             padding: ${navigation_style_constants_1.TAB_SPACE_AROUND}px;
+            transition: all 0.3s ease;
         }
         .active {
             color: ${navigation_style_constants_1.COLORS.ACTIVE_TEXT};
@@ -40,7 +41,7 @@ NavigationComponent = __decorate([
         }
     `],
         template: `
-        <ul>
+        <ul class="animated fadeIn">
             <li *ngFor="let link of links">
                 <a [routerLink]="link.url" routerLinkActive="active">{{link.name}}</a>
             </li>

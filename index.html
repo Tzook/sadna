@@ -6,66 +6,19 @@
     <title>Dily 2</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">
-    <!-- Reset stylings -->
-    <style>
-        * {
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
-            border: 0;
-            outline: 0;
-            font: 100% "Helvetica Neue", Helvetica, Arial, sans-serif;
-        }
-        html,
-        body {
-            height: 100%;
-            width: 100%;
-        }
-        body {
-            -webkit-font-smoothing: antialiased;
-        }
-        table {
-            width: 100%;
-            border-spacing: 0;
-        }
-        textarea {
-            resize: none;
-        }
-        ul {
-            list-style-type: none;
-        }
-        button[disabled] {
-            background: lightgrey;
-            cursor: not-allowed;
-        }
-        input,
-        textarea {
-            width: 100%;
-            padding: 2px 4px;
-            border-radius: 1px;
-            border: 1px solid rgba(0,0,0,.4);
-            transition: box-shadow linear .2s;
-        }
-        input:focus,
-        textarea:focus {
-            box-shadow: 0 0 2px;
-        }
-        button {
-            cursor: pointer;
-            padding: 5px 8px;
-            border-radius: 2px;
-            background: whitesmoke;
-            box-shadow: 1px 1px 3px -1px rgba(0,0,0,.6);
-            border: 1px solid black;
-            transition: transform linear .1s;
-        }
-        button:hover {
-            transform: scale(1.05);
-        }
-    </style>
+    <link rel="stylesheet" href="lib/style/base.css">
+    <link rel="stylesheet" href="lib/style/animate.css">
 </head>
 <body>
-    <my-app><img style="display: block; margin: auto;" src="loading.gif"></my-app>
+    <my-app>
+        <div class="spinner animated fadeIn">
+			<div class="spinner-unit"></div><div class="spinner-unit"></div><div class="spinner-unit"></div><div class="spinner-unit"></div>
+            <div class="spinner-unit"></div><div class="spinner-unit"></div><div class="spinner-unit"></div><div class="spinner-unit"></div>
+            <div class="spinner-unit"></div><div class="spinner-unit"></div><div class="spinner-unit"></div><div class="spinner-unit"></div>
+            <div class="spinner-unit"></div><div class="spinner-unit"></div><div class="spinner-unit"></div><div class="spinner-unit"></div>
+            <div class="spinner-unit"></div>
+		</div>
+    </my-app>
 
     <script src="node_modules/core-js/client/shim.min.js"></script>
 

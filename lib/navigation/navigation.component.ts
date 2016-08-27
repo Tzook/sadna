@@ -16,6 +16,7 @@ import {Component} from '@angular/core';
             text-decoration: none;
             color: ${COLORS.TEXT};
             padding: ${TAB_SPACE_AROUND}px;
+            transition: all 0.3s ease;
         }
         .active {
             color: ${COLORS.ACTIVE_TEXT};
@@ -25,7 +26,7 @@ import {Component} from '@angular/core';
         }
     `],
     template: `
-        <ul>
+        <ul class="animated fadeIn">
             <li *ngFor="let link of links">
                 <a [routerLink]="link.url" routerLinkActive="active">{{link.name}}</a>
             </li>
