@@ -24,6 +24,9 @@ textarea {
 ul {
     list-style-type: none;
 }
+h2 {
+    font-size: 22px;
+}
 button[disabled] {
     background: lightgrey;
     cursor: not-allowed;

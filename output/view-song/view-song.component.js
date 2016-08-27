@@ -10,17 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const router_1 = require('@angular/router');
 const view_song_service_1 = require('./view-song.service');
+const unique_words_service_1 = require('../words/unique-words.service');
+const song_info_component_1 = require('../songs/song-info.component');
 const core_1 = require('@angular/core');
 let ViewSongComponent = class ViewSongComponent {
-    constructor(viewSongService, route) {
+    constructor(viewSongService, uniqueWordsService, route) {
         this.viewSongService = viewSongService;
+        this.uniqueWordsService = uniqueWordsService;
         this.route = route;
         this.words = [];
+        this.uniqueWords = [];
     }
     ngOnInit() {
         let params = this.route.snapshot.params;
+        this.song = params;
         this.viewSongService.getSong(params["id"])
-            .subscribe(success => this.words = success.json(), error => console.log(error));
+            .subscribe(success => {
+            this.words = success.json();
+            this.uniqueWords = this.uniqueWordsService.getUniqueWords(this.words);
+        }, error => console.log(error));
     }
 };
 ViewSongComponent = __decorate([
@@ -28,19 +36,37 @@ ViewSongComponent = __decorate([
         moduleId: module.id,
         selector: 'view-song',
         styles: [`
-
+        song-info {
+            text-align: center;
+        }
+        #words {
+            margin-top: 40px;
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        span:not(:last-child):after {
+            content: " | ";
+        }
+        span {
+            font-size: 18px;
+            line-height: 30px;
+            letter-spacing: 2px;
+        }
     `],
         template: `
-        View a specific song be here
-        <section>
-            <div *ngFor="let word of words">
-                {{word | json}}
-            </div>
-        </section>
+        <song-info [song]="song"></song-info>
+        <div id="words">
+            <h2>Words in the song:</h2>
+            <span *ngFor="let word of uniqueWords">
+                {{word.word_value}}
+            </span>
+        </div>
     `,
-        viewProviders: [view_song_service_1.ViewSongService]
+        directives: [song_info_component_1.SongInfoComponent],
+        viewProviders: [view_song_service_1.ViewSongService, unique_words_service_1.UniqueWordsService]
     }), 
-    __metadata('design:paramtypes', [view_song_service_1.ViewSongService, router_1.ActivatedRoute])
+    __metadata('design:paramtypes', [view_song_service_1.ViewSongService, unique_words_service_1.UniqueWordsService, router_1.ActivatedRoute])
 ], ViewSongComponent);
 exports.ViewSongComponent = ViewSongComponent;
 //# sourceMappingURL=view-song.component.js.map

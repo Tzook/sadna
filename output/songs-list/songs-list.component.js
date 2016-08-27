@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const songs_list_service_1 = require('./songs-list.service');
+const song_info_component_1 = require('../songs/song-info.component');
 const core_1 = require('@angular/core');
 const routes_constants_1 = require('../navigation/routes.constants');
 let SongsListComponent = class SongsListComponent {
@@ -32,9 +33,6 @@ SongsListComponent = __decorate([
         moduleId: module.id,
         selector: 'songs-list',
         styles: [`
-        section {
-            padding: 20px;
-        }
         div {
             display: flex;
             justify-content: space-between;
@@ -45,24 +43,16 @@ SongsListComponent = __decorate([
             border-radius: 2px;
             box-shadow: 1px 2px 2px -1px rgba(0,0,0,.6);
         }
-        h2 {
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
     `],
         template: `
-        <section>
-            <div *ngFor="let song of songsList" class="animated fadeInDown">
-                <span>
-                    <h2>{{song.name}}</h2>
-                    <h3>Written by {{song.writer}} | Composed by {{song.composer}}</h3>
-                </span>
-                <span>
-                    <button [routerLink]="getSongUrl(song)">View song</button>
-                </span>
-            </div>
-        </section>
+        <div *ngFor="let song of songsList" class="animated fadeInDown">
+            <song-info [song]="song"></song-info>
+            <span>
+                <button [routerLink]="getSongUrl(song)">View song</button>
+            </span>
+        </div>
     `,
+        directives: [song_info_component_1.SongInfoComponent],
         viewProviders: [songs_list_service_1.SongsListService]
     }), 
     __metadata('design:paramtypes', [songs_list_service_1.SongsListService])

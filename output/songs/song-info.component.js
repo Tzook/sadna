@@ -8,25 +8,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const navigation_component_1 = require('../navigation/navigation.component');
 const core_1 = require('@angular/core');
-let ClientMainComponent = class ClientMainComponent {
+let SongInfoComponent = class SongInfoComponent {
 };
-ClientMainComponent = __decorate([
+__decorate([
+    core_1.Input(), 
+    __metadata('design:type', Object)
+], SongInfoComponent.prototype, "song", void 0);
+SongInfoComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
+        moduleId: module.id,
+        selector: 'song-info',
         styles: [`
-        main {
-            padding: 20px;
+        h2 {
+            margin-bottom: 5px;
         }
     `],
         template: `
-        <navigation></navigation>
-        <main><router-outlet></router-outlet></main>
-    `,
-        directives: [navigation_component_1.NavigationComponent]
+        <header>
+            <h2>{{song.name}}</h2>
+            <h3>Written by {{song.writer}} | Composed by {{song.composer}}</h3>
+        </header>
+    `
     }), 
     __metadata('design:paramtypes', [])
-], ClientMainComponent);
-exports.ClientMainComponent = ClientMainComponent;
-//# sourceMappingURL=client-main.js.map
+], SongInfoComponent);
+exports.SongInfoComponent = SongInfoComponent;
+//# sourceMappingURL=song-info.component.js.map

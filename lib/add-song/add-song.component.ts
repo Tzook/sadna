@@ -9,7 +9,6 @@ import {Component} from '@angular/core';
     styles: [`
         form {
             text-align: center;
-            padding: 20px;
         }
         td {
             padding-bottom: 20px;

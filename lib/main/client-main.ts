@@ -3,9 +3,14 @@ import {Component} from '@angular/core';
 
 @Component({
     selector: 'my-app',
+    styles: [`
+        main {
+            padding: 20px;
+        }
+    `],
     template: `
         <navigation></navigation>
-        <router-outlet></router-outlet>
+        <main><router-outlet></router-outlet></main>
     `,
     directives: [NavigationComponent]
 })
