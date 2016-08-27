@@ -16,7 +16,7 @@ let XmlHttpService = class XmlHttpService {
         this.http = http;
     }
     getXmlData() {
-        console.log('calling', xml_constants_1.XML_BACKUP_FILE_URL);
+        console.log('calling get', xml_constants_1.XML_BACKUP_FILE_URL);
         return this.http.get(xml_constants_1.XML_BACKUP_FILE_URL);
     }
 };

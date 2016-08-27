@@ -8,7 +8,7 @@ export class XmlHttpService {
     constructor(private http: Http) { }
 
     public getXmlData() : Observable<Response> {
-        console.log('calling', XML_BACKUP_FILE_URL);
+        console.log('calling get', XML_BACKUP_FILE_URL);
         return this.http.get(XML_BACKUP_FILE_URL);
     }
 }

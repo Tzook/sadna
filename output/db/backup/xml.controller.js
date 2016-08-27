@@ -15,12 +15,22 @@ let XmlController = class XmlController {
         this._xmlService = _xmlService;
     }
     backupToXml(req, res, next) {
+        console.log('starting backup to XML');
         this._xmlService.backupToXml()
             .then((xmlData) => {
             res.send(xmlData);
         });
     }
     backupFromXml(req, res, next) {
+        console.log('starting restore from XML');
+        let xmlData = req.file.buffer.toString();
+        this._xmlService.backupFromXml(xmlData)
+            .then(() => {
+            res.send('Successfull resotred DB from XML!');
+        })
+            .catch(e => {
+            res.send(`Error occoured: ${e}`);
+        });
     }
 };
 XmlController = __decorate([

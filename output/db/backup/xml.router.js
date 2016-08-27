@@ -11,17 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require('@angular/core');
 const xml_controller_1 = require('./xml.controller');
 const xml_constants_1 = require('./xml.constants');
+const multer = require('multer');
 let XmlRouter = class XmlRouter {
     constructor(_xmlController) {
         this._xmlController = _xmlController;
+        this._upload = multer();
     }
     /**
      * List the routes
      */
     init(app) {
         app.get(xml_constants_1.XML_BACKUP_FILE_URL, this._xmlController.backupToXml.bind(this._xmlController));
-        // app.post(XML_BACKUP_FILE_URL,
-        //         this._xmlController.backupFromXml.bind(this._xmlController));
+        app.post(xml_constants_1.XML_BACKUP_FILE_URL, this._upload.single('data'), this._xmlController.backupFromXml.bind(this._xmlController));
     }
 };
 XmlRouter = __decorate([

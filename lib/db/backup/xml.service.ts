@@ -90,7 +90,6 @@ export class XmlService {
     
                     Promise.all(firstPromiseLand)
                         .then(r => {
-                            console.log('here', r);
                             let secondPromiseLand = [];
                             // We do the second promises for tables that have foreign keys
                             if (restoredObj.root.wordInGroup) {
@@ -101,7 +100,6 @@ export class XmlService {
                             }
                             Promise.all(secondPromiseLand)
                                 .then(r2 => {
-                                    console.log('here2', r2);
                                     resolve(true);
                                 })
                                 .catch(e => {

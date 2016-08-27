@@ -8,19 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+const xml_constants_1 = require('./xml.constants');
 const xml_httpService_1 = require('./xml.httpService');
 const core_1 = require('@angular/core');
 let XmlComponent = class XmlComponent {
     constructor(_xmlHttpService) {
         this._xmlHttpService = _xmlHttpService;
         this._loading = false;
+        this._xmlBackupUrl = xml_constants_1.XML_BACKUP_FILE_URL;
     }
     /**
      * Calling for backup service to get XML data
      */
     backup() {
         this._loading = true;
-        console.log('here');
         let reader = new FileReader();
         this._xmlHttpService.getXmlData()
             .subscribe(response => {
@@ -33,6 +34,15 @@ let XmlComponent = class XmlComponent {
         reader.onloadend = (event) => {
             window.location.href = reader.result;
         };
+    }
+    /**
+     * Read the XML file and upload it as multipart
+     */
+    uploadFile(event) {
+        console.log('uploading', event);
+        this._loading = true;
+        let form = document.getElementsByTagName('form')[0];
+        form.submit();
     }
 };
 XmlComponent = __decorate([
@@ -54,13 +64,22 @@ XmlComponent = __decorate([
             max-width: 350px;
             margin: 10px auto 0;
         }
+        input[type=file] {
+            visibility: hidden;
+            height: 0;
+            position: absolute;
+        }
     `],
         template: `
     <div class="animated fadeIn">
         <h1>Backup or Restore from XML</h1>
         <div class="btn-container animated fadeIn" *ngIf="!_loading">
             <button (click)="backup()">BACKUP TO XML</button>
-            <button>RESTORE FROM XML</button>
+            <button>
+                <form action="{{_xmlBackupUrl}}" enctype="multipart/form-data" method="post">
+                    <label>RESTORE FROM XML<input type="file" (change)="uploadFile($event)" name="data"/></label>
+                </form>
+            </button>
         </div>
         <h1 class="animated fadeIn" *ngIf="_loading"><br>LOADING...</h1>
     </div>
