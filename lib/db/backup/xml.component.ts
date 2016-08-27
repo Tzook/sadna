@@ -21,6 +21,10 @@ import {Component} from '@angular/core';
             max-width: 350px;
             margin: 10px auto 0;
         }
+        label {
+            display: block;
+            cursor: pointer;
+        }
         input[type=file] {
             visibility: hidden;
             height: 0;
@@ -45,15 +49,15 @@ import {Component} from '@angular/core';
     viewProviders: [XmlHttpService]
 })
 export class XmlComponent {
-    private _loading: boolean; 
+    private _loading: boolean;
     private _succesfull: boolean;
     private _xmlBackupUrl: string;
     constructor(private _route : ActivatedRoute, private _xmlHttpService: XmlHttpService) {
         this._loading = false;
         this._xmlBackupUrl = XML_BACKUP_FILE_URL;
         this._route.queryParams.forEach(param => {
-            if (param['status'] === 'success') 
-                this._succesfull = true; 
+            if (param['status'] === 'success')
+                this._succesfull = true;
         });
     }
 
@@ -79,7 +83,7 @@ export class XmlComponent {
         }
     }
 
-    
+
     /**
      * Read the XML file and upload it as multipart
      */

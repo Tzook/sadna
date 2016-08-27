@@ -69,6 +69,10 @@ XmlComponent = __decorate([
             max-width: 350px;
             margin: 10px auto 0;
         }
+        label {
+            display: block;
+            cursor: pointer;
+        }
         input[type=file] {
             visibility: hidden;
             height: 0;
