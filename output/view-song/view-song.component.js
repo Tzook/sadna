@@ -15,11 +15,12 @@ let ViewSongComponent = class ViewSongComponent {
     constructor(viewSongService, route) {
         this.viewSongService = viewSongService;
         this.route = route;
+        this.words = [];
     }
     ngOnInit() {
         let params = this.route.snapshot.params;
         this.viewSongService.getSong(params["id"])
-            .subscribe(success => console.log(success.json()), error => console.log(error));
+            .subscribe(success => this.words = success.json(), error => console.log(error));
     }
 };
 ViewSongComponent = __decorate([
@@ -31,6 +32,11 @@ ViewSongComponent = __decorate([
     `],
         template: `
         View a specific song be here
+        <section>
+            <div *ngFor="let word of words">
+                {{word | json}}
+            </div>
+        </section>
     `,
         viewProviders: [view_song_service_1.ViewSongService]
     }), 
