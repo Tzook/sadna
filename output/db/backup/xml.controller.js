@@ -15,6 +15,10 @@ let XmlController = class XmlController {
         this._xmlService = _xmlService;
     }
     backupToXml(req, res, next) {
+        this._xmlService.backupToXml()
+            .then((xmlData) => {
+            res.send(xmlData);
+        });
     }
     backupFromXml(req, res, next) {
     }
