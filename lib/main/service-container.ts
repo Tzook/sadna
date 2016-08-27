@@ -28,6 +28,9 @@ export const serviceContainer = ReflectiveInjector.resolveAndCreate([
     SongsListRouter,
     SongsListController,
     SongsService,
+    XmlRouter,
+    XmlController,
+    XmlService,
     SongAnalyzeService,
     ServerMain,
 ]);
