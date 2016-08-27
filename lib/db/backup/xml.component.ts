@@ -1,5 +1,6 @@
 import {XML_BACKUP_FILE_URL} from './xml.constants';
 import {XmlHttpService} from './xml.httpService';
+import {ActivatedRoute} from '@angular/router';
 import {Component} from '@angular/core';
 
 @Component({
@@ -29,7 +30,7 @@ import {Component} from '@angular/core';
     template: `
     <div class="animated fadeIn">
         <h1>Backup or Restore from XML</h1>
-        <div class="btn-container animated fadeIn" *ngIf="!_loading">
+        <div class="btn-container animated fadeIn" *ngIf="!_loading && !_succesfull">
             <button (click)="backup()">BACKUP TO XML</button>
             <button>
                 <form action="{{_xmlBackupUrl}}" enctype="multipart/form-data" method="post">
@@ -38,16 +39,22 @@ import {Component} from '@angular/core';
             </button>
         </div>
         <h1 class="animated fadeIn" *ngIf="_loading"><br>LOADING...</h1>
+        <h1 class="animated fadeIn" *ngIf="_succesfull"><br>DB has restored successfully from XML file!</h1>
     </div>
     `,
     viewProviders: [XmlHttpService]
 })
 export class XmlComponent {
     private _loading: boolean; 
+    private _succesfull: boolean;
     private _xmlBackupUrl: string;
-    constructor(private _xmlHttpService: XmlHttpService) {
+    constructor(private _route : ActivatedRoute, private _xmlHttpService: XmlHttpService) {
         this._loading = false;
         this._xmlBackupUrl = XML_BACKUP_FILE_URL;
+        this._route.queryParams.forEach(param => {
+            if (param['status'] === 'success') 
+                this._succesfull = true; 
+        });
     }
 
     /**

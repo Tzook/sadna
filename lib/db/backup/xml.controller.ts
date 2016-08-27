@@ -19,10 +19,12 @@ export class XmlController {
         let xmlData = req.file.buffer.toString();
         this._xmlService.backupFromXml(xmlData)
             .then(() => {
-                res.send('Successfull restored the DB from XML!');
+                // res.send('Successfull restored the DB from XML!');
+                res.redirect('/xml?status=success')
             })
             .catch(e => {
-                res.send(`Error occoured: ${e}`);
+                console.log(`Error occoured: ${e}`);
+                res.redirect('/xml?status=error')
             });
     }
 }

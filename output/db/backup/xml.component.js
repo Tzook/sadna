@@ -10,12 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const xml_constants_1 = require('./xml.constants');
 const xml_httpService_1 = require('./xml.httpService');
+const router_1 = require('@angular/router');
 const core_1 = require('@angular/core');
 let XmlComponent = class XmlComponent {
-    constructor(_xmlHttpService) {
+    constructor(_route, _xmlHttpService) {
+        this._route = _route;
         this._xmlHttpService = _xmlHttpService;
         this._loading = false;
         this._xmlBackupUrl = xml_constants_1.XML_BACKUP_FILE_URL;
+        this._route.queryParams.forEach(param => {
+            if (param['status'] === 'success')
+                this._succesfull = true;
+        });
     }
     /**
      * Calling for backup service to get XML data
@@ -72,7 +78,7 @@ XmlComponent = __decorate([
         template: `
     <div class="animated fadeIn">
         <h1>Backup or Restore from XML</h1>
-        <div class="btn-container animated fadeIn" *ngIf="!_loading">
+        <div class="btn-container animated fadeIn" *ngIf="!_loading && !_succesfull">
             <button (click)="backup()">BACKUP TO XML</button>
             <button>
                 <form action="{{_xmlBackupUrl}}" enctype="multipart/form-data" method="post">
@@ -81,11 +87,12 @@ XmlComponent = __decorate([
             </button>
         </div>
         <h1 class="animated fadeIn" *ngIf="_loading"><br>LOADING...</h1>
+        <h1 class="animated fadeIn" *ngIf="_succesfull"><br>DB has restored successfully from XML file!</h1>
     </div>
     `,
         viewProviders: [xml_httpService_1.XmlHttpService]
     }), 
-    __metadata('design:paramtypes', [xml_httpService_1.XmlHttpService])
+    __metadata('design:paramtypes', [router_1.ActivatedRoute, xml_httpService_1.XmlHttpService])
 ], XmlComponent);
 exports.XmlComponent = XmlComponent;
 //# sourceMappingURL=xml.component.js.map
