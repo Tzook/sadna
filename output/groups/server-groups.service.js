@@ -75,6 +75,22 @@ let GroupsService = class GroupsService {
         });
     }
     /**
+     * Select all groups
+     */
+    selectGroups() {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                SELECT * FROM groups;
+            `, (e, result) => {
+                if (e)
+                    reject(e);
+                else
+                    resolve(result);
+            });
+        });
+    }
+    /**
      * Will get words in order in all songs
      */
     getWordGroupPossibilities(words) {

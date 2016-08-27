@@ -142,6 +142,38 @@ export class WordsService
         });
     }
 
+    /**
+     * Select all word_in_song table
+     */
+    selectWordInSong() : Promise<WordInSongResult> {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                SELECT * FROM word_in_song;
+            `,
+            (e: DbError, result: WordInSongResult) => {
+                if (e) reject (e);
+                else resolve(result);
+            })
+        });
+    }
+
+    /**
+     * Select all word_in_group table
+     */
+    selectWordInGroup() : Promise<WordInGroupResult> {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                SELECT * FROM word_in_group;
+            `,
+            (e: DbError, result: WordInGroupResult) => {
+                if (e) reject (e);
+                else resolve(result);
+            })
+        });
+    }
+
     // deprecated - delete later
     /**
      * Insert word in song safe to word_in_song table

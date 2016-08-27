@@ -101,6 +101,75 @@ let WordsService = class WordsService {
             });
         });
     }
+    /**
+     * Select all the words
+     */
+    selectWords() {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                SELECT * FROM words;
+            `, (e, result) => {
+                if (e)
+                    reject(e);
+                else
+                    resolve(result);
+            });
+        });
+    }
+    /**
+     * This selects all occournces of words what so ever
+     * Add here limit if this becomes slow
+     */
+    selectWordsEverywhere() {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                select s.name as song_name, w.song_id, w.word_id, ww.value as word_value, ww.is_punctuation, w.col, w."row", w.house, w.sentence, w.word_num 
+            	from
+            		songs s,
+            		word_in_song w,
+            		words ww;
+            `, (e, result) => {
+                if (e)
+                    reject(e);
+                else
+                    resolve(result);
+            });
+        });
+    }
+    /**
+     * Select all word_in_song table
+     */
+    selectWordInSong() {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                SELECT * FROM word_in_song;
+            `, (e, result) => {
+                if (e)
+                    reject(e);
+                else
+                    resolve(result);
+            });
+        });
+    }
+    /**
+     * Select all word_in_group table
+     */
+    selectWordInGroup() {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                SELECT * FROM word_in_group;
+            `, (e, result) => {
+                if (e)
+                    reject(e);
+                else
+                    resolve(result);
+            });
+        });
+    }
 };
 WordsService = __decorate([
     core_1.Injectable(), 

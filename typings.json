@@ -10,6 +10,7 @@
     "mime": "github:DefinitelyTyped/DefinitelyTyped/mime/mime.d.ts#2a24bbb7ca4f13e52c7f6a0ab6144b565bf1ef55",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#2a24bbb7ca4f13e52c7f6a0ab6144b565bf1ef55",
     "pg": "registry:dt/pg#0.0.0+20160514172051",
-    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#2a24bbb7ca4f13e52c7f6a0ab6144b565bf1ef55"
+    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#2a24bbb7ca4f13e52c7f6a0ab6144b565bf1ef55",
+    "xml2js": "registry:dt/xml2js#0.0.0+20160317120654"
   }
 }

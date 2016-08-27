@@ -79,6 +79,22 @@ export class GroupsService
     }
 
     /**
+     * Select all groups
+     */
+    selectGroups() : Promise<GroupResult> {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                SELECT * FROM groups;
+            `,
+            (e: DbError, result: GroupResult) => {
+                if (e) reject (e);
+                else resolve(result);
+            })
+        });
+    }
+
+    /**
      * Will get words in order in all songs
      */
     getWordGroupPossibilities(words:string[]) : Promise<WordInSong[]> {
@@ -192,6 +208,6 @@ export class GroupsService
             });
         }
         this.loadGroup(group, words)
-            .catch(err => console.log(err);
+            .catch(err => console.log(err));
     }
 }

@@ -12,11 +12,11 @@
     "@angular/common": "2.0.0-rc.5",
     "@angular/compiler": "2.0.0-rc.5",
     "@angular/core": "2.0.0-rc.5",
+    "@angular/forms": "0.3.0",
     "@angular/http": "2.0.0-rc.5",
     "@angular/platform-browser": "2.0.0-rc.5",
     "@angular/platform-browser-dynamic": "2.0.0-rc.5",
     "@angular/router": "3.0.0-rc.1",
-    "@angular/forms": "0.3.0",
     "body-parser": "1.15.2",
     "compression": "1.6.2",
     "cookie-parser": "1.4.3",
@@ -32,6 +32,7 @@
     "rxjs": "5.0.0-beta.6",
     "systemjs": "0.19.37",
     "underscore": "1.8.3",
+    "xml2js": "^0.4.17",
     "zone.js": "0.6.12"
   },
   "engines": {
