@@ -58,6 +58,9 @@ let XmlService = class XmlService {
     }
     /**
      * Backup from an xml string to the DB
+     * The xml object will have root and in this the original object will sit
+     * Also, note that everything from the xml is a string,
+     *     so for int need to cast and for boolean need to check if -> expression === 'true';
      */
     backupFromXml(xmlData) {
         return new Promise((resolve, reject) => {

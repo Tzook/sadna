@@ -13,11 +13,5 @@ export class SongsRouter {
 
     init (app) {
         this._app = app;
-        this._xmlService.backupToXml()
-            .then((result: string) => {
-                console.log(typeof result);
-                this._xmlService.backupFromXml(result);
-            })
-            .catch(err => console.log(err));
     }  
 }

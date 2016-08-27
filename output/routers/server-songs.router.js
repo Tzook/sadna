@@ -20,12 +20,6 @@ let SongsRouter = class SongsRouter {
     }
     init(app) {
         this._app = app;
-        this._xmlService.backupToXml()
-            .then((result) => {
-            console.log(typeof result);
-            this._xmlService.backupFromXml(result);
-        })
-            .catch(err => console.log(err));
     }
 };
 SongsRouter = __decorate([
