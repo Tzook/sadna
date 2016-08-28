@@ -39,7 +39,10 @@ textarea {
     border: 1px solid rgba(0,0,0,.4);
     transition: box-shadow linear .2s;
 }
-input:focus,
+select {
+    border: 1px solid;
+}
+input[type=text]:focus,
 textarea:focus {
     box-shadow: 0 0 2px;
 }

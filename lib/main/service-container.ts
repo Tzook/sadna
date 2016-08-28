@@ -1,3 +1,7 @@
+import {GroupsRouter} from '../groups/groups.router';
+import {GroupsMiddleware} from '../groups/groups.middleware';
+import {GroupsController} from '../groups/groups.controller';
+import {ParamsValidators} from '../Components/params.validator';
 import {ViewSongRouter} from '../view-song/view-song.router';
 import {ViewSongController} from '../view-song/view-song.controller';
 import {AddSongController} from '../add-song/add-song.controller';
@@ -20,6 +24,7 @@ import {ReflectiveInjector} from '@angular/core';
 
 export const serviceContainer = ReflectiveInjector.resolveAndCreate([
     DbService,
+    ParamsValidators,
     ServerRouter,
     SongsRouter,
     GroupsService,
@@ -29,6 +34,9 @@ export const serviceContainer = ReflectiveInjector.resolveAndCreate([
     AddSongController,
     SongsListRouter,
     SongsListController,
+    GroupsRouter,
+    GroupsMiddleware,
+    GroupsController,
     ViewSongRouter,
     ViewSongController,
     SongsService,

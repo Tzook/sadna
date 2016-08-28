@@ -6,18 +6,7 @@ import {Component} from '@angular/core';
 @Component({
     moduleId: module.id,
     selector: 'add-song',
-    styles: [`
-        form {
-            text-align: center;
-        }
-        td {
-            padding-bottom: 20px;
-            vertical-align: top;
-        }
-        #submit {
-            text-align: left;
-        }
-    `],
+    styleUrls: ['../../style/form-styles.css'],
     template: `
         <form class="animated fadeIn"
             (ngSubmit)="onSubmit()" #addSongForm="ngForm">

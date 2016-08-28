@@ -9,16 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const add_song_model_1 = require('./add-song.model');
+const add_group_model_1 = require('./add-group.model');
+const groups_constants_1 = require('./groups.constants');
 const params_validator_1 = require('../Components/params.validator');
-const add_song_constants_1 = require('./add-song.constants');
-let AddSongMiddleware = class AddSongMiddleware {
+let GroupsMiddleware = class GroupsMiddleware {
     constructor(paramsValidators) {
         this.paramsValidators = paramsValidators;
     }
     validateRequest(req, res, next) {
         let body = req.body;
-        let model = new add_song_model_1.AddSong(body.name, body.writer, body.composer, body.text);
+        let model = new add_group_model_1.AddGroup(body.name, body.words, !!body.is_expression);
         let error = this.validateModel(model);
         if (!error) {
             req.body.model = model;
@@ -30,17 +30,16 @@ let AddSongMiddleware = class AddSongMiddleware {
     }
     validateModel(model) {
         let params = [
-            { name: "name", type: "string", min: 0, max: add_song_constants_1.MAX_NAME_LENGTH },
-            { name: "writer", type: "string", min: 0, max: add_song_constants_1.MAX_NAME_LENGTH },
-            { name: "composer", type: "string", min: 0, max: add_song_constants_1.MAX_NAME_LENGTH },
-            { name: "text", type: "string", min: add_song_constants_1.MIN_SONG_LENGTH, max: add_song_constants_1.MAX_SONG_LENGTH },
+            { name: "name", type: "string", min: 0, max: groups_constants_1.MAX_GROUP_NAME_LENGTH },
+            { name: "words", type: "string", min: 0, max: groups_constants_1.MAX_WORDS_LENGTH },
+            { name: "is_expression", type: "boolean" },
         ];
         return this.paramsValidators.validateParams(model, params);
     }
 };
-AddSongMiddleware = __decorate([
+GroupsMiddleware = __decorate([
     core_1.Injectable(), 
     __metadata('design:paramtypes', [params_validator_1.ParamsValidators])
-], AddSongMiddleware);
-exports.AddSongMiddleware = AddSongMiddleware;
-//# sourceMappingURL=add-song.middleware.js.map
+], GroupsMiddleware);
+exports.GroupsMiddleware = GroupsMiddleware;
+//# sourceMappingURL=groups.middleware.js.map

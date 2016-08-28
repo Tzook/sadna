@@ -1,0 +1,10 @@
+form {
+    text-align: center;
+}
+td {
+    padding-bottom: 20px;
+    vertical-align: top;
+}
+#submit {
+    text-align: left;
+}
