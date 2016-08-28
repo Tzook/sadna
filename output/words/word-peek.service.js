@@ -19,6 +19,12 @@ let WordPeekService = class WordPeekService {
         let wordsRow = [];
         let currentRow = 0;
         let currentHouse = 0;
+        words = words.concat().sort((a, b) => {
+            if (a.row > b.row || (a.row == b.row && a.col > b.col)) {
+                return 1;
+            }
+            return -1;
+        });
         for (let word of words) {
             if (word.row !== currentRow) {
                 // push a new row
