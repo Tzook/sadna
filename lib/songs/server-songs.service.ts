@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {DbService} from '../main/server-db';
 import {WordsService} from '../words/server-words.service';
-import {Song, SongResult, Word, WordResult, WordInSong, WordInSongResult, CompleteSong, CompleteSongResult, DbError} from '../db/server-db.model';
+import {Song, SongResult, Word, WordResult, WordInSong,
+    WordInSongResult, CompleteSong, CompleteSongResult,
+    SongStatisticsRowsResult, SongStatisticsHousesResult, DbError} from '../db/server-db.model';
 
 @Injectable()
 export class SongsService
@@ -110,6 +112,52 @@ export class SongsService
                 if (e) reject (e);
                 else {
                     console.log(`done getting complete song for id: ${id}`);
+                    resolve(result);
+                }
+            });
+        });
+    }
+    
+    /**
+     * Stats for amount of words and letters in a song rows,
+     * With this we can also show the amount of words and letters overall in a song
+     */
+    selectSongStatisticsRows(songId: number) : Promise<SongStatisticsRowsResult> {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                select s.id, ws.row, count(ws.id) as words_count, sum(char_length(w.value)) as letters_sum
+                    from word_in_song ws inner join songs s on ws.song_id = s.id
+                    inner join words w on ws.word_id = w.id
+                    where song_id = $1
+                    group by ws.row, s.id;
+            `, [songId],
+            (e: DbError, result: SongStatisticsRowsResult) => {
+                if (e) reject (e);
+                else {
+                    resolve(result);
+                }
+            });
+        });
+    }
+
+    /**
+     * Stats for amount of words and letters in a song houses,
+     * With this we can also show the amount of words and letters overall in a song
+     */
+    selectSongStatisticsHouses(songId: number) : Promise<SongStatisticsHousesResult> {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                select s.id, ws.house, count(ws.id) as words_count, sum(char_length(w.value)) as letters_sum
+                    from word_in_song ws inner join songs s on ws.song_id = s.id
+                    inner join words w on ws.word_id = w.id
+                    where song_id = $1
+                    group by ws.house, s.id;
+            `, [songId],
+            (e: DbError, result: SongStatisticsHousesResult) => {
+                if (e) reject (e);
+                else {
                     resolve(result);
                 }
             });

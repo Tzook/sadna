@@ -8,15 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const server_songs_service_1 = require('../songs/server-songs.service');
-const server_groups_service_1 = require('../groups/server-groups.service');
-const xml_service_1 = require('../db/backup/xml.service');
 const core_1 = require('@angular/core');
 let SongsRouter = class SongsRouter {
-    constructor(_songsService, _groupsService, _xmlService) {
-        this._songsService = _songsService;
-        this._groupsService = _groupsService;
-        this._xmlService = _xmlService;
+    constructor() {
     }
     init(app) {
         this._app = app;
@@ -24,7 +18,7 @@ let SongsRouter = class SongsRouter {
 };
 SongsRouter = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [server_songs_service_1.SongsService, server_groups_service_1.GroupsService, xml_service_1.XmlService])
+    __metadata('design:paramtypes', [])
 ], SongsRouter);
 exports.SongsRouter = SongsRouter;
 //# sourceMappingURL=server-songs.router.js.map

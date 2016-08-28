@@ -27,7 +27,7 @@ export class GroupsService
                 WITH s_group AS (
                     SELECT id, name
                     FROM groups
-                    WHERE name = $1
+                    WHERE UPPER(name) like UPPER($1)
                 ),
                 i_group AS (
                     INSERT INTO groups (name, is_expression)
@@ -118,7 +118,7 @@ export class GroupsService
                                 song_id = s_id
                                 and word_id in (
                                     select id from words
-                                        where value = w_val
+                                        where UPPER(value) like UPPER(w_val)
                                 )
                                 and col = cur_col
                                 and row = cur_row;
@@ -146,7 +146,7 @@ export class GroupsService
                             song_id = s_id
                             and word_id in (
                                 select id from words
-                                where value = w_val
+                                where UPPER(value) like UPPER(w_val)
                             )
                             and col = cur_col
                             and row = cur_row
@@ -169,7 +169,7 @@ export class GroupsService
                     where word_id in (
                             SELECT id
                             FROM words
-                            WHERE value = word_val)
+                            WHERE UPPER (value) like UPPER(word_val))
                 loop
                     return query
                         select * from
