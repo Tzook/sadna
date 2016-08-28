@@ -170,6 +170,32 @@ let WordsService = class WordsService {
             });
         });
     }
+    selectWordStatistics(words, songId) {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient, query, bindings = [];
+            query = `
+                select w.id, w.value, w.is_punctuation, count(ws.id) as word_count, char_length(w.value) as word_length
+                    from word_in_song ws inner join words w on ws.word_id = w.id
+                    ${songId ? `where ws.song_id = ${songId}` : ``}`;
+            if (words && words.length) {
+                query = `${query}
+                    ${songId ? `and` : `where`} UPPER(w.value) in (`;
+                for (let i = 0, l = words.length; i < l; i++) {
+                    query = `${query}UPPER($${i + 1})${i === l - 1 ? ')' : ','}`;
+                    bindings.push(words[i]);
+                }
+            }
+            query = `${query}
+                    group by ws.word_id, w.id;`;
+            console.log(query);
+            dbClient.query(query, bindings, (e, result) => {
+                if (e)
+                    reject(e);
+                else
+                    resolve(result);
+            });
+        });
+    }
 };
 WordsService = __decorate([
     core_1.Injectable(), 

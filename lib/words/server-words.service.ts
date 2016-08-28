@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {DbService} from '../main/server-db';
 import {Word, WordResult, WordInSong, WordInSongResult,
-    WordInGroup, WordInGroupResult, CompleteSongResult, DbError} from '../db/server-db.model';
+    WordInGroup, WordInGroupResult, CompleteSongResult,
+    WordStatistics, WordStatisticsResult,  DbError} from '../db/server-db.model';
 
 @Injectable()
 export class WordsService
@@ -174,77 +175,32 @@ export class WordsService
         });
     }
 
-    // deprecated - delete later
-    /**
-     * Insert word in song safe to word_in_song table
-     */
-    // insertWordInSong(wordInSong: WordInSong) : Promise<WordInSongResult> {
-    //     console.info(`inserting word in song id: ${wordInSong.song_id} and word id: ${wordInSong.word_id}`);
-    //     return new Promise((resolve, reject) => {
-    //         let dbClient = this.dbClient;
-    //         // running safe insert, since word in song value must be unique
-    //         dbClient.query(`
-    //             WITH s_wis AS (
-    //                 SELECT id, song_id, word_id, col, "row", house, sentence, word_num
-    //                 FROM word_in_song
-    //                 WHERE song_id = $1 AND word_id = $2 AND col = $3 AND "row" = $4 AND house = $5 AND sentence = $6 AND word_num = $7
-    //             ),
-    //             i_wis AS (
-    //                 INSERT INTO word_in_song (song_id, word_id, col, "row", house, sentence, word_num)
-    //                 SELECT $1, $2, $3, $4, $5, $6, $7
-    //                 WHERE NOT EXISTS (SELECT 1 FROM s_wis)
-    //                 RETURNING id
-    //             )
-    //             SELECT id
-    //             FROM s_wis
-    //             UNION ALL
-    //             SELECT id
-    //             FROM i_wis;
-    //         `, [wordInSong.song_id, wordInSong.word_id, wordInSong.col, wordInSong.row, wordInSong.house, wordInSong.sentence, wordInSong.word_num],
-    //         (e: DbError, result: WordInSongResult) => {
-    //             if (e) reject (e);
-    //             else {
-    //                 console.info(`inserting word in song id: ${wordInSong.song_id} and word id: ${wordInSong.word_id}`);
-    //                 resolve(result);
-    //             }
-    //         });
-    //     });
-    // }
+    selectWordStatistics(words?: string[], songId?: number) : Promise<WordStatisticsResult> {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient,
+            query,
+            bindings = [];
 
-    // /**
-    //  * Insert word safe to words table
-    //  */
-    // insertWord(word: Word) : Promise<WordResult>
-    // {
-    //     console.info(`inserting word ${word.value}`);
-    //     return new Promise((resolve, reject) => {
-    //         let dbClient = this.dbClient;
-    //         // running safe insert, since word value must be unique
-    //         dbClient.query(`
-    //             WITH s_word AS (
-    //                 SELECT id, value
-    //                 FROM words
-    //                 WHERE value = $1
-    //             ),
-    //             i_word AS (
-    //                 INSERT INTO words (value, is_punctuation)
-    //                 SELECT $1, $2
-    //                 WHERE NOT EXISTS (SELECT 1 FROM s_word)
-    //                 RETURNING id, value
-    //             )
-    //             SELECT id, value
-    //             FROM i_word
-    //             UNION ALL
-    //             SELECT id, value
-    //             FROM s_word
-    //         `, [word.value, word.is_punctuation],
-    //         (e: DbError, result: WordResult) => {
-    //             if (e) reject (e);
-    //             else {
-    //                 console.info(`done inserting word ${word.value}`);
-    //                 resolve(result);
-    //             }
-    //         });
-    //     });
-    // }
+            query = `
+                select w.id, w.value, w.is_punctuation, count(ws.id) as word_count, char_length(w.value) as word_length
+                    from word_in_song ws inner join words w on ws.word_id = w.id
+                    ${songId ? `where ws.song_id = ${songId}` : ``}`;
+            if (words && words.length) {
+                query = `${query}
+                    ${songId ? `and` : `where`} UPPER(w.value) in (`;
+                for (let i = 0, l = words.length; i < l; i++) {
+                    query = `${query}UPPER($${i+1})${i === l - 1 ? ')' : ','}`;
+                    bindings.push(words[i]);
+                }
+            }
+            query = `${query}
+                    group by ws.word_id, w.id;`;
+            console.log(query);
+            dbClient.query(query, bindings,
+            (e: DbError, result: WordInGroupResult) => {
+                if (e) reject (e);
+                else resolve(result);
+            })
+        });
+    }
 }

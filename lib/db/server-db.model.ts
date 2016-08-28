@@ -105,3 +105,15 @@ export interface WordInGroupResult extends Result {
     rows: WordInGroup[],
     addRow: (row: WordInGroup) => void,
 }
+
+export interface WordStatistics extends Row {
+    value: string,
+    is_punctuation: boolean,
+    word_count: number,
+    word_length: number,
+}
+
+export interface WordStatisticsResult extends Result {
+    rows: WordStatistics[],
+    addRow: (row: WordStatistics) => void,
+}
