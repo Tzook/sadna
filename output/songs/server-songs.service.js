@@ -113,7 +113,7 @@ let SongsService = class SongsService {
         });
     }
     /**
-     * Stats for amount of words and letters for a song rows,
+     * Stats for amount of words and letters in a song rows,
      * With this we can also show the amount of words and letters overall in a song
      */
     selectSongStatisticsRows(songId) {
@@ -135,9 +135,9 @@ let SongsService = class SongsService {
         });
     }
     /**
- * Stats for amount of words and letters for a song houses,
- * With this we can also show the amount of words and letters overall in a song
- */
+     * Stats for amount of words and letters in a song houses,
+     * With this we can also show the amount of words and letters overall in a song
+     */
     selectSongStatisticsHouses(songId) {
         return new Promise((resolve, reject) => {
             let dbClient = this.dbClient;
