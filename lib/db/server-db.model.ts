@@ -117,3 +117,26 @@ export interface WordStatisticsResult extends Result {
     rows: WordStatistics[],
     addRow: (row: WordStatistics) => void,
 }
+
+interface SongStatistics extends Row {
+    word_count: number,
+    letter_count: number,
+}
+
+export interface SongStatisticsRows extends SongStatistics {
+    row: string,
+}
+
+export interface SongStatisticsRowsResult extends Result {
+    rows: SongStatisticsRows[],
+    addRow: (row: SongStatisticsRows) => void,
+}
+
+export interface SongStatisticsHouses extends SongStatistics {
+    house: string,
+}
+
+export interface SongStatisticsHousesResult extends Result {
+    rows: SongStatisticsHouses[],
+    addRow: (row: SongStatisticsHouses) => void,
+}

@@ -170,6 +170,11 @@ let WordsService = class WordsService {
             });
         });
     }
+    /**
+     * This returns a WordStatistics Result obj
+     * With a lot of stats for all words:
+     *     you can limit the query to some words by providing a string array and also a specific song by providing a song id
+     */
     selectWordStatistics(words, songId) {
         return new Promise((resolve, reject) => {
             let dbClient = this.dbClient, query, bindings = [];

@@ -112,6 +112,50 @@ let SongsService = class SongsService {
             });
         });
     }
+    /**
+     * Stats for amount of words and letters for a song rows,
+     * With this we can also show the amount of words and letters overall in a song
+     */
+    selectSongStatisticsRows(songId) {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                select s.id, ws.row, count(ws.id) as words_count, sum(char_length(w.value)) as letters_sum
+                    from word_in_song ws inner join songs s on ws.song_id = s.id
+                    inner join words w on ws.word_id = w.id
+                    where song_id = $1
+                    group by ws.row, s.id;
+            `, [songId], (e, result) => {
+                if (e)
+                    reject(e);
+                else {
+                    resolve(result);
+                }
+            });
+        });
+    }
+    /**
+ * Stats for amount of words and letters for a song houses,
+ * With this we can also show the amount of words and letters overall in a song
+ */
+    selectSongStatisticsHouses(songId) {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                select s.id, ws.house, count(ws.id) as words_count, sum(char_length(w.value)) as letters_sum
+                    from word_in_song ws inner join songs s on ws.song_id = s.id
+                    inner join words w on ws.word_id = w.id
+                    where song_id = $1
+                    group by ws.house, s.id;
+            `, [songId], (e, result) => {
+                if (e)
+                    reject(e);
+                else {
+                    resolve(result);
+                }
+            });
+        });
+    }
     get dbClient() {
         return this._dbClient = this._dbClient || this._dbService.dbClient;
     }

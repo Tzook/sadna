@@ -22,9 +22,9 @@ let SongsRouter = class SongsRouter {
     }
     init(app) {
         this._app = app;
-        this._wordsService.selectWordStatistics(['you', 'two', 'to', ','], 4)
+        this._songsService.selectSongStatisticsHouses(1)
             .then(res => {
-            console.log(res);
+            console.log('res', res);
         })
             .catch(err => {
             console.log('error', err);
