@@ -1,4 +1,3 @@
-import {NavigationComponent} from '../navigation/navigation.component';
 import {Component} from '@angular/core';
 
 @Component({
@@ -11,7 +10,6 @@ import {Component} from '@angular/core';
     template: `
         <navigation></navigation>
         <main><router-outlet></router-outlet></main>
-    `,
-    directives: [NavigationComponent]
+    `
 })
 export class ClientMainComponent { }

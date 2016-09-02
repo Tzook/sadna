@@ -1,5 +1,4 @@
 import {SongsListService} from './songs-list.service';
-import {SongInfoComponent} from '../songs/song-info.component';
 import {Component, OnInit} from '@angular/core';
 import {ROUTE_VIEW_SONG} from '../navigation/routes.constants';
 import {Song} from '../db/server-db.model';
@@ -27,7 +26,6 @@ import {Song} from '../db/server-db.model';
             </span>
         </div>
     `,
-    directives: [SongInfoComponent],
     viewProviders: [SongsListService]
 })
 export class SongsListComponent implements OnInit {

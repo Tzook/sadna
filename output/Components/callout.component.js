@@ -8,39 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-let CalloutComponent = class CalloutComponent {
-    constructor() {
+var core_1 = require('@angular/core');
+var CalloutComponent = (function () {
+    function CalloutComponent() {
     }
-    ngOnInit() {
-    }
-};
-CalloutComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'callout',
-        styles: [`
-        div {
-            position: absolute;
-            width: 90%;
-            max-height: 300px;
-            overflow-y: scroll;
-            background: white;
-            border-radius: 2px;
-            padding: 20px;
-            box-shadow: 0 0 9px -1px;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-    `],
-        template: `
-        <div>
-            <ng-content></ng-content>
-        </div>
-    `
-    }), 
-    __metadata('design:paramtypes', [])
-], CalloutComponent);
+    CalloutComponent.prototype.ngOnInit = function () {
+    };
+    CalloutComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'callout',
+            styles: ["\n        div {\n            position: absolute;\n            width: 90%;\n            max-height: 300px;\n            overflow-y: scroll;\n            background: white;\n            border-radius: 2px;\n            padding: 20px;\n            box-shadow: 0 0 9px -1px;\n            left: 0;\n            right: 0;\n            margin: auto;\n        }\n    "],
+            template: "\n        <div>\n            <ng-content></ng-content>\n        </div>\n    "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], CalloutComponent);
+    return CalloutComponent;
+}());
 exports.CalloutComponent = CalloutComponent;
 //# sourceMappingURL=callout.component.js.map

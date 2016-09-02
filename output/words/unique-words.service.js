@@ -8,31 +8,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-let UniqueWordsService = class UniqueWordsService {
-    constructor() {
+var core_1 = require('@angular/core');
+var UniqueWordsService = (function () {
+    function UniqueWordsService() {
     }
-    getUniqueWords(words, sorted) {
-        let resultWords = [];
-        let seenWords = new Set();
-        for (let word of words) {
-            let wordValue = word.word_value.toLowerCase();
+    UniqueWordsService.prototype.getUniqueWords = function (words, sorted) {
+        var resultWords = [];
+        var seenWords = new Set();
+        for (var _i = 0, words_1 = words; _i < words_1.length; _i++) {
+            var word = words_1[_i];
+            var wordValue = word.word_value.toLowerCase();
             if (!word.is_punctuation && !seenWords.has(wordValue)) {
                 seenWords.add(wordValue);
                 resultWords.push(wordValue);
             }
         }
         return sorted ? this.sortWords(resultWords) : resultWords;
-    }
-    sortWords(words) {
-        return words.sort((a, b) => {
+    };
+    UniqueWordsService.prototype.sortWords = function (words) {
+        return words.sort(function (a, b) {
             return a > b ? 1 : -1;
         });
-    }
-};
-UniqueWordsService = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [])
-], UniqueWordsService);
+    };
+    UniqueWordsService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], UniqueWordsService);
+    return UniqueWordsService;
+}());
 exports.UniqueWordsService = UniqueWordsService;
 //# sourceMappingURL=unique-words.service.js.map

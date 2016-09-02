@@ -8,7 +8,7 @@ export class WordPeekService {
     private houseIndexes: {};
 
     constructor() {
-        this.wordMap = new Map();
+        this.wordMap = new Map<string, CompleteSong[]>();
         this.wordsRows = [];
         this.houseIndexes = {};
     }

@@ -8,25 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const navigation_component_1 = require('../navigation/navigation.component');
-const core_1 = require('@angular/core');
-let ClientMainComponent = class ClientMainComponent {
-};
-ClientMainComponent = __decorate([
-    core_1.Component({
-        selector: 'my-app',
-        styles: [`
-        main {
-            padding: 20px;
-        }
-    `],
-        template: `
-        <navigation></navigation>
-        <main><router-outlet></router-outlet></main>
-    `,
-        directives: [navigation_component_1.NavigationComponent]
-    }), 
-    __metadata('design:paramtypes', [])
-], ClientMainComponent);
+var core_1 = require('@angular/core');
+var ClientMainComponent = (function () {
+    function ClientMainComponent() {
+    }
+    ClientMainComponent = __decorate([
+        core_1.Component({
+            selector: 'my-app',
+            styles: ["\n        main {\n            padding: 20px;\n        }\n    "],
+            template: "\n        <navigation></navigation>\n        <main><router-outlet></router-outlet></main>\n    "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], ClientMainComponent);
+    return ClientMainComponent;
+}());
 exports.ClientMainComponent = ClientMainComponent;
 //# sourceMappingURL=client-main.js.map

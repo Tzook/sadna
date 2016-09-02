@@ -8,20 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const view_song_controller_1 = require('./view-song.controller');
-const view_song_constants_1 = require('./view-song.constants');
-const core_1 = require('@angular/core');
-let ViewSongRouter = class ViewSongRouter {
-    constructor(viewSongController) {
+var view_song_controller_1 = require('./view-song.controller');
+var view_song_constants_1 = require('./view-song.constants');
+var core_1 = require('@angular/core');
+var ViewSongRouter = (function () {
+    function ViewSongRouter(viewSongController) {
         this.viewSongController = viewSongController;
     }
-    init(app) {
+    ViewSongRouter.prototype.init = function (app) {
         app.get(view_song_constants_1.GET_SONG_URL, this.viewSongController.returnSong.bind(this.viewSongController));
-    }
-};
-ViewSongRouter = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [view_song_controller_1.ViewSongController])
-], ViewSongRouter);
+    };
+    ViewSongRouter = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [view_song_controller_1.ViewSongController])
+    ], ViewSongRouter);
+    return ViewSongRouter;
+}());
 exports.ViewSongRouter = ViewSongRouter;
 //# sourceMappingURL=view-song.router.js.map

@@ -1,3 +1,10 @@
+import {CalloutComponent} from '../Components/callout.component';
+import {WordPeekComponent} from '../words/word-peek.component';
+import {FullSongComponent} from '../view-song/full-song.component';
+import {SongInfoComponent} from '../songs/song-info.component';
+import {AddGroupComponent} from '../groups/add-group.component';
+import {GroupListComponent} from '../groups/group-list.component';
+import {NavigationComponent} from '../navigation/navigation.component';
 import {GroupsComponent} from '../groups/groups.component';
 import {ViewSongComponent} from '../view-song/view-song.component';
 import {HttpModule} from '@angular/http';
@@ -17,9 +24,16 @@ import {ClientMainComponent} from './client-main';
 		BrowserModule,
 		FormsModule,
 		HttpModule,
-		routing
+		routing,
 	],
 	declarations: [
+		NavigationComponent,
+		AddGroupComponent,
+		GroupListComponent,
+		SongInfoComponent,
+		WordPeekComponent,
+		FullSongComponent,
+		CalloutComponent,
 		ClientMainComponent,
 		SongsListComponent,
 		GroupsComponent,

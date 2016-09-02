@@ -8,25 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const groups_constants_1 = require('./groups.constants');
-const http_1 = require('@angular/http');
-const core_1 = require('@angular/core');
-let ClientGroupsService = class ClientGroupsService {
-    constructor(http) {
+var groups_constants_1 = require('./groups.constants');
+var http_1 = require('@angular/http');
+var core_1 = require('@angular/core');
+var ClientGroupsService = (function () {
+    function ClientGroupsService(http) {
         this.http = http;
     }
-    addGroup(group) {
-        let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        let options = new http_1.RequestOptions({ headers });
+    ClientGroupsService.prototype.addGroup = function (group) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(groups_constants_1.ADD_GROUP_URL, JSON.stringify(group), options);
-    }
-    getGroups() {
+    };
+    ClientGroupsService.prototype.getGroups = function () {
         return this.http.get(groups_constants_1.GET_GROUPS_URL);
-    }
-};
-ClientGroupsService = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [http_1.Http])
-], ClientGroupsService);
+    };
+    ClientGroupsService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], ClientGroupsService);
+    return ClientGroupsService;
+}());
 exports.ClientGroupsService = ClientGroupsService;
 //# sourceMappingURL=groups.service.js.map

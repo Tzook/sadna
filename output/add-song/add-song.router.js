@@ -8,22 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const add_song_controller_1 = require('./add-song.controller');
-const add_song_middleware_1 = require('./add-song.middleware');
-const add_song_constants_1 = require('./add-song.constants');
-const core_1 = require('@angular/core');
-let AddSongRouter = class AddSongRouter {
-    constructor(addSongMiddleware, addSongController) {
+var add_song_controller_1 = require('./add-song.controller');
+var add_song_middleware_1 = require('./add-song.middleware');
+var add_song_constants_1 = require('./add-song.constants');
+var core_1 = require('@angular/core');
+var AddSongRouter = (function () {
+    function AddSongRouter(addSongMiddleware, addSongController) {
         this.addSongMiddleware = addSongMiddleware;
         this.addSongController = addSongController;
     }
-    init(app) {
+    AddSongRouter.prototype.init = function (app) {
         app.post(add_song_constants_1.ADD_SONG_URL, this.addSongMiddleware.validateRequest.bind(this.addSongMiddleware), this.addSongController.processSong.bind(this.addSongController), this.addSongController.insertSong.bind(this.addSongController));
-    }
-};
-AddSongRouter = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [add_song_middleware_1.AddSongMiddleware, add_song_controller_1.AddSongController])
-], AddSongRouter);
+    };
+    AddSongRouter = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [add_song_middleware_1.AddSongMiddleware, add_song_controller_1.AddSongController])
+    ], AddSongRouter);
+    return AddSongRouter;
+}());
 exports.AddSongRouter = AddSongRouter;
 //# sourceMappingURL=add-song.router.js.map

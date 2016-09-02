@@ -4,8 +4,6 @@ import {ViewSongService} from './view-song.service';
 import {UniqueWordsService} from '../words/unique-words.service';
 import {WordPeekService} from '../words/word-peek.service';
 import {WordPeekComponent} from '../words/word-peek.component';
-import {FullSongComponent} from './full-song.component';
-import {SongInfoComponent} from '../songs/song-info.component';
 import {Component, OnInit} from '@angular/core';
 import {Song} from '../db/server-db.model';
 
@@ -39,7 +37,6 @@ import {Song} from '../db/server-db.model';
         </div>
         <full-song *ngIf="uniqueWords.length"></full-song>
     `,
-    directives: [SongInfoComponent, WordPeekComponent, FullSongComponent],
     providers: [WordPeekService], // available for children components too
     viewProviders: [ViewSongService, UniqueWordsService]
 })

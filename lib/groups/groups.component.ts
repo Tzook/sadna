@@ -1,5 +1,3 @@
-import {AddGroupComponent} from './add-group.component';
-import {GroupListComponent} from './group-list.component';
 import {ClientGroupsService} from './groups.service';
 import {Component, OnInit} from '@angular/core';
 
@@ -22,7 +20,6 @@ import {Component, OnInit} from '@angular/core';
         <group-list></group-list>
     `,
     providers: [ClientGroupsService],
-    directives: [AddGroupComponent, GroupListComponent]
 })
 export class GroupsComponent implements OnInit {
     constructor() { }

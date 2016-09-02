@@ -8,17 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-let SongsRouter = class SongsRouter {
-    constructor() {
+var core_1 = require('@angular/core');
+var SongsRouter = (function () {
+    function SongsRouter() {
     }
-    init(app) {
+    SongsRouter.prototype.init = function (app) {
         this._app = app;
-    }
-};
-SongsRouter = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [])
-], SongsRouter);
+    };
+    SongsRouter = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], SongsRouter);
+    return SongsRouter;
+}());
 exports.SongsRouter = SongsRouter;
 //# sourceMappingURL=server-songs.router.js.map

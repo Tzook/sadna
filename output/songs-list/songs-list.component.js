@@ -8,54 +8,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const songs_list_service_1 = require('./songs-list.service');
-const song_info_component_1 = require('../songs/song-info.component');
-const core_1 = require('@angular/core');
-const routes_constants_1 = require('../navigation/routes.constants');
-let SongsListComponent = class SongsListComponent {
-    constructor(songsListService) {
+var songs_list_service_1 = require('./songs-list.service');
+var core_1 = require('@angular/core');
+var routes_constants_1 = require('../navigation/routes.constants');
+var SongsListComponent = (function () {
+    function SongsListComponent(songsListService) {
         this.songsListService = songsListService;
     }
-    ngOnInit() {
+    SongsListComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.songsListService.getSongs()
-            .subscribe(success => this.songsList = success.json(), error => console.log(error));
-    }
-    getSongUrl(song) {
+            .subscribe(function (success) { return _this.songsList = success.json(); }, function (error) { return console.log(error); });
+    };
+    SongsListComponent.prototype.getSongUrl = function (song) {
         return "/" + routes_constants_1.ROUTE_VIEW_SONG
             .replace(":id", "" + song.id)
             .replace(":name", song.name)
             .replace(":writer", "" + song.writer)
             .replace(":composer", "" + song.composer);
-    }
-};
-SongsListComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'songs-list',
-        styles: [`
-        div {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid;
-            border-radius: 2px;
-            box-shadow: 1px 2px 2px -1px rgba(0,0,0,.6);
-        }
-    `],
-        template: `
-        <div *ngFor="let song of songsList" class="animated fadeInDown">
-            <song-info [song]="song"></song-info>
-            <span>
-                <button [routerLink]="getSongUrl(song)">View song</button>
-            </span>
-        </div>
-    `,
-        directives: [song_info_component_1.SongInfoComponent],
-        viewProviders: [songs_list_service_1.SongsListService]
-    }), 
-    __metadata('design:paramtypes', [songs_list_service_1.SongsListService])
-], SongsListComponent);
+    };
+    SongsListComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'songs-list',
+            styles: ["\n        div {\n            display: flex;\n            justify-content: space-between;\n            align-items: flex-end;\n            padding: 15px;\n            margin-bottom: 20px;\n            border: 1px solid;\n            border-radius: 2px;\n            box-shadow: 1px 2px 2px -1px rgba(0,0,0,.6);\n        }\n    "],
+            template: "\n        <div *ngFor=\"let song of songsList\" class=\"animated fadeInDown\">\n            <song-info [song]=\"song\"></song-info>\n            <span>\n                <button [routerLink]=\"getSongUrl(song)\">View song</button>\n            </span>\n        </div>\n    ",
+            viewProviders: [songs_list_service_1.SongsListService]
+        }), 
+        __metadata('design:paramtypes', [songs_list_service_1.SongsListService])
+    ], SongsListComponent);
+    return SongsListComponent;
+}());
 exports.SongsListComponent = SongsListComponent;
 //# sourceMappingURL=songs-list.component.js.map

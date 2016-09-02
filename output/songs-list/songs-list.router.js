@@ -8,20 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const songs_list_controller_1 = require('./songs-list.controller');
-const songs_list_constants_1 = require('./songs-list.constants');
-const core_1 = require('@angular/core');
-let SongsListRouter = class SongsListRouter {
-    constructor(songsListController) {
+var songs_list_controller_1 = require('./songs-list.controller');
+var songs_list_constants_1 = require('./songs-list.constants');
+var core_1 = require('@angular/core');
+var SongsListRouter = (function () {
+    function SongsListRouter(songsListController) {
         this.songsListController = songsListController;
     }
-    init(app) {
+    SongsListRouter.prototype.init = function (app) {
         app.get(songs_list_constants_1.GET_SONGS_LIST_URL, this.songsListController.returnSongs.bind(this.songsListController));
-    }
-};
-SongsListRouter = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [songs_list_controller_1.SongsListController])
-], SongsListRouter);
+    };
+    SongsListRouter = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [songs_list_controller_1.SongsListController])
+    ], SongsListRouter);
+    return SongsListRouter;
+}());
 exports.SongsListRouter = SongsListRouter;
 //# sourceMappingURL=songs-list.router.js.map

@@ -25,7 +25,7 @@ export class XmlService {
     get dbClient () {
         return this._dbClient = this._dbClient || this._dbService.dbClient;
     }
-    
+
     /**
      * Create xml file string for the whole DB
      */
@@ -40,15 +40,15 @@ export class XmlService {
                 this._wordsService.selectWordInGroup(),
                 this._wordsService.selectWordInSong(),
             ];
-        
-        Promise.all(promiseLand)
+
+        Promise.all<any>(promiseLand)
             .then((promises: any[]) => {
                 let songs : Song[] = promises[0].rows,
                     groups : Group[] = promises[1].rows,
                     words : Word[] = promises[2].rows,
                     wordInGroup: WordInGroup[] = promises[3].rows,
                     wordInSong: WordInSong[] = promises[4].rows;
-                
+
                 xmlData = this._builder.buildObject({
                     songs: songs,
                     groups: groups,
@@ -64,7 +64,7 @@ export class XmlService {
             })
         });
     }
-    
+
     /**
      * Backup from an xml string to the DB
      * The xml object will have root and in this the original object will sit
@@ -87,7 +87,7 @@ export class XmlService {
                     if (restoredObj.root.words) {
                         firstPromiseLand.push(this.restoreWordsTable(restoredObj.root.words));
                     }
-    
+
                     Promise.all(firstPromiseLand)
                         .then(r => {
                             let secondPromiseLand = [];
@@ -115,7 +115,7 @@ export class XmlService {
             });
         });
     }
-    
+
     /**
      * Restore songs query
      */

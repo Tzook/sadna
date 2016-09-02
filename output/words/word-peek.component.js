@@ -8,56 +8,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const callout_component_1 = require('../Components/callout.component');
-const word_peek_service_1 = require('./word-peek.service');
-const core_1 = require('@angular/core');
-let WordPeekComponent = class WordPeekComponent {
-    constructor(wordPeekService) {
+var word_peek_service_1 = require('./word-peek.service');
+var core_1 = require('@angular/core');
+var WordPeekComponent = (function () {
+    function WordPeekComponent(wordPeekService) {
         this.wordPeekService = wordPeekService;
         this.showCallout = false;
     }
-    ngOnInit() { }
-    showRows() {
+    WordPeekComponent.prototype.ngOnInit = function () { };
+    WordPeekComponent.prototype.showRows = function () {
         this.wordRows = this.wordRows || this.wordPeekService.getWordRows(this.word);
         this.showCallout = true;
-    }
-    hideRows() {
+    };
+    WordPeekComponent.prototype.hideRows = function () {
         this.showCallout = false;
-    }
-};
-__decorate([
-    core_1.Input(), 
-    __metadata('design:type', String)
-], WordPeekComponent.prototype, "word", void 0);
-WordPeekComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'word-peek',
-        styles: [`
-        .word {
-            padding-bottom: 5px;
-        }
-        .rows:not(:last-child) {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 2px dotted;
-        }
-    `],
-        template: `
-        <span (mouseenter)="showRows()" (mouseleave)="hideRows()">
-            <span class="word">{{word}}</span>
-            <callout *ngIf="showCallout">
-                <div class="rows" *ngFor="let wordRow of wordRows">
-                    <div *ngFor="let row of wordRow">
-                        {{row}}
-                    </div>
-                </div>
-            </callout>
-        </span>
-    `,
-        directives: [callout_component_1.CalloutComponent]
-    }), 
-    __metadata('design:paramtypes', [word_peek_service_1.WordPeekService])
-], WordPeekComponent);
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], WordPeekComponent.prototype, "word", void 0);
+    WordPeekComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'word-peek',
+            styles: ["\n        .word {\n            padding-bottom: 5px;\n        }\n        .rows:not(:last-child) {\n            margin-bottom: 20px;\n            padding-bottom: 20px;\n            border-bottom: 2px dotted;\n        }\n    "],
+            template: "\n        <span (mouseenter)=\"showRows()\" (mouseleave)=\"hideRows()\">\n            <span class=\"word\">{{word}}</span>\n            <callout *ngIf=\"showCallout\">\n                <div class=\"rows\" *ngFor=\"let wordRow of wordRows\">\n                    <div *ngFor=\"let row of wordRow\">\n                        {{row}}\n                    </div>\n                </div>\n            </callout>\n        </span>\n    ",
+        }), 
+        __metadata('design:paramtypes', [word_peek_service_1.WordPeekService])
+    ], WordPeekComponent);
+    return WordPeekComponent;
+}());
 exports.WordPeekComponent = WordPeekComponent;
 //# sourceMappingURL=word-peek.component.js.map

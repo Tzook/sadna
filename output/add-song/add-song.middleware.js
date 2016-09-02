@@ -8,18 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-const add_song_model_1 = require('./add-song.model');
-const params_validator_1 = require('../Components/params.validator');
-const add_song_constants_1 = require('./add-song.constants');
-let AddSongMiddleware = class AddSongMiddleware {
-    constructor(paramsValidators) {
+var core_1 = require('@angular/core');
+var add_song_model_1 = require('./add-song.model');
+var params_validator_1 = require('../Components/params.validator');
+var add_song_constants_1 = require('./add-song.constants');
+var AddSongMiddleware = (function () {
+    function AddSongMiddleware(paramsValidators) {
         this.paramsValidators = paramsValidators;
     }
-    validateRequest(req, res, next) {
-        let body = req.body;
-        let model = new add_song_model_1.AddSong(body.name, body.writer, body.composer, body.text);
-        let error = this.validateModel(model);
+    AddSongMiddleware.prototype.validateRequest = function (req, res, next) {
+        var body = req.body;
+        var model = new add_song_model_1.AddSong(body.name, body.writer, body.composer, body.text);
+        var error = this.validateModel(model);
         if (!error) {
             req.body.model = model;
             next();
@@ -27,20 +27,21 @@ let AddSongMiddleware = class AddSongMiddleware {
         else {
             next("Invalid parameter: " + error);
         }
-    }
-    validateModel(model) {
-        let params = [
+    };
+    AddSongMiddleware.prototype.validateModel = function (model) {
+        var params = [
             { name: "name", type: "string", min: 0, max: add_song_constants_1.MAX_NAME_LENGTH },
             { name: "writer", type: "string", min: 0, max: add_song_constants_1.MAX_NAME_LENGTH },
             { name: "composer", type: "string", min: 0, max: add_song_constants_1.MAX_NAME_LENGTH },
             { name: "text", type: "string", min: add_song_constants_1.MIN_SONG_LENGTH, max: add_song_constants_1.MAX_SONG_LENGTH },
         ];
         return this.paramsValidators.validateParams(model, params);
-    }
-};
-AddSongMiddleware = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [params_validator_1.ParamsValidators])
-], AddSongMiddleware);
+    };
+    AddSongMiddleware = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [params_validator_1.ParamsValidators])
+    ], AddSongMiddleware);
+    return AddSongMiddleware;
+}());
 exports.AddSongMiddleware = AddSongMiddleware;
 //# sourceMappingURL=add-song.middleware.js.map

@@ -8,23 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-const groups_controller_1 = require('./groups.controller');
-const groups_middleware_1 = require('./groups.middleware');
-const groups_constants_1 = require('./groups.constants');
-let GroupsRouter = class GroupsRouter {
-    constructor(groupsMiddleware, groupsController) {
+var core_1 = require('@angular/core');
+var groups_controller_1 = require('./groups.controller');
+var groups_middleware_1 = require('./groups.middleware');
+var groups_constants_1 = require('./groups.constants');
+var GroupsRouter = (function () {
+    function GroupsRouter(groupsMiddleware, groupsController) {
         this.groupsMiddleware = groupsMiddleware;
         this.groupsController = groupsController;
     }
-    init(app) {
+    GroupsRouter.prototype.init = function (app) {
         app.post(groups_constants_1.ADD_GROUP_URL, this.groupsMiddleware.validateRequest.bind(this.groupsMiddleware), this.groupsController.processGroup.bind(this.groupsController), this.groupsController.insertGroup.bind(this.groupsController));
         app.get(groups_constants_1.GET_GROUPS_URL, this.groupsController.returnGroups.bind(this.groupsController));
-    }
-};
-GroupsRouter = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [groups_middleware_1.GroupsMiddleware, groups_controller_1.GroupsController])
-], GroupsRouter);
+    };
+    GroupsRouter = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [groups_middleware_1.GroupsMiddleware, groups_controller_1.GroupsController])
+    ], GroupsRouter);
+    return GroupsRouter;
+}());
 exports.GroupsRouter = GroupsRouter;
 //# sourceMappingURL=groups.router.js.map

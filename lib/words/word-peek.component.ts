@@ -1,4 +1,3 @@
-import {CalloutComponent} from '../Components/callout.component';
 import {WordPeekService} from './word-peek.service';
 import {Component, OnInit, Input} from '@angular/core';
 
@@ -27,7 +26,6 @@ import {Component, OnInit, Input} from '@angular/core';
             </callout>
         </span>
     `,
-    directives: [CalloutComponent]
 })
 export class WordPeekComponent implements OnInit {
     @Input() word: string;

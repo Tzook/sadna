@@ -8,207 +8,119 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-const server_db_1 = require('../main/server-db');
-const server_words_service_1 = require('../words/server-words.service');
-let GroupsService = class GroupsService {
-    constructor(_dbService, _wordsService) {
+var core_1 = require('@angular/core');
+var server_db_1 = require('../main/server-db');
+var server_words_service_1 = require('../words/server-words.service');
+var GroupsService = (function () {
+    function GroupsService(_dbService, _wordsService) {
         this._dbService = _dbService;
         this._wordsService = _wordsService;
     }
-    get dbClient() {
-        return this._dbClient = this._dbClient || this._dbService.dbClient;
-    }
+    Object.defineProperty(GroupsService.prototype, "dbClient", {
+        get: function () {
+            return this._dbClient = this._dbClient || this._dbService.dbClient;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Insert song safe to songs table
      */
-    insertGroup(group) {
-        console.info(`inserting group ${group.name}`);
-        return new Promise((resolve, reject) => {
-            let dbClient = this.dbClient;
+    GroupsService.prototype.insertGroup = function (group) {
+        var _this = this;
+        console.info("inserting group " + group.name);
+        return new Promise(function (resolve, reject) {
+            var dbClient = _this.dbClient;
             // running safe insert, since song name must be unique
-            dbClient.query(`
-                WITH s_group AS (
-                    SELECT id, name
-                    FROM groups
-                    WHERE UPPER(name) like UPPER($1)
-                ),
-                i_group AS (
-                    INSERT INTO groups (name, is_expression)
-                    SELECT $1, $2
-                    WHERE NOT EXISTS (SELECT 1 FROM s_group)
-                    RETURNING id, name
-                )
-                SELECT id, name
-                FROM i_group
-                UNION ALL --only one of those will be filled
-                SELECT id, name
-                FROM s_group
-            `, [group.name, group.is_expression], (e, result) => {
+            dbClient.query("\n                WITH s_group AS (\n                    SELECT id, name\n                    FROM groups\n                    WHERE UPPER(name) like UPPER($1)\n                ),\n                i_group AS (\n                    INSERT INTO groups (name, is_expression)\n                    SELECT $1, $2\n                    WHERE NOT EXISTS (SELECT 1 FROM s_group)\n                    RETURNING id, name\n                )\n                SELECT id, name\n                FROM i_group\n                UNION ALL --only one of those will be filled\n                SELECT id, name\n                FROM s_group\n            ", [group.name, group.is_expression], function (e, result) {
                 if (e)
                     reject(e);
                 else {
-                    console.info(`done inserting group ${group.name}`);
+                    console.info("done inserting group " + group.name);
                     resolve(result);
                 }
             });
         });
-    }
-    loadGroup(group, words) {
-        return new Promise((resolve, reject) => {
-            console.log(`start loading group ${group.name} with ${words.length} words.`);
-            let promiseLand = [], wordPromises = [], group_id = null;
-            promiseLand.push(this.insertGroup(group));
-            promiseLand.push(this._wordsService.insertWords(words));
+    };
+    GroupsService.prototype.loadGroup = function (group, words) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log("start loading group " + group.name + " with " + words.length + " words.");
+            var promiseLand = [], wordPromises = [], group_id = null;
+            promiseLand.push(_this.insertGroup(group));
+            promiseLand.push(_this._wordsService.insertWords(words));
             Promise.all(promiseLand)
-                .then(promiseLandRes => {
-                console.log(`resolved words and group for ${group.name}`);
-                let songResult = promiseLandRes.shift(), group_id = songResult.rows[0].id;
-                this._wordsService.insertWordsInGroup(words, group_id)
-                    .then(wordPromisesRes => {
-                    console.log(`resolved all for ${group.name}`);
+                .then(function (promiseLandRes) {
+                console.log("resolved words and group for " + group.name);
+                var songResult = promiseLandRes.shift(), group_id = songResult.rows[0].id;
+                _this._wordsService.insertWordsInGroup(words, group_id)
+                    .then(function (wordPromisesRes) {
+                    console.log("resolved all for " + group.name);
                     resolve(true);
                 })
                     .catch(reject);
             })
                 .catch(reject);
         });
-    }
+    };
     /**
      * Select all groups
      */
-    selectGroups() {
-        return new Promise((resolve, reject) => {
-            let dbClient = this.dbClient;
-            dbClient.query(`
-                SELECT * FROM groups;
-            `, (e, result) => {
+    GroupsService.prototype.selectGroups = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var dbClient = _this.dbClient;
+            dbClient.query("\n                SELECT * FROM groups;\n            ", function (e, result) {
                 if (e)
                     reject(e);
                 else
                     resolve(result);
             });
         });
-    }
+    };
     /**
      * Will get words in order in all songs
      */
-    getWordGroupPossibilities(words) {
-        console.info(`getting list of words for ${words.toString}`);
-        return new Promise((resolve, reject) => {
-            let dbClient = this.dbClient;
+    GroupsService.prototype.getWordGroupPossibilities = function (words) {
+        var _this = this;
+        console.info("getting list of words for " + words.toString);
+        return new Promise(function (resolve, reject) {
+            var dbClient = _this.dbClient;
             // running safe insert, since song name must be unique
-            dbClient.query(`
-            CREATE OR REPLACE FUNCTION next_word(s_id int, cur_col int, cur_row int, w_val text, word_vals text[])
-	            RETURNS SETOF word_in_song AS
-            $$
-            DECLARE
-                l int;
-                n1_col int;
-                n2_row int;
-            BEGIN
-                if word_vals = '{}' then
-                    return query 
-                        select * from word_in_song
-                            where
-                                song_id = s_id
-                                and word_id in (
-                                    select id from words
-                                        where UPPER(value) like UPPER(w_val)
-                                )
-                                and col = cur_col
-                                and row = cur_row;
-                else
-                    l := array_length(word_vals, 1);
-                    n1_col := cur_col + 1;
-                    n2_row := cur_row + 1;
-                    return query
-                        with n1 as (
-                            select * from next_word(s_id, n1_col, cur_row, word_vals[1], word_vals[2:l])
-                        ),
-                        n2 as (
-                            select * from next_word(s_id, 0, n2_row, word_vals[1], word_vals[2:l])
-                                where not exists (
-                                    select * from word_in_song
-                                        where
-                                            song_id = s_id
-                                            and col = n1_col
-                                            and row = cur_row
-                                )
-                        ),
-                        r as (
-                            select * from word_in_song
-                            where
-                            song_id = s_id
-                            and word_id in (
-                                select id from words
-                                where UPPER(value) like UPPER(w_val)
-                            )
-                            and col = cur_col
-                            and row = cur_row
-                        )
-                        select * from r where exists (select * from n1) union select * from n1
-                        union
-                        select * from r where exists (select * from n2) union select * from n2;
-                end if;
-                RETURN;          
-            END
-            $$ LANGUAGE plpgsql;
-
-            CREATE OR REPLACE FUNCTION first_word(word_val text, word_vals text[])
-                RETURNS SETOF word_in_song AS
-            $$
-            DECLARE
-                r word_in_song%rowtype;
-            BEGIN
-                for r in select * from word_in_song
-                    where word_id in (
-                            SELECT id
-                            FROM words
-                            WHERE UPPER (value) like UPPER(word_val))
-                loop
-                    return query
-                        select * from
-                            next_word(r.song_id, r.col, r."row", word_val, word_vals);
-                end loop;
-                RETURN;  
-            END
-            $$ LANGUAGE plpgsql;
-
-            select * from first_word($1, $2);
-            `, [words.shift(), words], (e, result) => {
+            dbClient.query("\n            CREATE OR REPLACE FUNCTION next_word(s_id int, cur_col int, cur_row int, w_val text, word_vals text[])\n\t            RETURNS SETOF word_in_song AS\n            $$\n            DECLARE\n                l int;\n                n1_col int;\n                n2_row int;\n            BEGIN\n                if word_vals = '{}' then\n                    return query \n                        select * from word_in_song\n                            where\n                                song_id = s_id\n                                and word_id in (\n                                    select id from words\n                                        where UPPER(value) like UPPER(w_val)\n                                )\n                                and col = cur_col\n                                and row = cur_row;\n                else\n                    l := array_length(word_vals, 1);\n                    n1_col := cur_col + 1;\n                    n2_row := cur_row + 1;\n                    return query\n                        with n1 as (\n                            select * from next_word(s_id, n1_col, cur_row, word_vals[1], word_vals[2:l])\n                        ),\n                        n2 as (\n                            select * from next_word(s_id, 0, n2_row, word_vals[1], word_vals[2:l])\n                                where not exists (\n                                    select * from word_in_song\n                                        where\n                                            song_id = s_id\n                                            and col = n1_col\n                                            and row = cur_row\n                                )\n                        ),\n                        r as (\n                            select * from word_in_song\n                            where\n                            song_id = s_id\n                            and word_id in (\n                                select id from words\n                                where UPPER(value) like UPPER(w_val)\n                            )\n                            and col = cur_col\n                            and row = cur_row\n                        )\n                        select * from r where exists (select * from n1) union select * from n1\n                        union\n                        select * from r where exists (select * from n2) union select * from n2;\n                end if;\n                RETURN;          \n            END\n            $$ LANGUAGE plpgsql;\n\n            CREATE OR REPLACE FUNCTION first_word(word_val text, word_vals text[])\n                RETURNS SETOF word_in_song AS\n            $$\n            DECLARE\n                r word_in_song%rowtype;\n            BEGIN\n                for r in select * from word_in_song\n                    where word_id in (\n                            SELECT id\n                            FROM words\n                            WHERE UPPER (value) like UPPER(word_val))\n                loop\n                    return query\n                        select * from\n                            next_word(r.song_id, r.col, r.\"row\", word_val, word_vals);\n                end loop;\n                RETURN;  \n            END\n            $$ LANGUAGE plpgsql;\n\n            select * from first_word($1, $2);\n            ", [words.shift(), words], function (e, result) {
                 if (e)
                     reject(e);
                 else {
-                    console.info(`getting list of words for ${words.toString}`);
+                    console.info("getting list of words for " + words.toString);
                     resolve(result);
                 }
             });
         });
-    }
+    };
     /**
      * Mock to check that eveyrthing is working curretly with groups
      */
-    mockLoader() {
-        let group = {
+    GroupsService.prototype.mockLoader = function () {
+        var group = {
             name: 'noam_group',
             is_expression: false,
         };
-        let words = [];
-        let val = 'word_group';
-        for (let i = 0; i < 10; i++) {
+        var words = [];
+        var val = 'word_group';
+        for (var i = 0; i < 10; i++) {
             words.push({
-                value: `${val}_${i}`,
+                value: val + "_" + i,
                 is_punctuation: false,
             });
         }
         this.loadGroup(group, words)
-            .catch(err => console.log(err));
-    }
-};
-GroupsService = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [server_db_1.DbService, server_words_service_1.WordsService])
-], GroupsService);
+            .catch(function (err) { return console.log(err); });
+    };
+    GroupsService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [server_db_1.DbService, server_words_service_1.WordsService])
+    ], GroupsService);
+    return GroupsService;
+}());
 exports.GroupsService = GroupsService;
 //# sourceMappingURL=server-groups.service.js.map

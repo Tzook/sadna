@@ -8,38 +8,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-const PUNCTUATIONS = /([,."?!])/g;
-let SongAnalyzeService = class SongAnalyzeService {
-    constructor() {
+var core_1 = require('@angular/core');
+var PUNCTUATIONS = /([,."?!])/g;
+var SongAnalyzeService = (function () {
+    function SongAnalyzeService() {
     }
-    analyze(text) {
-        return new Promise(resolve => {
-            let wordsResult = {
+    SongAnalyzeService.prototype.analyze = function (text) {
+        return new Promise(function (resolve) {
+            var wordsResult = {
                 words: [],
                 wordsInSong: [],
             };
-            let row = 0;
-            let houseNum = 0;
-            let houses = text.split(/\n{2,}/g);
-            for (let house of houses) {
-                let sentenceNum = 0;
-                let wordNum = 0;
-                let sentences = house.split(/\n/g);
-                for (let sentence of sentences) {
-                    let col = 0;
-                    let words = sentence.split(/\s/g);
-                    for (let word of words) {
-                        let wordParts = word.split(PUNCTUATIONS);
-                        for (let wordPart of wordParts) {
+            var row = 0;
+            var houseNum = 0;
+            var houses = text.split(/\n{2,}/g);
+            for (var _i = 0, houses_1 = houses; _i < houses_1.length; _i++) {
+                var house = houses_1[_i];
+                var sentenceNum = 0;
+                var wordNum = 0;
+                var sentences = house.split(/\n/g);
+                for (var _a = 0, sentences_1 = sentences; _a < sentences_1.length; _a++) {
+                    var sentence = sentences_1[_a];
+                    var col = 0;
+                    var words = sentence.split(/\s/g);
+                    for (var _b = 0, words_1 = words; _b < words_1.length; _b++) {
+                        var word = words_1[_b];
+                        var wordParts = word.split(PUNCTUATIONS);
+                        for (var _c = 0, wordParts_1 = wordParts; _c < wordParts_1.length; _c++) {
+                            var wordPart = wordParts_1[_c];
                             if (wordPart.length) {
-                                let wordObj = {
+                                var wordObj = {
                                     value: wordPart,
                                     is_punctuation: PUNCTUATIONS.test(wordPart)
                                 };
-                                let wordInSong = {
-                                    col,
-                                    row,
+                                var wordInSong = {
+                                    col: col,
+                                    row: row,
                                     house: houseNum,
                                     sentence: sentenceNum,
                                     word_num: wordNum,
@@ -58,11 +62,12 @@ let SongAnalyzeService = class SongAnalyzeService {
             }
             resolve(wordsResult);
         });
-    }
-};
-SongAnalyzeService = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [])
-], SongAnalyzeService);
+    };
+    SongAnalyzeService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], SongAnalyzeService);
+    return SongAnalyzeService;
+}());
 exports.SongAnalyzeService = SongAnalyzeService;
 //# sourceMappingURL=song-analyze.service.js.map

@@ -8,30 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-let SongInfoComponent = class SongInfoComponent {
-};
-__decorate([
-    core_1.Input(), 
-    __metadata('design:type', Object)
-], SongInfoComponent.prototype, "song", void 0);
-SongInfoComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'song-info',
-        styles: [`
-        h2 {
-            margin-bottom: 5px;
-        }
-    `],
-        template: `
-        <header>
-            <h2>{{song.name}}</h2>
-            <h3>Written by {{song.writer}} | Composed by {{song.composer}}</h3>
-        </header>
-    `
-    }), 
-    __metadata('design:paramtypes', [])
-], SongInfoComponent);
+var core_1 = require('@angular/core');
+var SongInfoComponent = (function () {
+    function SongInfoComponent() {
+    }
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], SongInfoComponent.prototype, "song", void 0);
+    SongInfoComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'song-info',
+            styles: ["\n        h2 {\n            margin-bottom: 5px;\n        }\n    "],
+            template: "\n        <header>\n            <h2>{{song.name}}</h2>\n            <h3>Written by {{song.writer}} | Composed by {{song.composer}}</h3>\n        </header>\n    "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], SongInfoComponent);
+    return SongInfoComponent;
+}());
 exports.SongInfoComponent = SongInfoComponent;
 //# sourceMappingURL=song-info.component.js.map

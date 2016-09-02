@@ -8,44 +8,61 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const groups_component_1 = require('../groups/groups.component');
-const view_song_component_1 = require('../view-song/view-song.component');
-const http_1 = require('@angular/http');
-const songs_list_component_1 = require('../songs-list/songs-list.component');
-const add_song_component_1 = require('../add-song/add-song.component');
-const xml_component_1 = require('../db/backup/xml.component');
-const client_routes_1 = require('../navigation/client-routes');
-const core_1 = require('@angular/core');
-const platform_browser_1 = require('@angular/platform-browser');
-const forms_1 = require('@angular/forms');
-const platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
-const client_main_1 = require('./client-main');
-let AppModule = class AppModule {
-};
-AppModule = __decorate([
-    core_1.NgModule({
-        imports: [
-            platform_browser_1.BrowserModule,
-            forms_1.FormsModule,
-            http_1.HttpModule,
-            client_routes_1.routing
-        ],
-        declarations: [
-            client_main_1.ClientMainComponent,
-            songs_list_component_1.SongsListComponent,
-            groups_component_1.GroupsComponent,
-            add_song_component_1.AddSongComponent,
-            view_song_component_1.ViewSongComponent,
-            xml_component_1.XmlComponent,
-        ],
-        providers: [],
-        bootstrap: [client_main_1.ClientMainComponent]
-    }), 
-    __metadata('design:paramtypes', [])
-], AppModule);
+var callout_component_1 = require('../Components/callout.component');
+var word_peek_component_1 = require('../words/word-peek.component');
+var full_song_component_1 = require('../view-song/full-song.component');
+var song_info_component_1 = require('../songs/song-info.component');
+var add_group_component_1 = require('../groups/add-group.component');
+var group_list_component_1 = require('../groups/group-list.component');
+var navigation_component_1 = require('../navigation/navigation.component');
+var groups_component_1 = require('../groups/groups.component');
+var view_song_component_1 = require('../view-song/view-song.component');
+var http_1 = require('@angular/http');
+var songs_list_component_1 = require('../songs-list/songs-list.component');
+var add_song_component_1 = require('../add-song/add-song.component');
+var xml_component_1 = require('../db/backup/xml.component');
+var client_routes_1 = require('../navigation/client-routes');
+var core_1 = require('@angular/core');
+var platform_browser_1 = require('@angular/platform-browser');
+var forms_1 = require('@angular/forms');
+var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
+var client_main_1 = require('./client-main');
+var AppModule = (function () {
+    function AppModule() {
+    }
+    AppModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
+                http_1.HttpModule,
+                client_routes_1.routing,
+            ],
+            declarations: [
+                navigation_component_1.NavigationComponent,
+                add_group_component_1.AddGroupComponent,
+                group_list_component_1.GroupListComponent,
+                song_info_component_1.SongInfoComponent,
+                word_peek_component_1.WordPeekComponent,
+                full_song_component_1.FullSongComponent,
+                callout_component_1.CalloutComponent,
+                client_main_1.ClientMainComponent,
+                songs_list_component_1.SongsListComponent,
+                groups_component_1.GroupsComponent,
+                add_song_component_1.AddSongComponent,
+                view_song_component_1.ViewSongComponent,
+                xml_component_1.XmlComponent,
+            ],
+            providers: [],
+            bootstrap: [client_main_1.ClientMainComponent]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], AppModule);
+    return AppModule;
+}());
 exports.AppModule = AppModule;
 platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(AppModule)
-    .catch(e => {
+    .catch(function (e) {
     console.error(e);
 });
 //# sourceMappingURL=client-bootstrap.js.map

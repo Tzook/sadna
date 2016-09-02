@@ -8,95 +8,60 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const xml_constants_1 = require('./xml.constants');
-const xml_httpService_1 = require('./xml.httpService');
-const router_1 = require('@angular/router');
-const core_1 = require('@angular/core');
-let XmlComponent = class XmlComponent {
-    constructor(_route, _xmlHttpService) {
+var xml_constants_1 = require('./xml.constants');
+var xml_httpService_1 = require('./xml.httpService');
+var router_1 = require('@angular/router');
+var core_1 = require('@angular/core');
+var XmlComponent = (function () {
+    function XmlComponent(_route, _xmlHttpService) {
+        var _this = this;
         this._route = _route;
         this._xmlHttpService = _xmlHttpService;
         this._loading = false;
         this._xmlBackupUrl = xml_constants_1.XML_BACKUP_FILE_URL;
-        this._route.queryParams.forEach(param => {
+        this._route.queryParams.forEach(function (param) {
             if (param['status'] === 'success')
-                this._succesfull = true;
+                _this._succesfull = true;
         });
     }
     /**
      * Calling for backup service to get XML data
      */
-    backup() {
+    XmlComponent.prototype.backup = function () {
+        var _this = this;
         this._loading = true;
-        let reader = new FileReader();
+        var reader = new FileReader();
         this._xmlHttpService.getXmlData()
-            .subscribe(response => {
-            let blob = new Blob([response.text()], { type: 'text/xml' });
+            .subscribe(function (response) {
+            var blob = new Blob([response.text()], { type: 'text/xml' });
             reader.readAsDataURL(blob);
-        }, error => {
-            this._loading = false;
+        }, function (error) {
+            _this._loading = false;
             console.log(error);
         });
-        reader.onloadend = (event) => {
+        reader.onloadend = function (event) {
             window.location.href = reader.result;
         };
-    }
+    };
     /**
      * Read the XML file and upload it as multipart
      */
-    uploadFile(event) {
+    XmlComponent.prototype.uploadFile = function (event) {
         this._loading = true;
-        let form = document.getElementsByTagName('form')[0];
+        var form = document.getElementsByTagName('form')[0];
         form.submit();
-    }
-};
-XmlComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'xml-backup',
-        styles: [`
-        h1 {
-            text-align: center;
-            font-size: 28px;
-        }
-        button {
-            margin: 10px 0;
-        }
-        .btn-container {
-            display: flex;
-            justifiy-content: center;
-            flex-direction: column;
-            max-width: 350px;
-            margin: 10px auto 0;
-        }
-        label {
-            display: block;
-            cursor: pointer;
-        }
-        input[type=file] {
-            visibility: hidden;
-            height: 0;
-            position: absolute;
-        }
-    `],
-        template: `
-    <div class="animated fadeIn">
-        <h1>Backup or Restore from XML</h1>
-        <div class="btn-container animated fadeIn" *ngIf="!_loading && !_succesfull">
-            <button (click)="backup()">BACKUP TO XML</button>
-            <button>
-                <form action="{{_xmlBackupUrl}}" enctype="multipart/form-data" method="post">
-                    <label>RESTORE FROM XML<input type="file" (change)="uploadFile($event)" name="data"/></label>
-                </form>
-            </button>
-        </div>
-        <h1 class="animated fadeIn" *ngIf="_loading"><br>LOADING...</h1>
-        <h1 class="animated fadeIn" *ngIf="_succesfull"><br>DB has restored successfully from XML file!</h1>
-    </div>
-    `,
-        viewProviders: [xml_httpService_1.XmlHttpService]
-    }), 
-    __metadata('design:paramtypes', [router_1.ActivatedRoute, xml_httpService_1.XmlHttpService])
-], XmlComponent);
+    };
+    XmlComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'xml-backup',
+            styles: ["\n        h1 {\n            text-align: center;\n            font-size: 28px;\n        }\n        button {\n            margin: 10px 0;\n        }\n        .btn-container {\n            display: flex;\n            justifiy-content: center;\n            flex-direction: column;\n            max-width: 350px;\n            margin: 10px auto 0;\n        }\n        label {\n            display: block;\n            cursor: pointer;\n        }\n        input[type=file] {\n            visibility: hidden;\n            height: 0;\n            position: absolute;\n        }\n    "],
+            template: "\n    <div class=\"animated fadeIn\">\n        <h1>Backup or Restore from XML</h1>\n        <div class=\"btn-container animated fadeIn\" *ngIf=\"!_loading && !_succesfull\">\n            <button (click)=\"backup()\">BACKUP TO XML</button>\n            <button>\n                <form action=\"{{_xmlBackupUrl}}\" enctype=\"multipart/form-data\" method=\"post\">\n                    <label>RESTORE FROM XML<input type=\"file\" (change)=\"uploadFile($event)\" name=\"data\"/></label>\n                </form>\n            </button>\n        </div>\n        <h1 class=\"animated fadeIn\" *ngIf=\"_loading\"><br>LOADING...</h1>\n        <h1 class=\"animated fadeIn\" *ngIf=\"_succesfull\"><br>DB has restored successfully from XML file!</h1>\n    </div>\n    ",
+            viewProviders: [xml_httpService_1.XmlHttpService]
+        }), 
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, xml_httpService_1.XmlHttpService])
+    ], XmlComponent);
+    return XmlComponent;
+}());
 exports.XmlComponent = XmlComponent;
 //# sourceMappingURL=xml.component.js.map

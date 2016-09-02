@@ -8,20 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const http_1 = require('@angular/http');
-const view_song_constants_1 = require('./view-song.constants');
-const core_1 = require('@angular/core');
-let ViewSongService = class ViewSongService {
-    constructor(http) {
+var http_1 = require('@angular/http');
+var view_song_constants_1 = require('./view-song.constants');
+var core_1 = require('@angular/core');
+var ViewSongService = (function () {
+    function ViewSongService(http) {
         this.http = http;
     }
-    getSong(id) {
+    ViewSongService.prototype.getSong = function (id) {
         return this.http.get(view_song_constants_1.GET_SONG_URL.replace(":id", id));
-    }
-};
-ViewSongService = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [http_1.Http])
-], ViewSongService);
+    };
+    ViewSongService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], ViewSongService);
+    return ViewSongService;
+}());
 exports.ViewSongService = ViewSongService;
 //# sourceMappingURL=view-song.service.js.map

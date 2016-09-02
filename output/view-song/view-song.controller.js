@@ -8,21 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-const server_songs_service_1 = require('../songs/server-songs.service');
-let ViewSongController = class ViewSongController {
-    constructor(songsService) {
+var core_1 = require('@angular/core');
+var server_songs_service_1 = require('../songs/server-songs.service');
+var ViewSongController = (function () {
+    function ViewSongController(songsService) {
         this.songsService = songsService;
     }
-    returnSong(req, res, next) {
+    ViewSongController.prototype.returnSong = function (req, res, next) {
         this.songsService.getCompleteSongById(req.params.id)
-            .then(result => res.send(result.rows))
-            .catch(e => next("Error while fetching song " + e));
-    }
-};
-ViewSongController = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [server_songs_service_1.SongsService])
-], ViewSongController);
+            .then(function (result) { return res.send(result.rows); })
+            .catch(function (e) { return next("Error while fetching song " + e); });
+    };
+    ViewSongController = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [server_songs_service_1.SongsService])
+    ], ViewSongController);
+    return ViewSongController;
+}());
 exports.ViewSongController = ViewSongController;
 //# sourceMappingURL=view-song.controller.js.map

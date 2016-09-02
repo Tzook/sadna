@@ -8,21 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-let ParamsValidators = class ParamsValidators {
-    validateParams(model, params) {
-        for (let param of params) {
-            let name = param.name, type = param.type, min = param.min, max = param.max;
-            if (typeof model[name] !== type || type == 'string' && (model[name].length <= min || model[name].length > max)) {
-                return `Expected field '${name}' to be a ${type}` + (type == 'string' ? ` between ${min} and ${max}. Instead got ${model[name]}.` : '.');
+var core_1 = require('@angular/core');
+var ParamsValidators = (function () {
+    function ParamsValidators() {
+    }
+    ParamsValidators.prototype.validateParams = function (model, params) {
+        for (var _i = 0, params_1 = params; _i < params_1.length; _i++) {
+            var param = params_1[_i];
+            var name_1 = param.name, type = param.type, min = param.min, max = param.max;
+            if (typeof model[name_1] !== type || type == 'string' && (model[name_1].length <= min || model[name_1].length > max)) {
+                return ("Expected field '" + name_1 + "' to be a " + type) + (type == 'string' ? " between " + min + " and " + max + ". Instead got " + model[name_1] + "." : '.');
             }
         }
         return "";
-    }
-};
-ParamsValidators = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [])
-], ParamsValidators);
+    };
+    ParamsValidators = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], ParamsValidators);
+    return ParamsValidators;
+}());
 exports.ParamsValidators = ParamsValidators;
 //# sourceMappingURL=params.validator.js.map

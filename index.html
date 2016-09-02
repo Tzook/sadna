@@ -46,7 +46,6 @@
             ngPackageNames.forEach(function(pkgName) {
                 packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
             });
-            // packages['@angular/router'] = { main: 'index.js', defaultExtension: 'js' };
             System.config({packages: packages, map: {"@angular": "node_modules/@angular", rxjs: "node_modules/rxjs"}});
             System.import('output/main/client-bootstrap');
         })();

@@ -8,18 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-const add_group_model_1 = require('./add-group.model');
-const groups_constants_1 = require('./groups.constants');
-const params_validator_1 = require('../Components/params.validator');
-let GroupsMiddleware = class GroupsMiddleware {
-    constructor(paramsValidators) {
+var core_1 = require('@angular/core');
+var add_group_model_1 = require('./add-group.model');
+var groups_constants_1 = require('./groups.constants');
+var params_validator_1 = require('../Components/params.validator');
+var GroupsMiddleware = (function () {
+    function GroupsMiddleware(paramsValidators) {
         this.paramsValidators = paramsValidators;
     }
-    validateRequest(req, res, next) {
-        let body = req.body;
-        let model = new add_group_model_1.AddGroup(body.name, body.words, !!body.is_expression);
-        let error = this.validateModel(model);
+    GroupsMiddleware.prototype.validateRequest = function (req, res, next) {
+        var body = req.body;
+        var model = new add_group_model_1.AddGroup(body.name, body.words, !!body.is_expression);
+        var error = this.validateModel(model);
         if (!error) {
             req.body.model = model;
             next();
@@ -27,19 +27,20 @@ let GroupsMiddleware = class GroupsMiddleware {
         else {
             next("Invalid parameter: " + error);
         }
-    }
-    validateModel(model) {
-        let params = [
+    };
+    GroupsMiddleware.prototype.validateModel = function (model) {
+        var params = [
             { name: "name", type: "string", min: 0, max: groups_constants_1.MAX_GROUP_NAME_LENGTH },
             { name: "words", type: "string", min: 0, max: groups_constants_1.MAX_WORDS_LENGTH },
             { name: "is_expression", type: "boolean" },
         ];
         return this.paramsValidators.validateParams(model, params);
-    }
-};
-GroupsMiddleware = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [params_validator_1.ParamsValidators])
-], GroupsMiddleware);
+    };
+    GroupsMiddleware = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [params_validator_1.ParamsValidators])
+    ], GroupsMiddleware);
+    return GroupsMiddleware;
+}());
 exports.GroupsMiddleware = GroupsMiddleware;
 //# sourceMappingURL=groups.middleware.js.map

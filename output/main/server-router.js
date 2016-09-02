@@ -8,15 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const groups_router_1 = require('../groups/groups.router');
-const view_song_router_1 = require('../view-song/view-song.router');
-const songs_list_router_1 = require('../songs-list/songs-list.router');
-const add_song_router_1 = require('../add-song/add-song.router');
-const server_songs_router_1 = require('../routers/server-songs.router');
-const xml_router_1 = require('../db/backup/xml.router');
-const core_1 = require('@angular/core');
-let ServerRouter = class ServerRouter {
-    constructor(songsRouter, addSongRouter, songsListRouter, groupsRouter, viewSongRouter, xmlRouter) {
+var groups_router_1 = require('../groups/groups.router');
+var view_song_router_1 = require('../view-song/view-song.router');
+var songs_list_router_1 = require('../songs-list/songs-list.router');
+var add_song_router_1 = require('../add-song/add-song.router');
+var server_songs_router_1 = require('../routers/server-songs.router');
+var xml_router_1 = require('../db/backup/xml.router');
+var core_1 = require('@angular/core');
+var ServerRouter = (function () {
+    function ServerRouter(songsRouter, addSongRouter, songsListRouter, groupsRouter, viewSongRouter, xmlRouter) {
         this.songsRouter = songsRouter;
         this.addSongRouter = addSongRouter;
         this.songsListRouter = songsListRouter;
@@ -24,9 +24,9 @@ let ServerRouter = class ServerRouter {
         this.viewSongRouter = viewSongRouter;
         this.xmlRouter = xmlRouter;
     }
-    init(app) {
+    ServerRouter.prototype.init = function (app) {
         this.app = app;
-        let routers = [
+        var routers = [
             this.songsRouter,
             this.addSongRouter,
             this.songsListRouter,
@@ -34,14 +34,15 @@ let ServerRouter = class ServerRouter {
             this.viewSongRouter,
             this.groupsRouter,
         ];
-        for (let i = 0, l = routers.length; i < l; i++) {
+        for (var i = 0, l = routers.length; i < l; i++) {
             routers[i].init(this.app);
         }
-    }
-};
-ServerRouter = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [server_songs_router_1.SongsRouter, add_song_router_1.AddSongRouter, songs_list_router_1.SongsListRouter, groups_router_1.GroupsRouter, view_song_router_1.ViewSongRouter, xml_router_1.XmlRouter])
-], ServerRouter);
+    };
+    ServerRouter = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [server_songs_router_1.SongsRouter, add_song_router_1.AddSongRouter, songs_list_router_1.SongsListRouter, groups_router_1.GroupsRouter, view_song_router_1.ViewSongRouter, xml_router_1.XmlRouter])
+    ], ServerRouter);
+    return ServerRouter;
+}());
 exports.ServerRouter = ServerRouter;
 //# sourceMappingURL=server-router.js.map

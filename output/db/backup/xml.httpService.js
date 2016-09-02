@@ -8,21 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const xml_constants_1 = require('./xml.constants');
-const http_1 = require('@angular/http');
-const core_1 = require('@angular/core');
-let XmlHttpService = class XmlHttpService {
-    constructor(http) {
+var xml_constants_1 = require('./xml.constants');
+var http_1 = require('@angular/http');
+var core_1 = require('@angular/core');
+var XmlHttpService = (function () {
+    function XmlHttpService(http) {
         this.http = http;
     }
-    getXmlData() {
+    XmlHttpService.prototype.getXmlData = function () {
         console.log('calling get', xml_constants_1.XML_BACKUP_FILE_URL);
         return this.http.get(xml_constants_1.XML_BACKUP_FILE_URL);
-    }
-};
-XmlHttpService = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [http_1.Http])
-], XmlHttpService);
+    };
+    XmlHttpService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], XmlHttpService);
+    return XmlHttpService;
+}());
 exports.XmlHttpService = XmlHttpService;
 //# sourceMappingURL=xml.httpService.js.map

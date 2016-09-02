@@ -8,36 +8,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-const xml_service_1 = require('./xml.service');
-let XmlController = class XmlController {
-    constructor(_xmlService) {
+var core_1 = require('@angular/core');
+var xml_service_1 = require('./xml.service');
+var XmlController = (function () {
+    function XmlController(_xmlService) {
         this._xmlService = _xmlService;
     }
-    backupToXml(req, res, next) {
+    XmlController.prototype.backupToXml = function (req, res, next) {
         console.log('starting backup to XML');
         this._xmlService.backupToXml()
-            .then((xmlData) => {
+            .then(function (xmlData) {
             res.send(xmlData);
         });
-    }
-    backupFromXml(req, res, next) {
+    };
+    XmlController.prototype.backupFromXml = function (req, res, next) {
         console.log('starting to restore from XML');
-        let xmlData = req.file.buffer.toString();
+        var xmlData = req.file.buffer.toString();
         this._xmlService.backupFromXml(xmlData)
-            .then(() => {
+            .then(function () {
             // res.send('Successfull restored the DB from XML!');
             res.redirect('/xml?status=success');
         })
-            .catch(e => {
-            console.log(`Error occoured: ${e}`);
+            .catch(function (e) {
+            console.log("Error occoured: " + e);
             res.redirect('/xml?status=error');
         });
-    }
-};
-XmlController = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [xml_service_1.XmlService])
-], XmlController);
+    };
+    XmlController = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [xml_service_1.XmlService])
+    ], XmlController);
+    return XmlController;
+}());
 exports.XmlController = XmlController;
 //# sourceMappingURL=xml.controller.js.map

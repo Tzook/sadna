@@ -8,26 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-const xml_controller_1 = require('./xml.controller');
-const xml_constants_1 = require('./xml.constants');
-const multer = require('multer');
-let XmlRouter = class XmlRouter {
-    constructor(_xmlController) {
+var core_1 = require('@angular/core');
+var xml_controller_1 = require('./xml.controller');
+var xml_constants_1 = require('./xml.constants');
+var multer = require('multer');
+var XmlRouter = (function () {
+    function XmlRouter(_xmlController) {
         this._xmlController = _xmlController;
         this._upload = multer();
     }
     /**
      * List the routes
      */
-    init(app) {
+    XmlRouter.prototype.init = function (app) {
         app.get(xml_constants_1.XML_BACKUP_FILE_URL, this._xmlController.backupToXml.bind(this._xmlController));
         app.post(xml_constants_1.XML_BACKUP_FILE_URL, this._upload.single('data'), this._xmlController.backupFromXml.bind(this._xmlController));
-    }
-};
-XmlRouter = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [xml_controller_1.XmlController])
-], XmlRouter);
+    };
+    XmlRouter = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [xml_controller_1.XmlController])
+    ], XmlRouter);
+    return XmlRouter;
+}());
 exports.XmlRouter = XmlRouter;
 //# sourceMappingURL=xml.router.js.map

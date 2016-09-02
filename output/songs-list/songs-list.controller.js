@@ -8,25 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
-const server_songs_service_1 = require('../songs/server-songs.service');
-let SongsListController = class SongsListController {
-    constructor(songsService) {
+var core_1 = require('@angular/core');
+var server_songs_service_1 = require('../songs/server-songs.service');
+var SongsListController = (function () {
+    function SongsListController(songsService) {
         this.songsService = songsService;
     }
-    returnSongs(req, res, next) {
+    SongsListController.prototype.returnSongs = function (req, res, next) {
         this.songsService.selectSongs()
-            .then((result) => {
+            .then(function (result) {
             res.send(result.rows);
         })
-            .catch(e => {
+            .catch(function (e) {
             next("Error while fetching songs list" + e);
         });
-    }
-};
-SongsListController = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [server_songs_service_1.SongsService])
-], SongsListController);
+    };
+    SongsListController = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [server_songs_service_1.SongsService])
+    ], SongsListController);
+    return SongsListController;
+}());
 exports.SongsListController = SongsListController;
 //# sourceMappingURL=songs-list.controller.js.map
