@@ -23,8 +23,8 @@ var WordsComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'words',
-            styles: ["\n\n    "],
-            template: "\n        Loading all words...\n        {{wordsList | json}}\n    ",
+            styles: ["\n        span {\n            line-height: 25px;\n            letter-spacing: 1.5px;\n        }\n        span:not(:last-child):after {\n            content: \" | \";\n        }\n    "],
+            template: "\n        <h2>Words</h2>\n        <div *ngIf=\"wordsList\">\n            <span *ngFor=\"let word of wordsList\">{{word.value}}</span>\n        </div>\n    ",
             viewProviders: [view_words_service_1.ViewWordsService]
         }), 
         __metadata('design:paramtypes', [view_words_service_1.ViewWordsService])

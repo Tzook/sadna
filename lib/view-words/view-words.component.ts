@@ -5,11 +5,19 @@ import {Component, OnInit} from '@angular/core';
     moduleId: module.id,
     selector: 'words',
     styles: [`
-
+        span {
+            line-height: 25px;
+            letter-spacing: 1.5px;
+        }
+        span:not(:last-child):after {
+            content: " | ";
+        }
     `],
     template: `
-        Loading all words...
-        {{wordsList | json}}
+        <h2>Words</h2>
+        <div *ngIf="wordsList">
+            <span *ngFor="let word of wordsList">{{word.value}}</span>
+        </div>
     `,
     viewProviders: [ViewWordsService]
 })
