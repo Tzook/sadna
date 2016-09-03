@@ -52,6 +52,7 @@ var WordPeekService = (function () {
         configurable: true
     });
     WordPeekService.prototype.getWordRows = function (word) {
+        word = word.toLowerCase();
         var strings = [];
         var handledRows = new Set();
         var wordsArray = this.wordMap.get(word);

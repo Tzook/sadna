@@ -5,6 +5,14 @@ import {Component, OnInit, Input} from '@angular/core';
     moduleId: module.id,
     selector: 'word-peek',
     styles: [`
+        :host {
+            font-size: 18px;
+            line-height: 30px;
+            letter-spacing: 2px;
+        }
+        :host:not(:last-child):after {
+            content: " | ";
+        }
         .word {
             padding-bottom: 5px;
         }

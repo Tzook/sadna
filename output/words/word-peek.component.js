@@ -31,7 +31,7 @@ var WordPeekComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'word-peek',
-            styles: ["\n        .word {\n            padding-bottom: 5px;\n        }\n        .rows:not(:last-child) {\n            margin-bottom: 20px;\n            padding-bottom: 20px;\n            border-bottom: 2px dotted;\n        }\n    "],
+            styles: ["\n        :host {\n            font-size: 18px;\n            line-height: 30px;\n            letter-spacing: 2px;\n        }\n        :host:not(:last-child):after {\n            content: \" | \";\n        }\n        .word {\n            padding-bottom: 5px;\n        }\n        .rows:not(:last-child) {\n            margin-bottom: 20px;\n            padding-bottom: 20px;\n            border-bottom: 2px dotted;\n        }\n    "],
             template: "\n        <span (mouseenter)=\"showRows()\" (mouseleave)=\"hideRows()\">\n            <span class=\"word\">{{word}}</span>\n            <callout *ngIf=\"showCallout\">\n                <div class=\"rows\" *ngFor=\"let wordRow of wordRows\">\n                    <div *ngFor=\"let row of wordRow\">\n                        {{row}}\n                    </div>\n                </div>\n            </callout>\n        </span>\n    ",
         }), 
         __metadata('design:paramtypes', [word_peek_service_1.WordPeekService])

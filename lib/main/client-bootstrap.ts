@@ -1,3 +1,4 @@
+import {WordByIndexComponent} from '../words/word-by-index.component';
 import {CalloutComponent} from '../Components/callout.component';
 import {WordPeekComponent} from '../words/word-peek.component';
 import {FullSongComponent} from '../view-song/full-song.component';
@@ -33,6 +34,7 @@ import {ClientMainComponent} from './client-main';
 		SongInfoComponent,
 		WordPeekComponent,
 		FullSongComponent,
+		WordByIndexComponent,
 		CalloutComponent,
 		ClientMainComponent,
 		SongsListComponent,

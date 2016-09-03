@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var PUNCTUATIONS = /([,."?!])/g;
+var PUNCTUATIONS = /([…,."?!()])/g;
 var SongAnalyzeService = (function () {
     function SongAnalyzeService() {
     }
@@ -25,11 +25,11 @@ var SongAnalyzeService = (function () {
             for (var _i = 0, houses_1 = houses; _i < houses_1.length; _i++) {
                 var house = houses_1[_i];
                 var sentenceNum = 0;
-                var wordNum = 0;
                 var sentences = house.split(/\n/g);
                 for (var _a = 0, sentences_1 = sentences; _a < sentences_1.length; _a++) {
                     var sentence = sentences_1[_a];
                     var col = 0;
+                    var wordNum = 0;
                     var words = sentence.split(/\s/g);
                     for (var _b = 0, words_1 = words; _b < words_1.length; _b++) {
                         var word = words_1[_b];

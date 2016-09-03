@@ -20,6 +20,7 @@ var ViewSongComponent = (function () {
         this.wordPeekService = wordPeekService;
         this.route = route;
         this.uniqueWords = [];
+        this.words = [];
     }
     ViewSongComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -27,17 +28,17 @@ var ViewSongComponent = (function () {
         this.song = params;
         this.viewSongService.getSong(params["id"])
             .subscribe(function (success) {
-            var words = success.json();
-            _this.wordPeekService.words = words;
-            _this.uniqueWords = _this.uniqueWordsService.getUniqueWords(words, true);
+            _this.words = success.json();
+            _this.wordPeekService.words = _this.words;
+            _this.uniqueWords = _this.uniqueWordsService.getUniqueWords(_this.words, true);
         }, function (error) { return console.log(error); });
     };
     ViewSongComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'view-song',
-            styles: ["\n        song-info {\n            text-align: center;\n        }\n        #words {\n            margin: 40px 0 20px;\n        }\n        h2 {\n            margin-bottom: 10px;\n        }\n        word-peek:not(:last-child):after {\n            content: \" | \";\n        }\n        word-peek {\n            font-size: 18px;\n            line-height: 30px;\n            letter-spacing: 2px;\n        }\n    "],
-            template: "\n        <song-info [song]=\"song\"></song-info>\n        <div id=\"words\">\n            <h2>Words in the song:</h2>\n            <word-peek *ngFor=\"let word of uniqueWords\" [word]=\"word\"></word-peek>\n        </div>\n        <full-song *ngIf=\"uniqueWords.length\"></full-song>\n    ",
+            styles: ["\n        :host {\n            display: block;\n            margin-bottom: 50px;\n        }\n        song-info {\n            text-align: center;\n        }\n        #words {\n            margin: 40px 0 20px;\n        }\n        h2 {\n            margin-bottom: 10px;\n        }\n    "],
+            template: "\n        <song-info [song]=\"song\"></song-info>\n        <div id=\"words\">\n            <h2>Words in the song:</h2>\n            <word-peek *ngFor=\"let word of uniqueWords\" [word]=\"word\"></word-peek>\n        </div>\n        <word-by-index *ngIf=\"words.length\" [words]=\"words\"></word-by-index>\n        <full-song *ngIf=\"uniqueWords.length\"></full-song>\n    ",
             providers: [word_peek_service_1.WordPeekService],
             viewProviders: [view_song_service_1.ViewSongService, unique_words_service_1.UniqueWordsService]
         }), 

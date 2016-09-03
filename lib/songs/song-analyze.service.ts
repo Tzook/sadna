@@ -1,7 +1,7 @@
 import {CompleteWordInSong, Word, WordInSong} from '../db/server-db.model';
 import {Injectable} from '@angular/core';
 
-const PUNCTUATIONS = /([,."?!])/g;
+const PUNCTUATIONS = /([…,."?!()])/g;
 
 @Injectable()
 export class SongAnalyzeService {
@@ -20,11 +20,11 @@ export class SongAnalyzeService {
 
             for (let house of houses) {
                 let sentenceNum = 0;
-                let wordNum = 0;
                 let sentences = house.split(/\n/g);
 
                 for (let sentence of sentences) {
                     let col = 0;
+                    let wordNum = 0;
                     let words = sentence.split(/\s/g);
 
                     for (let word of words) {

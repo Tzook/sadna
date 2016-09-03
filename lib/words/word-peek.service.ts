@@ -49,6 +49,7 @@ export class WordPeekService {
     }
 
     public getWordRows(word: string): string[][] {
+        word = word.toLowerCase();
         let strings = [];
         let handledRows = new Set<number>();
         let wordsArray = this.wordMap.get(word);
