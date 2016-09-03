@@ -1,1 +1,1 @@
-export const GET_SONG_URL = "/data/song/:id";
+export const GET_SONG_URL = "/data/song-number-:id";
