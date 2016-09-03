@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {DbService} from '../main/server-db';
+import {DbService} from '../db/server-db';
 import {WordsService} from '../words/server-words.service';
 import {Song, SongResult, Word, WordResult, WordInSong,
     WordInSongResult, CompleteSong, CompleteSongResult,
@@ -117,7 +117,7 @@ export class SongsService
             });
         });
     }
-    
+
     /**
      * Stats for amount of words and letters in a song rows,
      * With this we can also show the amount of words and letters overall in a song

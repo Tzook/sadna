@@ -1,0 +1,1 @@
+export const GET_WORDS_URL = '/data/words';

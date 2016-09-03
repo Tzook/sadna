@@ -1,5 +1,5 @@
-import {DbService} from './server-db';
-import {ServerRouter} from './server-router';
+import {DbService} from '../db/server-db';
+import {ServerRouter} from '../navigation/server-router';
 import * as express from 'express';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';

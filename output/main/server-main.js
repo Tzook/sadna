@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var server_db_1 = require('./server-db');
-var server_router_1 = require('./server-router');
+var server_db_1 = require('../db/server-db');
+var server_router_1 = require('../navigation/server-router');
 var express = require('express');
 var compression = require('compression');
 var cookieParser = require('cookie-parser');

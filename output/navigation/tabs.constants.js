@@ -10,6 +10,10 @@ exports.TABS = [
         name: "Groups"
     },
     {
+        url: routes_constants_1.ROUTE_WORDS,
+        name: "Words"
+    },
+    {
         url: routes_constants_1.ROUTE_ADD_SONG,
         name: "Add Song"
     },

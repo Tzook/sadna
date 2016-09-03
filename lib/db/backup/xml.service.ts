@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {SongsService} from '../../songs/server-songs.service';
 import {GroupsService} from '../../groups/server-groups.service';
 import {WordsService} from '../../words/server-words.service';
-import {DbService} from '../../main/server-db';
+import {DbService} from '../server-db';
 import * as xml2js from 'xml2js';
 import {Song, SongResult, Group, GroupResult, Word, WordResult, WordInSong, WordInSongResult,
     WordInGroup, WordInGroupResult, DbError} from '../server-db.model';

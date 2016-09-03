@@ -7,15 +7,15 @@ import {Component, OnInit, Input} from '@angular/core';
     selector: 'word-by-index',
     styles: [`
         h2,
+        h3,
         div {
             margin-bottom: 10px;
-        }
-        h3 {
-            margin-bottom: 40px;
         }
     `],
     template: `
         <h2>Search by index:</h2>
+        <h3 *ngIf="foundWord">Found word: <word-peek [word]="foundWord"></word-peek></h3>
+        <h3 *ngIf="foundWord === ''">No word found in the given index</h3>
         <div>
             <label for="row">Row: </label>
             <input type="number" max="9999" min="1" id="row" #row (input)="searchByRowCol(row.value, col.value)">
@@ -30,8 +30,6 @@ import {Component, OnInit, Input} from '@angular/core';
             <label for="word">Word: </label>
             <input type="number" max="9999" min="1" id="word" #word (input)="searchByHouseSentenceWord(house.value, sentence.value, word.value)">
         </div>
-        <h3 *ngIf="foundWord">Found word: <word-peek [word]="foundWord"></word-peek></h3>
-        <h3 *ngIf="foundWord === ''">No word found in the given index</h3>
     `,
     viewProviders: [WordsIndexService]
 })

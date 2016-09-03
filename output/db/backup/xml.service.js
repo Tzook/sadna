@@ -12,7 +12,7 @@ var core_1 = require('@angular/core');
 var server_songs_service_1 = require('../../songs/server-songs.service');
 var server_groups_service_1 = require('../../groups/server-groups.service');
 var server_words_service_1 = require('../../words/server-words.service');
-var server_db_1 = require('../../main/server-db');
+var server_db_1 = require('../server-db');
 var xml2js = require('xml2js');
 var XmlService = (function () {
     function XmlService(_dbService, _songsService, _groupsService, _wordsService) {

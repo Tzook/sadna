@@ -1,6 +1,7 @@
+import {WordsComponent} from '../view-words/view-words.component';
 import {GroupsComponent} from '../groups/groups.component';
 import {ViewSongComponent} from '../view-song/view-song.component';
-import {ROUTE_SONGS_LIST, ROUTE_GROUPS, ROUTE_ADD_SONG, ROUTE_VIEW_SONG, ROUTE_XML_BACKUP} from './routes.constants';
+import {ROUTE_SONGS_LIST, ROUTE_GROUPS, ROUTE_WORDS, ROUTE_ADD_SONG, ROUTE_VIEW_SONG, ROUTE_XML_BACKUP} from './routes.constants';
 import {SongsListComponent} from '../songs-list/songs-list.component';
 import {AddSongComponent} from '../add-song/add-song.component';
 import {XmlComponent} from '../db/backup/xml.component';
@@ -14,6 +15,10 @@ const routes: Routes = [
     {
         path: ROUTE_GROUPS,
         component: GroupsComponent
+    },
+    {
+        path: ROUTE_WORDS,
+        component: WordsComponent
     },
     {
         path: ROUTE_ADD_SONG,

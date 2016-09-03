@@ -1,4 +1,5 @@
 "use strict";
+var view_words_component_1 = require('../view-words/view-words.component');
 var groups_component_1 = require('../groups/groups.component');
 var view_song_component_1 = require('../view-song/view-song.component');
 var routes_constants_1 = require('./routes.constants');
@@ -14,6 +15,10 @@ var routes = [
     {
         path: routes_constants_1.ROUTE_GROUPS,
         component: groups_component_1.GroupsComponent
+    },
+    {
+        path: routes_constants_1.ROUTE_WORDS,
+        component: view_words_component_1.WordsComponent
     },
     {
         path: routes_constants_1.ROUTE_ADD_SONG,

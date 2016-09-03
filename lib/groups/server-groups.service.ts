@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {DbService} from '../main/server-db';
+import {DbService} from '../db/server-db';
 import {WordsService} from '../words/server-words.service';
 import {Group, GroupResult, Word, WordResult, WordInSong, WordInSongResult,
     WordInGroup, WordInGroupResult, DbError} from '../db/server-db.model';
@@ -112,7 +112,7 @@ export class GroupsService
                 n2_row int;
             BEGIN
                 if word_vals = '{}' then
-                    return query 
+                    return query
                         select * from word_in_song
                             where
                                 song_id = s_id
@@ -155,7 +155,7 @@ export class GroupsService
                         union
                         select * from r where exists (select * from n2) union select * from n2;
                 end if;
-                RETURN;          
+                RETURN;
             END
             $$ LANGUAGE plpgsql;
 
@@ -175,7 +175,7 @@ export class GroupsService
                         select * from
                             next_word(r.song_id, r.col, r."row", word_val, word_vals);
                 end loop;
-                RETURN;  
+                RETURN;
             END
             $$ LANGUAGE plpgsql;
 

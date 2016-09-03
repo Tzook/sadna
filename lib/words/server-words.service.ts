@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {DbService} from '../main/server-db';
+import {DbService} from '../db/server-db';
 import {Word, WordResult, WordInSong, WordInSongResult,
     WordInGroup, WordInGroupResult, CompleteSongResult,
     WordStatistics, WordStatisticsResult,  DbError} from '../db/server-db.model';
@@ -122,6 +122,22 @@ export class WordsService
         });
     }
 
+    selectUniqueWords() : Promise<WordResult> {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                SELECT DISTINCT lower(value) as value
+                FROM words w
+                WHERE w.is_punctuation = false
+                ORDER BY value;
+            `,
+            (e: DbError, result: WordResult) => {
+                if (e) reject (e);
+                else resolve(result);
+            });
+        });
+    }
+
     /**
      * This selects all occournces of words what so ever
      * Add here limit if this becomes slow
@@ -130,7 +146,7 @@ export class WordsService
         return new Promise((resolve, reject) => {
             let dbClient = this.dbClient;
             dbClient.query(`
-                select s.name as song_name, w.song_id, w.word_id, ww.value as word_value, ww.is_punctuation, w.col, w."row", w.house, w.sentence, w.word_num 
+                select s.name as song_name, w.song_id, w.word_id, ww.value as word_value, ww.is_punctuation, w.col, w."row", w.house, w.sentence, w.word_num
             	from
             		songs s,
             		word_in_song w,
@@ -174,7 +190,7 @@ export class WordsService
             })
         });
     }
-    
+
     /**
      * This returns a WordStatistics Result obj
      * With a lot of stats for all words:

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var server_db_1 = require('../main/server-db');
+var server_db_1 = require('../db/server-db');
 var WordsService = (function () {
     function WordsService(_dbService) {
         this._dbService = _dbService;
@@ -107,6 +107,18 @@ var WordsService = (function () {
             });
         });
     };
+    WordsService.prototype.selectUniqueWords = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var dbClient = _this.dbClient;
+            dbClient.query("\n                SELECT DISTINCT lower(value) as value\n                FROM words w\n                WHERE w.is_punctuation = false\n                ORDER BY value;\n            ", function (e, result) {
+                if (e)
+                    reject(e);
+                else
+                    resolve(result);
+            });
+        });
+    };
     /**
      * This selects all occournces of words what so ever
      * Add here limit if this becomes slow
@@ -115,7 +127,7 @@ var WordsService = (function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
             var dbClient = _this.dbClient;
-            dbClient.query("\n                select s.name as song_name, w.song_id, w.word_id, ww.value as word_value, ww.is_punctuation, w.col, w.\"row\", w.house, w.sentence, w.word_num \n            \tfrom\n            \t\tsongs s,\n            \t\tword_in_song w,\n            \t\twords ww;\n            ", function (e, result) {
+            dbClient.query("\n                select s.name as song_name, w.song_id, w.word_id, ww.value as word_value, ww.is_punctuation, w.col, w.\"row\", w.house, w.sentence, w.word_num\n            \tfrom\n            \t\tsongs s,\n            \t\tword_in_song w,\n            \t\twords ww;\n            ", function (e, result) {
                 if (e)
                     reject(e);
                 else
