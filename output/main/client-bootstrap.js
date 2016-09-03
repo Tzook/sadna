@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var songs_peek_component_1 = require('../songs/songs-peek.component');
 var view_words_component_1 = require('../view-words/view-words.component');
 var word_by_index_component_1 = require('../words/word-by-index.component');
 var callout_component_1 = require('../Components/callout.component');
@@ -46,9 +47,10 @@ var AppModule = (function () {
                 group_list_component_1.GroupListComponent,
                 song_info_component_1.SongInfoComponent,
                 word_peek_component_1.WordPeekComponent,
+                songs_peek_component_1.SongsPeekComponent,
                 full_song_component_1.FullSongComponent,
                 word_by_index_component_1.WordByIndexComponent,
-                callout_component_1.CalloutComponent,
+                callout_component_1.PreCalloutComponent, callout_component_1.CalloutComponent, callout_component_1.CalloutWrapComponent,
                 view_words_component_1.WordsComponent,
                 client_main_1.ClientMainComponent,
                 songs_list_component_1.SongsListComponent,

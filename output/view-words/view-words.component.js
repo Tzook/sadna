@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var view_words_service_1 = require('./view-words.service');
+var songs_peek_service_1 = require('../songs/songs-peek.service');
 var core_1 = require('@angular/core');
 var WordsComponent = (function () {
     function WordsComponent(viewWordsService) {
@@ -23,8 +24,9 @@ var WordsComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'words',
-            styles: ["\n        span {\n            line-height: 25px;\n            letter-spacing: 1.5px;\n        }\n        span:not(:last-child):after {\n            content: \" | \";\n        }\n    "],
-            template: "\n        <h2>Words</h2>\n        <div *ngIf=\"wordsList\">\n            <span *ngFor=\"let word of wordsList\">{{word.value}}</span>\n        </div>\n    ",
+            styles: ["\n    "],
+            template: "\n        <h2>Words</h2>\n        <div *ngIf=\"wordsList\">\n            <songs-peek *ngFor=\"let word of wordsList\" [word]=\"word.value\"></songs-peek>\n        </div>\n    ",
+            providers: [songs_peek_service_1.SongsPeekService],
             viewProviders: [view_words_service_1.ViewWordsService]
         }), 
         __metadata('design:paramtypes', [view_words_service_1.ViewWordsService])

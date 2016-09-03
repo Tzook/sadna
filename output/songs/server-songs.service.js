@@ -71,6 +71,19 @@ var SongsService = (function () {
             });
         });
     };
+    SongsService.prototype.selectSongsByWord = function (word) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var dbClient = _this.dbClient;
+            dbClient.query("\n                select distinct s.name, s.id, s.writer, s.composer\n                from\n                    word_in_song w,\n                    words ww,\n                    songs s\n                where\n                    lower(ww.value) = $1\n                    and ww.id = w.word_id\n                    and s.id = w.song_id;\n            ", [word], function (e, result) {
+                console.log(e, "got", result.rows);
+                if (e)
+                    reject(e);
+                else
+                    resolve(result);
+            });
+        });
+    };
     /**
      * Get all the words in a song
      */

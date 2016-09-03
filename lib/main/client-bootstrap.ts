@@ -1,6 +1,7 @@
+import {SongsPeekComponent} from '../songs/songs-peek.component';
 import {WordsComponent} from '../view-words/view-words.component';
 import {WordByIndexComponent} from '../words/word-by-index.component';
-import {CalloutComponent} from '../Components/callout.component';
+import {PreCalloutComponent, CalloutComponent, CalloutWrapComponent} from '../Components/callout.component';
 import {WordPeekComponent} from '../words/word-peek.component';
 import {FullSongComponent} from '../view-song/full-song.component';
 import {SongInfoComponent} from '../songs/song-info.component';
@@ -34,9 +35,10 @@ import {ClientMainComponent} from './client-main';
 		GroupListComponent,
 		SongInfoComponent,
 		WordPeekComponent,
+		SongsPeekComponent,
 		FullSongComponent,
 		WordByIndexComponent,
-		CalloutComponent,
+		PreCalloutComponent, CalloutComponent, CalloutWrapComponent,
 		WordsComponent,
 		ClientMainComponent,
 		SongsListComponent,

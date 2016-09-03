@@ -23,6 +23,15 @@ var SongsListController = (function () {
             next("Error while fetching songs list" + e);
         });
     };
+    SongsListController.prototype.returnSongsByWord = function (req, res, next) {
+        this.songsService.selectSongsByWord(req.params.word)
+            .then(function (result) {
+            res.send(result.rows);
+        })
+            .catch(function (e) {
+            next("Error while fetching songs list by word" + e);
+        });
+    };
     SongsListController = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [server_songs_service_1.SongsService])

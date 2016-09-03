@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ContentChild, Output, EventEmitter, HostListener} from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -16,18 +16,54 @@ import { Component, OnInit } from '@angular/core';
             left: 0;
             right: 0;
             margin: auto;
+            visibility: hidden;
+            opacity: 0;
+        }
+        .show {
+            transition: all linear .2s; /* transition only in */
+            visibility: visible;
+            opacity: 1;
         }
     `],
     template: `
-        <div>
+        <div [ngClass]="{show: show}">
             <ng-content></ng-content>
         </div>
     `
 })
-export class CalloutComponent implements OnInit {
-    constructor() { }
+export class CalloutComponent {
+    public show: boolean;
+}
 
-    ngOnInit() {
+@Component({
+    moduleId: module.id,
+    selector: 'pre-callout',
+    styles: [`
+        :host {
+            padding-bottom: 5px;
+        }
+    `],
+    template: `<ng-content></ng-content>`
+})
+export class PreCalloutComponent {}
 
+@Component({
+    moduleId: module.id,
+    selector: 'callout-wrap',
+    template: `<ng-content></ng-content>`
+})
+export class CalloutWrapComponent {
+    @ContentChild(CalloutComponent) callout: CalloutComponent;
+    @Output() calloutShown = new EventEmitter();
+
+    @HostListener('mouseenter')
+    private show() {
+        this.calloutShown.emit();
+        this.callout.show = true;
+    }
+
+    @HostListener('mouseleave')
+    private hide() {
+        this.callout.show = false;
     }
 }

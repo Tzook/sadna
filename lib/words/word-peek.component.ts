@@ -13,9 +13,6 @@ import {Component, OnInit, Input} from '@angular/core';
         :host:not(:last-child):after {
             content: " | ";
         }
-        .word {
-            padding-bottom: 5px;
-        }
         .rows:not(:last-child) {
             margin-bottom: 20px;
             padding-bottom: 20px;
@@ -23,35 +20,27 @@ import {Component, OnInit, Input} from '@angular/core';
         }
     `],
     template: `
-        <span (mouseenter)="showRows()" (mouseleave)="hideRows()">
-            <span class="word">{{word}}</span>
-            <callout *ngIf="showCallout">
+        <callout-wrap (calloutShown)="showRows()">
+            <pre-callout>{{word}}</pre-callout>
+            <callout>
                 <div class="rows" *ngFor="let wordRow of wordRows">
                     <div *ngFor="let row of wordRow">
                         {{row}}
                     </div>
                 </div>
             </callout>
-        </span>
+        </callout-wrap>
     `,
 })
 export class WordPeekComponent implements OnInit {
     @Input() word: string;
     private wordRows: string[][];
-    private showCallout: boolean;
 
-    constructor(private wordPeekService: WordPeekService) {
-        this.showCallout = false;
-    }
+    constructor(private wordPeekService: WordPeekService) {}
 
     ngOnInit() {}
 
     private showRows() {
         this.wordRows = this.wordRows || this.wordPeekService.getWordRows(this.word);
-        this.showCallout = true;
-    }
-
-    private hideRows() {
-        this.showCallout = false;
     }
 }

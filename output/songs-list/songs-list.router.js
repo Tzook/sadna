@@ -17,6 +17,7 @@ var SongsListRouter = (function () {
     }
     SongsListRouter.prototype.init = function (app) {
         app.get(songs_list_constants_1.GET_SONGS_LIST_URL, this.songsListController.returnSongs.bind(this.songsListController));
+        app.get(songs_list_constants_1.GET_SONGS_BY_WORD_URL, this.songsListController.returnSongsByWord.bind(this.songsListController));
     };
     SongsListRouter = __decorate([
         core_1.Injectable(), 

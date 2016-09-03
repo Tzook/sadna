@@ -92,6 +92,28 @@ export class SongsService
         });
     }
 
+    selectSongsByWord(word: string) : Promise<SongResult> {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                select distinct s.name, s.id, s.writer, s.composer
+                from
+                    word_in_song w,
+                    words ww,
+                    songs s
+                where
+                    lower(ww.value) = $1
+                    and ww.id = w.word_id
+                    and s.id = w.song_id;
+            `, [word],
+            (e: DbError, result: SongResult) => {
+                console.log(e, "got", result.rows);
+                if (e) reject (e);
+                else resolve(result);
+            });
+        });
+    }
+
     /**
      * Get all the words in a song
      */

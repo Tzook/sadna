@@ -17,4 +17,14 @@ export class SongsListController {
                 next("Error while fetching songs list" + e);
             });
     }
+
+    public returnSongsByWord(req: e.Request, res: e.Response, next: Function) {
+        this.songsService.selectSongsByWord(req.params.word)
+            .then((result: SongResult) => {
+                res.send(result.rows);
+            })
+            .catch(e => {
+                next("Error while fetching songs list by word" + e);
+            });
+    }
 }

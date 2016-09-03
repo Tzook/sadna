@@ -13,15 +13,10 @@ var core_1 = require('@angular/core');
 var WordPeekComponent = (function () {
     function WordPeekComponent(wordPeekService) {
         this.wordPeekService = wordPeekService;
-        this.showCallout = false;
     }
     WordPeekComponent.prototype.ngOnInit = function () { };
     WordPeekComponent.prototype.showRows = function () {
         this.wordRows = this.wordRows || this.wordPeekService.getWordRows(this.word);
-        this.showCallout = true;
-    };
-    WordPeekComponent.prototype.hideRows = function () {
-        this.showCallout = false;
     };
     __decorate([
         core_1.Input(), 
@@ -31,8 +26,8 @@ var WordPeekComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'word-peek',
-            styles: ["\n        :host {\n            font-size: 18px;\n            line-height: 30px;\n            letter-spacing: 2px;\n        }\n        :host:not(:last-child):after {\n            content: \" | \";\n        }\n        .word {\n            padding-bottom: 5px;\n        }\n        .rows:not(:last-child) {\n            margin-bottom: 20px;\n            padding-bottom: 20px;\n            border-bottom: 2px dotted;\n        }\n    "],
-            template: "\n        <span (mouseenter)=\"showRows()\" (mouseleave)=\"hideRows()\">\n            <span class=\"word\">{{word}}</span>\n            <callout *ngIf=\"showCallout\">\n                <div class=\"rows\" *ngFor=\"let wordRow of wordRows\">\n                    <div *ngFor=\"let row of wordRow\">\n                        {{row}}\n                    </div>\n                </div>\n            </callout>\n        </span>\n    ",
+            styles: ["\n        :host {\n            font-size: 18px;\n            line-height: 30px;\n            letter-spacing: 2px;\n        }\n        :host:not(:last-child):after {\n            content: \" | \";\n        }\n        .rows:not(:last-child) {\n            margin-bottom: 20px;\n            padding-bottom: 20px;\n            border-bottom: 2px dotted;\n        }\n    "],
+            template: "\n        <callout-wrap (calloutShown)=\"showRows()\">\n            <pre-callout>{{word}}</pre-callout>\n            <callout>\n                <div class=\"rows\" *ngFor=\"let wordRow of wordRows\">\n                    <div *ngFor=\"let row of wordRow\">\n                        {{row}}\n                    </div>\n                </div>\n            </callout>\n        </callout-wrap>\n    ",
         }), 
         __metadata('design:paramtypes', [word_peek_service_1.WordPeekService])
     ], WordPeekComponent);
