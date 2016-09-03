@@ -1,4 +1,4 @@
-import {Component, ContentChild, Output, EventEmitter, HostListener} from '@angular/core';
+import {Component, transition, ContentChild, Output, Input, HostListener, EventEmitter} from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -55,15 +55,21 @@ export class PreCalloutComponent {}
 export class CalloutWrapComponent {
     @ContentChild(CalloutComponent) callout: CalloutComponent;
     @Output() calloutShown = new EventEmitter();
+    @Input() delay: number;
+
+    private timer;
 
     @HostListener('mouseenter')
     private show() {
-        this.calloutShown.emit();
-        this.callout.show = true;
+        this.timer = setTimeout(() => {
+            this.calloutShown.emit();
+            this.callout.show = true;
+        }, this.delay || 0);
     }
 
     @HostListener('mouseleave')
     private hide() {
+        clearTimeout(this.timer);
         this.callout.show = false;
     }
 }

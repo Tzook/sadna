@@ -27,7 +27,7 @@ import {Component, Input} from '@angular/core';
         }
     `],
     template: `
-        <callout-wrap (calloutShown)="fillSongs()">
+        <callout-wrap (calloutShown)="fillSongs()" delay="100">
             <pre-callout>{{word}}</pre-callout>
             <callout>
                 <div *ngFor="let song of songs">

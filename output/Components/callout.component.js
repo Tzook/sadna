@@ -44,10 +44,14 @@ var CalloutWrapComponent = (function () {
         this.calloutShown = new core_1.EventEmitter();
     }
     CalloutWrapComponent.prototype.show = function () {
-        this.calloutShown.emit();
-        this.callout.show = true;
+        var _this = this;
+        this.timer = setTimeout(function () {
+            _this.calloutShown.emit();
+            _this.callout.show = true;
+        }, this.delay || 0);
     };
     CalloutWrapComponent.prototype.hide = function () {
+        clearTimeout(this.timer);
         this.callout.show = false;
     };
     __decorate([
@@ -58,6 +62,10 @@ var CalloutWrapComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], CalloutWrapComponent.prototype, "calloutShown", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], CalloutWrapComponent.prototype, "delay", void 0);
     __decorate([
         core_1.HostListener('mouseenter'), 
         __metadata('design:type', Function), 

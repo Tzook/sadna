@@ -34,7 +34,7 @@ var SongsPeekComponent = (function () {
             moduleId: module.id,
             selector: 'songs-peek',
             styles: ["\n        :host {\n            line-height: 25px;\n            letter-spacing: 1.5px;\n        }\n        :host:not(:last-child):after {\n            content: \" | \";\n        }\n        div {\n            display: flex;\n            align-items: flex-end;\n            justify-content: space-between;\n            width: 100%;\n        }\n        div:not(:last-child) {\n            margin-bottom: 20px;\n            padding-bottom: 20px;\n            border-bottom: 2px dotted;\n        }\n    "],
-            template: "\n        <callout-wrap (calloutShown)=\"fillSongs()\">\n            <pre-callout>{{word}}</pre-callout>\n            <callout>\n                <div *ngFor=\"let song of songs\">\n                    <song-info [song]=\"song\"></song-info>\n                    <button [routerLink]=\"viewSongService.getSongUrl(song)\">View song</button>\n                </div>\n            </callout>\n        </callout-wrap>\n    "
+            template: "\n        <callout-wrap (calloutShown)=\"fillSongs()\" delay=\"100\">\n            <pre-callout>{{word}}</pre-callout>\n            <callout>\n                <div *ngFor=\"let song of songs\">\n                    <song-info [song]=\"song\"></song-info>\n                    <button [routerLink]=\"viewSongService.getSongUrl(song)\">View song</button>\n                </div>\n            </callout>\n        </callout-wrap>\n    "
         }), 
         __metadata('design:paramtypes', [songs_peek_service_1.SongsPeekService, view_song_service_1.ViewSongService])
     ], SongsPeekComponent);
