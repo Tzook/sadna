@@ -31,7 +31,7 @@ button[disabled] {
     background: lightgrey;
     cursor: not-allowed;
 }
-input,
+input:not([type="file"]),
 textarea {
     width: 100%;
     padding: 2px 4px;

@@ -23,16 +23,25 @@ var AddSongComponent = (function () {
         var _this = this;
         this.loading = true;
         this.message = "Adding song...";
-        console.log('Submitting', this.model);
         this.addSongService.addSong(this.model)
             .subscribe(function (success) { return _this.message = "The song has been added successfully."; }, function (error) { return _this.message = "Error: " + error._body; });
+    };
+    AddSongComponent.prototype.fillText = function (blob) {
+        var _this = this;
+        if (blob.length > 0) {
+            var reader = new FileReader();
+            reader.readAsText(blob[0]);
+            reader.onload = function (event) {
+                _this.model.text = event.target.result;
+            };
+        }
     };
     AddSongComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'add-song',
             styleUrls: ['../../style/form-styles.css'],
-            template: "\n        <form class=\"animated fadeIn\"\n            (ngSubmit)=\"onSubmit()\" #addSongForm=\"ngForm\">\n            <table>\n                <tr>\n                    <td><label for=\"name\">Name:</label></td>\n                    <td><input type=\"text\" placeholder=\"Name\" maxlength=\"" + add_song_constants_1.MAX_NAME_LENGTH + "\" id=\"name\" [(ngModel)]=\"model.name\" name=\"name\" autofocus required></td>\n                </tr>\n                <tr>\n                    <td><label for=\"writer\">Writer:</label></td>\n                    <td><input type=\"text\" placeholder=\"Writer\" maxlength=\"" + add_song_constants_1.MAX_NAME_LENGTH + "\" id=\"writer\" [(ngModel)]=\"model.writer\" name=\"writer\" required></td>\n                </tr>\n                <tr>\n                    <td><label for=\"composer\">Composer:</label></td>\n                    <td><input type=\"text\" placeholder=\"Composer\" maxlength=\"" + add_song_constants_1.MAX_NAME_LENGTH + "\" id=\"composer\" [(ngModel)]=\"model.composer\" name=\"composer\" required></td>\n                </tr>\n                <tr>\n                    <td><label for=\"text\">Text:</label></td>\n                    <td><textarea placeholder=\"Song text (At least " + add_song_constants_1.MIN_SONG_LENGTH + " characters)\" minlength=\"" + add_song_constants_1.MIN_SONG_LENGTH + "\" maxlength=\"" + add_song_constants_1.MAX_SONG_LENGTH + "\" rows=\"10\" id=\"text\" [(ngModel)]=\"model.text\" name=\"text\" required></textarea></td>\n                </tr>\n                <tr>\n                    <td></td>\n                    <td id=\"submit\"><button type=\"submit\" [disabled]=\"!addSongForm.form.valid || loading\">Add song</button></td>\n                </tr>\n            </table>\n\n            <div [hidden]=\"!message\">\n                {{message}}\n            </div>\n        </form>\n    ",
+            template: "\n        <form class=\"animated fadeIn\"\n            (ngSubmit)=\"onSubmit()\" #addSongForm=\"ngForm\">\n            <table>\n                <tr>\n                    <td><label for=\"name\">Name:</label></td>\n                    <td><input type=\"text\" placeholder=\"Name\" maxlength=\"" + add_song_constants_1.MAX_NAME_LENGTH + "\" id=\"name\" [(ngModel)]=\"model.name\" name=\"name\" autofocus required></td>\n                </tr>\n                <tr>\n                    <td><label for=\"writer\">Writer:</label></td>\n                    <td><input type=\"text\" placeholder=\"Writer\" maxlength=\"" + add_song_constants_1.MAX_NAME_LENGTH + "\" id=\"writer\" [(ngModel)]=\"model.writer\" name=\"writer\" required></td>\n                </tr>\n                <tr>\n                    <td><label for=\"composer\">Composer:</label></td>\n                    <td><input type=\"text\" placeholder=\"Composer\" maxlength=\"" + add_song_constants_1.MAX_NAME_LENGTH + "\" id=\"composer\" [(ngModel)]=\"model.composer\" name=\"composer\" required></td>\n                </tr>\n                <tr>\n                    <td><label for=\"text\">Text:</label></td>\n                    <td>\n                        <input #fileUpload type=\"file\" (change)=\"fillText(fileUpload.files)\">\n                        <textarea placeholder=\"Song text (At least " + add_song_constants_1.MIN_SONG_LENGTH + " characters)\" minlength=\"" + add_song_constants_1.MIN_SONG_LENGTH + "\" maxlength=\"" + add_song_constants_1.MAX_SONG_LENGTH + "\" rows=\"10\" id=\"text\" [(ngModel)]=\"model.text\" name=\"text\" required></textarea>\n                    </td>\n                </tr>\n                <tr>\n                    <td></td>\n                    <td id=\"submit\"><button type=\"submit\" [disabled]=\"!addSongForm.form.valid || loading\">Add song</button></td>\n                </tr>\n            </table>\n\n            <div [hidden]=\"!message\">\n                {{message}}\n            </div>\n        </form>\n    ",
             viewProviders: [add_song_service_1.AddSongService]
         }), 
         __metadata('design:paramtypes', [add_song_service_1.AddSongService])

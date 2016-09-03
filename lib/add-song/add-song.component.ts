@@ -25,7 +25,10 @@ import {Component} from '@angular/core';
                 </tr>
                 <tr>
                     <td><label for="text">Text:</label></td>
-                    <td><textarea placeholder="Song text (At least ${MIN_SONG_LENGTH} characters)" minlength="${MIN_SONG_LENGTH}" maxlength="${MAX_SONG_LENGTH}" rows="10" id="text" [(ngModel)]="model.text" name="text" required></textarea></td>
+                    <td>
+                        <input #fileUpload type="file" (change)="fillText(fileUpload.files)">
+                        <textarea placeholder="Song text (At least ${MIN_SONG_LENGTH} characters)" minlength="${MIN_SONG_LENGTH}" maxlength="${MAX_SONG_LENGTH}" rows="10" id="text" [(ngModel)]="model.text" name="text" required></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
@@ -54,10 +57,19 @@ export class AddSongComponent {
     private onSubmit() {
         this.loading = true;
         this.message = "Adding song...";
-        console.log('Submitting', this.model);
         this.addSongService.addSong(this.model)
             .subscribe(
                 success => this.message = "The song has been added successfully.",
                 error => this.message = "Error: " + error._body);
+    }
+
+    private fillText(blob: Blob[]) {
+        if (blob.length > 0) {
+            let reader = new FileReader();
+            reader.readAsText(blob[0]);
+            reader.onload = (event: any) => {
+                this.model.text =  event.target.result;
+            };
+        }
     }
 }

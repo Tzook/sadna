@@ -5,6 +5,6 @@ shim;
 import {ServerMain} from './server-main';
 import {serviceContainer} from './service-container';
 
-let main = serviceContainer.get(ServerMain);
+let main: ServerMain = serviceContainer.get(ServerMain);
 main.useDependencies();
 main.beginServer();
