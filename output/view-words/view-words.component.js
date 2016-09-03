@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var view_words_service_1 = require('./view-words.service');
 var songs_peek_service_1 = require('../songs/songs-peek.service');
+var view_song_service_1 = require('../view-song/view-song.service');
 var core_1 = require('@angular/core');
 var WordsComponent = (function () {
     function WordsComponent(viewWordsService) {
@@ -26,7 +27,7 @@ var WordsComponent = (function () {
             selector: 'words',
             styles: ["\n    "],
             template: "\n        <h2>Words</h2>\n        <div *ngIf=\"wordsList\">\n            <songs-peek *ngFor=\"let word of wordsList\" [word]=\"word.value\"></songs-peek>\n        </div>\n    ",
-            providers: [songs_peek_service_1.SongsPeekService],
+            providers: [songs_peek_service_1.SongsPeekService, view_song_service_1.ViewSongService],
             viewProviders: [view_words_service_1.ViewWordsService]
         }), 
         __metadata('design:paramtypes', [view_words_service_1.ViewWordsService])

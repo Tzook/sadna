@@ -1,5 +1,6 @@
 import {wrap} from 'popsicle/dist/plugins';
 import {SongsPeekService} from './songs-peek.service';
+import {ViewSongService} from '../view-song/view-song.service';
 import {Component, Input} from '@angular/core';
 
 @Component({
@@ -13,12 +14,26 @@ import {Component, Input} from '@angular/core';
         :host:not(:last-child):after {
             content: " | ";
         }
+        div {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            width: 100%;
+        }
+        div:not(:last-child) {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px dotted;
+        }
     `],
     template: `
         <callout-wrap (calloutShown)="fillSongs()">
             <pre-callout>{{word}}</pre-callout>
             <callout>
-                {{songs | json}}
+                <div *ngFor="let song of songs">
+                    <song-info [song]="song"></song-info>
+                    <button [routerLink]="viewSongService.getSongUrl(song)">View song</button>
+                </div>
             </callout>
         </callout-wrap>
     `
@@ -29,7 +44,8 @@ export class SongsPeekComponent {
     private songs;
     private fetched: boolean;
 
-    constructor(private songsPeekService: SongsPeekService) {
+    constructor(private songsPeekService: SongsPeekService,
+                private viewSongService: ViewSongService) {
         this.fetched = false;
     }
 

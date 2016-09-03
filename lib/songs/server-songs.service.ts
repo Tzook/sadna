@@ -107,7 +107,6 @@ export class SongsService
                     and s.id = w.song_id;
             `, [word],
             (e: DbError, result: SongResult) => {
-                console.log(e, "got", result.rows);
                 if (e) reject (e);
                 else resolve(result);
             });

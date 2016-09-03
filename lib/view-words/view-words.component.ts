@@ -1,5 +1,6 @@
 import {ViewWordsService} from './view-words.service';
 import {SongsPeekService} from '../songs/songs-peek.service';
+import {ViewSongService} from '../view-song/view-song.service';
 import {Component, OnInit} from '@angular/core';
 import {Word} from '../db/server-db.model';
 
@@ -14,7 +15,7 @@ import {Word} from '../db/server-db.model';
             <songs-peek *ngFor="let word of wordsList" [word]="word.value"></songs-peek>
         </div>
     `,
-    providers: [SongsPeekService], // available for children
+    providers: [SongsPeekService, ViewSongService], // available for children
     viewProviders: [ViewWordsService]
 })
 export class WordsComponent implements OnInit {

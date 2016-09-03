@@ -1,6 +1,6 @@
 import {SongsListService} from './songs-list.service';
+import {ViewSongService} from '../view-song/view-song.service';
 import {Component, OnInit} from '@angular/core';
-import {ROUTE_VIEW_SONG} from '../navigation/routes.constants';
 import {Song} from '../db/server-db.model';
 
 @Component({
@@ -22,16 +22,17 @@ import {Song} from '../db/server-db.model';
         <div *ngFor="let song of songsList" class="animated fadeInDown">
             <song-info [song]="song"></song-info>
             <span>
-                <button [routerLink]="getSongUrl(song)">View song</button>
+                <button [routerLink]="viewSongService.getSongUrl(song)">View song</button>
             </span>
         </div>
     `,
-    viewProviders: [SongsListService]
+    viewProviders: [ViewSongService, SongsListService]
 })
 export class SongsListComponent implements OnInit {
     private songsList: Song[];
 
-    constructor(private songsListService: SongsListService) {}
+    constructor(private songsListService: SongsListService,
+                private viewSongService: ViewSongService) {}
 
     ngOnInit() {
         this.songsListService.getSongs()
@@ -39,13 +40,5 @@ export class SongsListComponent implements OnInit {
                 success => this.songsList = success.json(),
                 error => console.log(error)
             );
-    }
-
-    private getSongUrl(song: Song): string {
-        return "/" + ROUTE_VIEW_SONG
-                        .replace(":id", "" + song.id)
-                        .replace(":name", song.name)
-                        .replace(":writer", "" + song.writer)
-                        .replace(":composer", "" + song.composer);
     }
 }

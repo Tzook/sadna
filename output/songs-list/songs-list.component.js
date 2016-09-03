@@ -9,33 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var songs_list_service_1 = require('./songs-list.service');
+var view_song_service_1 = require('../view-song/view-song.service');
 var core_1 = require('@angular/core');
-var routes_constants_1 = require('../navigation/routes.constants');
 var SongsListComponent = (function () {
-    function SongsListComponent(songsListService) {
+    function SongsListComponent(songsListService, viewSongService) {
         this.songsListService = songsListService;
+        this.viewSongService = viewSongService;
     }
     SongsListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.songsListService.getSongs()
             .subscribe(function (success) { return _this.songsList = success.json(); }, function (error) { return console.log(error); });
     };
-    SongsListComponent.prototype.getSongUrl = function (song) {
-        return "/" + routes_constants_1.ROUTE_VIEW_SONG
-            .replace(":id", "" + song.id)
-            .replace(":name", song.name)
-            .replace(":writer", "" + song.writer)
-            .replace(":composer", "" + song.composer);
-    };
     SongsListComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'songs-list',
             styles: ["\n        div {\n            display: flex;\n            justify-content: space-between;\n            align-items: flex-end;\n            padding: 15px;\n            margin-bottom: 20px;\n            border: 1px solid;\n            border-radius: 2px;\n            box-shadow: 1px 2px 2px -1px rgba(0,0,0,.6);\n        }\n    "],
-            template: "\n        <div *ngFor=\"let song of songsList\" class=\"animated fadeInDown\">\n            <song-info [song]=\"song\"></song-info>\n            <span>\n                <button [routerLink]=\"getSongUrl(song)\">View song</button>\n            </span>\n        </div>\n    ",
-            viewProviders: [songs_list_service_1.SongsListService]
+            template: "\n        <div *ngFor=\"let song of songsList\" class=\"animated fadeInDown\">\n            <song-info [song]=\"song\"></song-info>\n            <span>\n                <button [routerLink]=\"viewSongService.getSongUrl(song)\">View song</button>\n            </span>\n        </div>\n    ",
+            viewProviders: [view_song_service_1.ViewSongService, songs_list_service_1.SongsListService]
         }), 
-        __metadata('design:paramtypes', [songs_list_service_1.SongsListService])
+        __metadata('design:paramtypes', [songs_list_service_1.SongsListService, view_song_service_1.ViewSongService])
     ], SongsListComponent);
     return SongsListComponent;
 }());

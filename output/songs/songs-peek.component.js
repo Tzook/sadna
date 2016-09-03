@@ -9,10 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var songs_peek_service_1 = require('./songs-peek.service');
+var view_song_service_1 = require('../view-song/view-song.service');
 var core_1 = require('@angular/core');
 var SongsPeekComponent = (function () {
-    function SongsPeekComponent(songsPeekService) {
+    function SongsPeekComponent(songsPeekService, viewSongService) {
         this.songsPeekService = songsPeekService;
+        this.viewSongService = viewSongService;
         this.fetched = false;
     }
     SongsPeekComponent.prototype.fillSongs = function () {
@@ -31,10 +33,10 @@ var SongsPeekComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'songs-peek',
-            styles: ["\n        :host {\n            line-height: 25px;\n            letter-spacing: 1.5px;\n        }\n        :host:not(:last-child):after {\n            content: \" | \";\n        }\n    "],
-            template: "\n        <callout-wrap (calloutShown)=\"fillSongs()\">\n            <pre-callout>{{word}}</pre-callout>\n            <callout>\n                {{songs | json}}\n            </callout>\n        </callout-wrap>\n    "
+            styles: ["\n        :host {\n            line-height: 25px;\n            letter-spacing: 1.5px;\n        }\n        :host:not(:last-child):after {\n            content: \" | \";\n        }\n        div {\n            display: flex;\n            align-items: flex-end;\n            justify-content: space-between;\n            width: 100%;\n        }\n        div:not(:last-child) {\n            margin-bottom: 20px;\n            padding-bottom: 20px;\n            border-bottom: 2px dotted;\n        }\n    "],
+            template: "\n        <callout-wrap (calloutShown)=\"fillSongs()\">\n            <pre-callout>{{word}}</pre-callout>\n            <callout>\n                <div *ngFor=\"let song of songs\">\n                    <song-info [song]=\"song\"></song-info>\n                    <button [routerLink]=\"viewSongService.getSongUrl(song)\">View song</button>\n                </div>\n            </callout>\n        </callout-wrap>\n    "
         }), 
-        __metadata('design:paramtypes', [songs_peek_service_1.SongsPeekService])
+        __metadata('design:paramtypes', [songs_peek_service_1.SongsPeekService, view_song_service_1.ViewSongService])
     ], SongsPeekComponent);
     return SongsPeekComponent;
 }());
