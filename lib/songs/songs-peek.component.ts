@@ -2,6 +2,7 @@ import {wrap} from 'popsicle/dist/plugins';
 import {SongsPeekService} from './songs-peek.service';
 import {ViewSongService} from '../view-song/view-song.service';
 import {Component, Input} from '@angular/core';
+import {Song} from '../db/server-db.model';
 
 @Component({
     moduleId: module.id,
@@ -34,6 +35,8 @@ import {Component, Input} from '@angular/core';
                     <song-info [song]="song"></song-info>
                     <button [routerLink]="viewSongService.getSongUrl(song)">View song</button>
                 </div>
+                <div *ngIf="songs && songs.length === 0">The word does not appear anywhere.</div>
+                <div *ngIf="!songs">Loading...</div>
             </callout>
         </callout-wrap>
     `
@@ -41,7 +44,7 @@ import {Component, Input} from '@angular/core';
 export class SongsPeekComponent {
     @Input() word: string;
 
-    private songs;
+    private songs: Song[];
     private fetched: boolean;
 
     constructor(private songsPeekService: SongsPeekService,
