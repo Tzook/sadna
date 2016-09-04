@@ -24,14 +24,14 @@ var GroupsRouter = (function () {
         this.groupsService.initNextWordFunctions();
         app.post(groups_constants_1.ADD_GROUP_URL, this.groupsMiddleware.validateRequest.bind(this.groupsMiddleware), this.groupsController.processGroup.bind(this.groupsController), this.groupsController.insertGroup.bind(this.groupsController));
         app.get(groups_constants_1.GET_GROUPS_URL, this.groupsController.returnGroups.bind(this.groupsController));
-        // working example of search for Tzookie:
-        this.groupsService.getWordGroupPossibilities("in my genes i got a laptop in my back".split(' '))
-            .then(function (d) {
-            console.log(d.rows);
-        })
-            .catch(function (e) {
-            console.log('err', e);
-        });
+        // // working example of search for Tzookie:
+        //    this.groupsService.getWordGroupPossibilities("in my genes i got a laptop in my back".split(' '))
+        //        .then((d) => {
+        //            console.log(d.rows);
+        //        })
+        //        .catch(e => {
+        //            console.log('err', e);
+        //        });
     };
     GroupsRouter = __decorate([
         core_1.Injectable(), 

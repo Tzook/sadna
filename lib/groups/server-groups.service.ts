@@ -129,11 +129,11 @@ export class GroupsService
                 RETURNS SETOF word_in_song AS
                 $$
                 DECLARE
-                    l int;
-                    n1_col int;
-                    n2_row int;
+                    l int;         -- will be set for the word_vals array length
+                    n1_col int;    -- will be set to the next possible column with the same row (cur_row, cur_col+1)
+                    n2_row int;    -- will be set to the next possible row with the coloumn 0 (cur_row+1, 0)
                 BEGIN
-                    if word_vals = '{}' then
+                    if word_vals = '{}' then -- this is the stop condition to return the word
                         return query
                             select * from word_in_song
                                 where
@@ -148,13 +148,13 @@ export class GroupsService
                         l := array_length(word_vals, 1);
                         n1_col := cur_col + 1;
                         n2_row := cur_row + 1;
-                        return query
+                        return query -- build n1 as the next column and n2 as the first word in the next row, note that we need to make sure there is no word at all in the next column for using the next row.
                             with n1 as (
                                 select * from next_word(s_id, n1_col, cur_row, word_vals[1], word_vals[2:l])
                             ),
                             n2 as (
                                 select * from next_word(s_id, 0, n2_row, word_vals[1], word_vals[2:l])
-                                    where not exists (
+                                    where not exists ( -- make sure n1 is empty
                                         select * from word_in_song
                                             where
                                                 song_id = s_id
@@ -172,7 +172,7 @@ export class GroupsService
                                 )
                                 and col = cur_col
                                 and row = cur_row
-                            )
+                            ) -- r is what we want to add n1 or n2 results to, becuase if we got this far than it's value is good
                             select * from r where exists (select * from n1) union select * from n1
                             union
                             select * from r where exists (select * from n2) union select * from n2;
@@ -180,7 +180,9 @@ export class GroupsService
                     RETURN;
                 END
                 $$ LANGUAGE plpgsql;
-    
+                
+                -- this function will look up a word, and for each findings will search if the next set of words
+                -- it will resolve that recursivley by adding up the results of either the next column or the next row in column 0
                 CREATE OR REPLACE FUNCTION first_word(word_val text, word_vals text[])
                     RETURNS SETOF word_in_song AS
                 $$
