@@ -18,15 +18,7 @@ var GroupsController = (function () {
     }
     GroupsController.prototype.processGroup = function (req, res, next) {
         var model = req.body.model;
-        var wordsStrings = this.wordsSeparatorService.separate(model.words);
-        req.body.words = [];
-        var i = 0;
-        for (var _i = 0, wordsStrings_1 = wordsStrings; _i < wordsStrings_1.length; _i++) {
-            var word = wordsStrings_1[_i];
-            req.body.words[i++] = {
-                value: word
-            };
-        }
+        req.body.words = this.wordsSeparatorService.separate(model.words);
         next();
     };
     GroupsController.prototype.insertGroup = function (req, res, next) {

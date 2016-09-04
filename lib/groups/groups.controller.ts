@@ -13,14 +13,7 @@ export class GroupsController {
 
     public processGroup(req: e.Request, res: e.Response, next: Function) {
         let model: AddGroup = req.body.model;
-        let wordsStrings = this.wordsSeparatorService.separate(model.words);
-        req.body.words = [];
-        let i = 0;
-        for (let word of wordsStrings) {
-            req.body.words[i++] = {
-                value: word
-            }
-        }
+        req.body.words = this.wordsSeparatorService.separate(model.words);
         next();
     }
 
