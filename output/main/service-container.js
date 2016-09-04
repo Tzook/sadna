@@ -1,4 +1,5 @@
 "use strict";
+var words_separator_service_1 = require('../words/words-separator.service');
 var view_words_controller_1 = require('../view-words/view-words.controller');
 var view_words_router_1 = require('../view-words/view-words.router');
 var groups_router_1 = require('../groups/groups.router');
@@ -46,6 +47,7 @@ exports.serviceContainer = core_1.ReflectiveInjector.resolveAndCreate([
     xml_controller_1.XmlController,
     xml_service_1.XmlService,
     song_analyze_service_1.SongAnalyzeService,
+    words_separator_service_1.WordsSeparatorService,
     server_main_1.ServerMain,
 ]);
 //# sourceMappingURL=service-container.js.map

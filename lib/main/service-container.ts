@@ -1,3 +1,4 @@
+import {WordsSeparatorService} from '../words/words-separator.service';
 import {ViewWordsController} from '../view-words/view-words.controller';
 import {ViewWordsRouter} from '../view-words/view-words.router';
 import {GroupsRouter} from '../groups/groups.router';
@@ -46,5 +47,6 @@ export const serviceContainer = ReflectiveInjector.resolveAndCreate([
     XmlController,
     XmlService,
     SongAnalyzeService,
+    WordsSeparatorService,
     ServerMain,
 ]);

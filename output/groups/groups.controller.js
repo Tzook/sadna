@@ -10,13 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var server_groups_service_1 = require("./server-groups.service");
+var words_separator_service_1 = require('../words/words-separator.service');
 var GroupsController = (function () {
-    function GroupsController(groupsService) {
+    function GroupsController(groupsService, wordsSeparatorService) {
         this.groupsService = groupsService;
+        this.wordsSeparatorService = wordsSeparatorService;
     }
     GroupsController.prototype.processGroup = function (req, res, next) {
         var model = req.body.model;
-        var wordsStrings = model.words.match(/[\w'-]+/g);
+        var wordsStrings = this.wordsSeparatorService.separate(model.words);
         req.body.words = [];
         var i = 0;
         for (var _i = 0, wordsStrings_1 = wordsStrings; _i < wordsStrings_1.length; _i++) {
@@ -43,7 +45,7 @@ var GroupsController = (function () {
     };
     GroupsController = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [server_groups_service_1.GroupsService])
+        __metadata('design:paramtypes', [server_groups_service_1.GroupsService, words_separator_service_1.WordsSeparatorService])
     ], GroupsController);
     return GroupsController;
 }());
