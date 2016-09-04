@@ -16,8 +16,8 @@ var CalloutComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'callout',
-            styles: ["\n        div {\n            position: absolute;\n            width: 90%;\n            max-height: 300px;\n            overflow-y: scroll;\n            background: white;\n            border-radius: 2px;\n            padding: 20px;\n            box-shadow: 0 0 9px -1px;\n            left: 0;\n            right: 0;\n            margin: auto;\n            visibility: hidden;\n            opacity: 0;\n        }\n        .show {\n            transition: all linear .2s; /* transition only in */\n            visibility: visible;\n            opacity: 1;\n        }\n    "],
-            template: "\n        <div [ngClass]=\"{show: show}\">\n            <ng-content></ng-content>\n        </div>\n    "
+            styles: ["\n        div {\n            position: absolute;\n            width: 90%;\n            max-height: 300px;\n            overflow-y: scroll;\n            background: white;\n            border-radius: 2px;\n            padding: 20px;\n            box-shadow: 0 0 9px -1px;\n            left: 0;\n            right: 0;\n            margin: auto;\n        }\n    "],
+            template: "\n        <div *ngIf=\"show\" class=\"animated fast fadeIn\">\n            <ng-content></ng-content>\n        </div>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], CalloutComponent);

@@ -61,6 +61,10 @@ button {
 button:hover {
     transform: scale(1.05);
 }
+.animated.fast {
+  -webkit-animation-duration: .2s;
+  animation-duration: .2s;
+}
 
 .spinner {
     width: 250px;

@@ -16,17 +16,10 @@ import {Component, transition, ContentChild, Output, Input, HostListener, EventE
             left: 0;
             right: 0;
             margin: auto;
-            visibility: hidden;
-            opacity: 0;
-        }
-        .show {
-            transition: all linear .2s; /* transition only in */
-            visibility: visible;
-            opacity: 1;
         }
     `],
     template: `
-        <div [ngClass]="{show: show}">
+        <div *ngIf="show" class="animated fast fadeIn">
             <ng-content></ng-content>
         </div>
     `
