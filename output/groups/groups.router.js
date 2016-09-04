@@ -10,20 +10,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var groups_controller_1 = require('./groups.controller');
+var server_groups_service_1 = require('./server-groups.service');
 var groups_middleware_1 = require('./groups.middleware');
 var groups_constants_1 = require('./groups.constants');
 var GroupsRouter = (function () {
-    function GroupsRouter(groupsMiddleware, groupsController) {
+    function GroupsRouter(groupsMiddleware, groupsController, groupsService) {
         this.groupsMiddleware = groupsMiddleware;
         this.groupsController = groupsController;
+        this.groupsService = groupsService;
     }
     GroupsRouter.prototype.init = function (app) {
+        // init the needed functions to make sure they are in the DB
+        this.groupsService.initNextWordFunctions();
         app.post(groups_constants_1.ADD_GROUP_URL, this.groupsMiddleware.validateRequest.bind(this.groupsMiddleware), this.groupsController.processGroup.bind(this.groupsController), this.groupsController.insertGroup.bind(this.groupsController));
         app.get(groups_constants_1.GET_GROUPS_URL, this.groupsController.returnGroups.bind(this.groupsController));
+        // working example of search for Tzookie:
+        this.groupsService.getWordGroupPossibilities("in my genes i got a laptop in my back".split(' '))
+            .then(function (d) {
+            console.log(d.rows);
+        })
+            .catch(function (e) {
+            console.log('err', e);
+        });
     };
     GroupsRouter = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [groups_middleware_1.GroupsMiddleware, groups_controller_1.GroupsController])
+        __metadata('design:paramtypes', [groups_middleware_1.GroupsMiddleware, groups_controller_1.GroupsController, server_groups_service_1.GroupsService])
     ], GroupsRouter);
     return GroupsRouter;
 }());

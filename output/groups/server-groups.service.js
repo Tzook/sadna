@@ -83,19 +83,46 @@ var GroupsService = (function () {
      */
     GroupsService.prototype.getWordGroupPossibilities = function (words) {
         var _this = this;
-        console.info("getting list of words for " + words.toString);
+        console.info("getting list of words for " + words.toString());
+        var startTime = Date.now();
         return new Promise(function (resolve, reject) {
             var dbClient = _this.dbClient;
             // running safe insert, since song name must be unique
-            dbClient.query("\n            CREATE OR REPLACE FUNCTION next_word(s_id int, cur_col int, cur_row int, w_val text, word_vals text[])\n\t            RETURNS SETOF word_in_song AS\n            $$\n            DECLARE\n                l int;\n                n1_col int;\n                n2_row int;\n            BEGIN\n                if word_vals = '{}' then\n                    return query\n                        select * from word_in_song\n                            where\n                                song_id = s_id\n                                and word_id in (\n                                    select id from words\n                                        where UPPER(value) like UPPER(w_val)\n                                )\n                                and col = cur_col\n                                and row = cur_row;\n                else\n                    l := array_length(word_vals, 1);\n                    n1_col := cur_col + 1;\n                    n2_row := cur_row + 1;\n                    return query\n                        with n1 as (\n                            select * from next_word(s_id, n1_col, cur_row, word_vals[1], word_vals[2:l])\n                        ),\n                        n2 as (\n                            select * from next_word(s_id, 0, n2_row, word_vals[1], word_vals[2:l])\n                                where not exists (\n                                    select * from word_in_song\n                                        where\n                                            song_id = s_id\n                                            and col = n1_col\n                                            and row = cur_row\n                                )\n                        ),\n                        r as (\n                            select * from word_in_song\n                            where\n                            song_id = s_id\n                            and word_id in (\n                                select id from words\n                                where UPPER(value) like UPPER(w_val)\n                            )\n                            and col = cur_col\n                            and row = cur_row\n                        )\n                        select * from r where exists (select * from n1) union select * from n1\n                        union\n                        select * from r where exists (select * from n2) union select * from n2;\n                end if;\n                RETURN;\n            END\n            $$ LANGUAGE plpgsql;\n\n            CREATE OR REPLACE FUNCTION first_word(word_val text, word_vals text[])\n                RETURNS SETOF word_in_song AS\n            $$\n            DECLARE\n                r word_in_song%rowtype;\n            BEGIN\n                for r in select * from word_in_song\n                    where word_id in (\n                            SELECT id\n                            FROM words\n                            WHERE UPPER (value) like UPPER(word_val))\n                loop\n                    return query\n                        select * from\n                            next_word(r.song_id, r.col, r.\"row\", word_val, word_vals);\n                end loop;\n                RETURN;\n            END\n            $$ LANGUAGE plpgsql;\n\n            select * from first_word($1, $2);\n            ", [words.shift(), words], function (e, result) {
+            dbClient.query("\n                select * from first_word($1, $2);\n            ", [words.shift(), words], function (e, result) {
                 if (e)
                     reject(e);
                 else {
-                    console.info("getting list of words for " + words.toString);
+                    console.info("done! getting list of words for " + words.toString() + " and it took " + (Date.now() - startTime) + "ms!");
                     resolve(result);
                 }
             });
         });
+    };
+    /**
+     * init the getWordGroupPossibilities needed functions,
+     * they should be registered in the db already, but just in case
+     */
+    GroupsService.prototype.initNextWordFunctions = function () {
+        var dbClient = this.dbClient;
+        return new Promise(function (resolve, reject) {
+            dbClient.query("\n                CREATE OR REPLACE FUNCTION next_word(s_id int, cur_col int, cur_row int, w_val text, word_vals text[])\n                RETURNS SETOF word_in_song AS\n                $$\n                DECLARE\n                    l int;\n                    n1_col int;\n                    n2_row int;\n                BEGIN\n                    if word_vals = '{}' then\n                        return query\n                            select * from word_in_song\n                                where\n                                    song_id = s_id\n                                    and word_id in (\n                                        select id from words\n                                            where UPPER(value) like UPPER(w_val)\n                                    )\n                                    and col = cur_col\n                                    and row = cur_row;\n                    else\n                        l := array_length(word_vals, 1);\n                        n1_col := cur_col + 1;\n                        n2_row := cur_row + 1;\n                        return query\n                            with n1 as (\n                                select * from next_word(s_id, n1_col, cur_row, word_vals[1], word_vals[2:l])\n                            ),\n                            n2 as (\n                                select * from next_word(s_id, 0, n2_row, word_vals[1], word_vals[2:l])\n                                    where not exists (\n                                        select * from word_in_song\n                                            where\n                                                song_id = s_id\n                                                and col = n1_col\n                                                and row = cur_row\n                                    )\n                            ),\n                            r as (\n                                select * from word_in_song\n                                where\n                                song_id = s_id\n                                and word_id in (\n                                    select id from words\n                                    where UPPER(value) like UPPER(w_val)\n                                )\n                                and col = cur_col\n                                and row = cur_row\n                            )\n                            select * from r where exists (select * from n1) union select * from n1\n                            union\n                            select * from r where exists (select * from n2) union select * from n2;\n                    end if;\n                    RETURN;\n                END\n                $$ LANGUAGE plpgsql;\n    \n                CREATE OR REPLACE FUNCTION first_word(word_val text, word_vals text[])\n                    RETURNS SETOF word_in_song AS\n                $$\n                DECLARE\n                    r word_in_song%rowtype;\n                BEGIN\n                    for r in select * from word_in_song\n                        where word_id in (\n                                SELECT id\n                                FROM words\n                                WHERE UPPER (value) like UPPER(word_val))\n                    loop\n                        return query\n                            select * from\n                                next_word(r.song_id, r.col, r.\"row\", word_val, word_vals);\n                    end loop;\n                    RETURN;\n                END\n                $$ LANGUAGE plpgsql;\n            ", function (e, result) {
+                if (e)
+                    reject(e);
+                else
+                    resolve(true);
+            });
+        });
+    };
+    /**
+     * @param {array} arr
+     * @returns
+     */
+    GroupsService.prototype.getQueryVarsForArray = function (arr) {
+        var queryVars = "";
+        for (var i = 0, l = arr.length; i < l; i++) {
+            queryVars += "$" + (i + 1) + (i !== l - 1 ? ',' : '');
+        }
+        return queryVars;
     };
     /**
      * Mock to check that eveyrthing is working curretly with groups
