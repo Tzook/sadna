@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {GroupsController} from './groups.controller';
 import {GroupsService} from './server-groups.service';
 import {GroupsMiddleware} from './groups.middleware';
-import {GET_GROUPS_URL, ADD_GROUP_URL} from './groups.constants';
+import {ADD_GROUP_URL, GET_GROUPS_URL, GET_SINGLE_GROUP_URL} from './groups.constants';
 
 @Injectable()
 export class GroupsRouter {
@@ -21,6 +21,13 @@ export class GroupsRouter {
 
         app.get(GET_GROUPS_URL,
             this.groupsController.returnGroups.bind(this.groupsController));
+
+        app.get(GET_SINGLE_GROUP_URL,
+            this.groupsController.returnSingleGroup.bind(this.groupsController));
+
+        // TODO add modify group route and action
+
+
     // // working example of search for Tzookie:
     //    this.groupsService.getWordGroupPossibilities("in my genes i got a laptop in my back".split(' '))
     //        .then((d) => {

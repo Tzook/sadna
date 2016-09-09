@@ -106,6 +106,14 @@ export interface WordInGroupResult extends Result {
     addRow: (row: WordInGroup) => void,
 }
 
+export interface CompleteWordInGroup extends Result {
+    value: string
+}
+
+export interface CompleteWordInGroupResult extends Result {
+    rows: CompleteWordInGroup[],
+}
+
 export interface WordStatistics extends Row {
     value: string,
     is_punctuation: boolean,

@@ -23,6 +23,14 @@ var ClientGroupsService = (function () {
     ClientGroupsService.prototype.getGroups = function () {
         return this.http.get(groups_constants_1.GET_GROUPS_URL);
     };
+    ClientGroupsService.prototype.getGroup = function (id) {
+        return this.http.get(groups_constants_1.GET_SINGLE_GROUP_URL.replace(":id", id));
+    };
+    ClientGroupsService.prototype.modifyGroup = function (group) {
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(groups_constants_1.MODIFY_GROUP_URL.replace(":id", group.id), JSON.stringify(group), options);
+    };
     ClientGroupsService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

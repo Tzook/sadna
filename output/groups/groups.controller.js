@@ -35,6 +35,15 @@ var GroupsController = (function () {
             next("Error while fetching groups list" + e);
         });
     };
+    GroupsController.prototype.returnSingleGroup = function (req, res, next) {
+        this.groupsService.selectGroup(req.params.id)
+            .then(function (result) {
+            res.send(result.rows);
+        })
+            .catch(function (e) {
+            next("Error while fetching groups list" + e);
+        });
+    };
     GroupsController = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [server_groups_service_1.GroupsService, words_separator_service_1.WordsSeparatorService])

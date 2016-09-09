@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {DbService} from '../db/server-db';
 import {WordsService} from '../words/server-words.service';
 import {Group, GroupResult, Word, WordResult, WordInSong, WordInSongResult,
-    WordInGroup, WordInGroupResult, DbError} from '../db/server-db.model';
+    WordInGroup, WordInGroupResult, CompleteWordInGroupResult, DbError} from '../db/server-db.model';
 
 @Injectable()
 export class GroupsService
@@ -94,6 +94,24 @@ export class GroupsService
         });
     }
 
+    selectGroup(id: string) : Promise<CompleteWordInGroupResult> {
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+            dbClient.query(`
+                select wig.id, w.value
+                from word_in_group as wig,
+                    words as w
+                where group_id = $1
+                    and w.id = wig.word_id
+                order by id;
+            `, [id],
+            (e: DbError, result: CompleteWordInGroupResult) => {
+                if (e) reject (e);
+                else resolve(result);
+            })
+        });
+    }
+
     /**
      * Will get words in order in all songs
      */
@@ -118,7 +136,7 @@ export class GroupsService
 
     /**
      * init the getWordGroupPossibilities needed functions,
-     * they should be registered in the db already, but just in case  
+     * they should be registered in the db already, but just in case
      */
     initNextWordFunctions() : Promise<boolean>
     {
@@ -180,7 +198,7 @@ export class GroupsService
                     RETURN;
                 END
                 $$ LANGUAGE plpgsql;
-                
+
                 -- this function will look up a word, and for each findings will search if the next set of words
                 -- it will resolve that recursivley by adding up the results of either the next column or the next row in column 0
                 CREATE OR REPLACE FUNCTION first_word(word_val text, word_vals text[])
@@ -209,7 +227,7 @@ export class GroupsService
             });
         });
     }
-    
+
     /**
      * @param {array} arr
      * @returns
