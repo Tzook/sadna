@@ -23,9 +23,15 @@ var WordsComponent = (function () {
     }
     WordsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var params = this.route.snapshot.queryParams;
+        var params = this.route.snapshot.params;
         if (params[view_words_constants_1.PARAM_WORDS_LIST]) {
-            this.wordsList = this.wordsSeparatorService.separate(params[view_words_constants_1.PARAM_WORDS_LIST]);
+            if (params[view_words_constants_1.PARAM_IS_EXPRESSION] === "true") {
+                // TODO!
+                console.log("Is expression!");
+            }
+            else {
+                this.wordsList = this.wordsSeparatorService.separate(params[view_words_constants_1.PARAM_WORDS_LIST]);
+            }
         }
         else {
             this.viewWordsService.getWords()

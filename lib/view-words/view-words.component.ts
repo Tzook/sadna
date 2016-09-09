@@ -1,5 +1,5 @@
 import {ActivatedRoute} from '@angular/router';
-import {PARAM_WORDS_LIST} from './view-words.constants';
+import {PARAM_WORDS_LIST, PARAM_IS_EXPRESSION} from './view-words.constants';
 import {ViewWordsService} from './view-words.service';
 import {WordsSeparatorService} from '../words/words-separator.service';
 import {SongsPeekService} from '../songs/songs-peek.service';
@@ -29,9 +29,14 @@ export class WordsComponent implements OnInit {
                 private viewWordsService: ViewWordsService) { }
 
     ngOnInit() {
-        let params = this.route.snapshot.queryParams;
+        let params = this.route.snapshot.params;
         if (params[PARAM_WORDS_LIST]) {
-            this.wordsList = this.wordsSeparatorService.separate(params[PARAM_WORDS_LIST]);
+            if (params[PARAM_IS_EXPRESSION] === "true") {
+                // TODO!
+                console.log("Is expression!");
+            } else {
+                this.wordsList = this.wordsSeparatorService.separate(params[PARAM_WORDS_LIST]);
+            }
         } else {
              this.viewWordsService.getWords()
                 .subscribe(
