@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var punctuation_constants_1 = require('../words/punctuation.constants');
 var core_1 = require('@angular/core');
-var PUNCTUATIONS = /([…,."?!()])/g;
 var SongAnalyzeService = (function () {
     function SongAnalyzeService() {
     }
@@ -33,13 +33,13 @@ var SongAnalyzeService = (function () {
                     var words = sentence.split(/\s/g);
                     for (var _b = 0, words_1 = words; _b < words_1.length; _b++) {
                         var word = words_1[_b];
-                        var wordParts = word.split(PUNCTUATIONS);
+                        var wordParts = word.split(punctuation_constants_1.PUNCTUATIONS_REGEX);
                         for (var _c = 0, wordParts_1 = wordParts; _c < wordParts_1.length; _c++) {
                             var wordPart = wordParts_1[_c];
                             if (wordPart.length) {
                                 var wordObj = {
                                     value: wordPart,
-                                    is_punctuation: PUNCTUATIONS.test(wordPart)
+                                    is_punctuation: punctuation_constants_1.PUNCTUATIONS_REGEX.test(wordPart)
                                 };
                                 var wordInSong = {
                                     col: col,

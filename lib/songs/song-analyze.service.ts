@@ -1,7 +1,6 @@
+import {PUNCTUATIONS_REGEX} from '../words/punctuation.constants';
 import {CompleteWordInSong, Word, WordInSong} from '../db/server-db.model';
 import {Injectable} from '@angular/core';
-
-const PUNCTUATIONS = /([…,."?!()])/g;
 
 @Injectable()
 export class SongAnalyzeService {
@@ -28,14 +27,14 @@ export class SongAnalyzeService {
                     let words = sentence.split(/\s/g);
 
                     for (let word of words) {
-                        let wordParts = word.split(PUNCTUATIONS);
+                        let wordParts = word.split(PUNCTUATIONS_REGEX);
 
                         for (let wordPart of wordParts) {
 
                             if (wordPart.length) {
                                 let wordObj: Word = {
                                     value: wordPart,
-                                    is_punctuation: PUNCTUATIONS.test(wordPart)
+                                    is_punctuation: PUNCTUATIONS_REGEX.test(wordPart)
                                 };
                                 let wordInSong: WordInSong = {
                                     col,

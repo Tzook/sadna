@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var punctuation_constants_1 = require('./punctuation.constants');
 var core_1 = require('@angular/core');
-var LETTERS = /[\w'-]+/g;
 var WordsSeparatorService = (function () {
     function WordsSeparatorService() {
     }
@@ -26,7 +26,7 @@ var WordsSeparatorService = (function () {
         return result;
     };
     WordsSeparatorService.prototype.separateToStrings = function (words) {
-        return words.match(LETTERS);
+        return words.match(punctuation_constants_1.LETTERS_REGEX);
     };
     WordsSeparatorService = __decorate([
         core_1.Injectable(), 

@@ -1,7 +1,6 @@
+import {LETTERS_REGEX} from './punctuation.constants';
 import {Word} from '../db/server-db.model';
 import {Injectable} from '@angular/core';
-
-const LETTERS = /[\w'-]+/g;
 
 @Injectable()
 export class WordsSeparatorService {
@@ -19,6 +18,6 @@ export class WordsSeparatorService {
     }
 
     public separateToStrings(words: string): string[] {
-        return words.match(LETTERS);
+        return words.match(LETTERS_REGEX);
     }
 }
