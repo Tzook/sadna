@@ -54,7 +54,6 @@ var GroupListComponent = (function () {
     };
     GroupListComponent.prototype.saveGroup = function () {
         var _this = this;
-        console.log("saving group", this.model);
         this.loading = true;
         this.clientGroupsService.modifyGroup(this.model)
             .subscribe(function (success) {

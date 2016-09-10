@@ -109,7 +109,6 @@ export class GroupListComponent implements OnInit {
     }
 
     private saveGroup() {
-        console.log("saving group", this.model);
         this.loading = true;
         this.clientGroupsService.modifyGroup(this.model)
             .subscribe(
