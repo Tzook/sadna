@@ -52,4 +52,3 @@ CREATE TABLE IF NOT EXISTS "public"."word_in_group" (
     CONSTRAINT "group_id" FOREIGN KEY ("group_id") REFERENCES "public"."groups"("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "word_id" FOREIGN KEY ("word_id") REFERENCES "public"."words"("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
-CREATE UNIQUE INDEX word_in_group_foreign ON word_in_group USING btree (group_id, word_id);
