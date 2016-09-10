@@ -59,7 +59,7 @@ var GroupListComponent = (function () {
         this.clientGroupsService.modifyGroup(this.model)
             .subscribe(function (success) {
             _this.loading = false;
-            _this.message = "The song has been added successfully.";
+            _this.message = "The group has been saved successfully.";
         }, function (error) {
             _this.loading = false;
             _this.message = "Error: " + error._body;

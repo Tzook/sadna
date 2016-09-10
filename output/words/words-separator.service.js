@@ -20,7 +20,7 @@ var WordsSeparatorService = (function () {
         for (var _i = 0, wordsStrings_1 = wordsStrings; _i < wordsStrings_1.length; _i++) {
             var word = wordsStrings_1[_i];
             result[i++] = {
-                value: word
+                value: word.toLowerCase()
             };
         }
         return result;

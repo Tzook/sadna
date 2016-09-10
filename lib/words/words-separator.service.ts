@@ -12,7 +12,7 @@ export class WordsSeparatorService {
         let result: Word[] = [];
         for (let word of wordsStrings) {
             result[i++] = {
-                value: word
+                value: word.toLowerCase()
             };
         }
         return result;

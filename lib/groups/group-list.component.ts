@@ -115,7 +115,7 @@ export class GroupListComponent implements OnInit {
             .subscribe(
                 success => {
                     this.loading = false;
-                    this.message = "The song has been added successfully."
+                    this.message = "The group has been saved successfully."
                 },
                 error => {
                     this.loading = false;
