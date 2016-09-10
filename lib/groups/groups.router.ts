@@ -33,7 +33,5 @@ export class GroupsRouter {
         app.get(GET_EXPRESSION_VALUES_URL,
             this.groupsMiddleware.processExpression.bind(this.groupsMiddleware),
             this.groupsController.returnExpressionValues.bind(this.groupsController));
-
-        // TODO add modify group route and action
     }
 }

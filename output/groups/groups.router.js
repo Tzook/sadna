@@ -27,7 +27,6 @@ var GroupsRouter = (function () {
         app.get(groups_constants_1.GET_GROUPS_URL, this.groupsController.returnGroups.bind(this.groupsController));
         app.get(groups_constants_1.GET_SINGLE_GROUP_URL, this.groupsController.returnSingleGroup.bind(this.groupsController));
         app.get(groups_constants_1.GET_EXPRESSION_VALUES_URL, this.groupsMiddleware.processExpression.bind(this.groupsMiddleware), this.groupsController.returnExpressionValues.bind(this.groupsController));
-        // TODO add modify group route and action
     };
     GroupsRouter = __decorate([
         core_1.Injectable(), 
