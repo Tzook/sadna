@@ -82,8 +82,9 @@ export class WordsService
     insertWordsInGroup(words: Word[], group_id: number) : Promise<WordInGroupResult> {
         console.info(`inserting word in group id: ${group_id} and words length is: ${words.length}`);
         return new Promise((resolve, reject) => {
-            let dbClient = this.dbClient,
-                bindings = [], query = `
+            let dbClient = this.dbClient;
+            let bindings = [];
+            let query = `
                 INSERT INTO word_in_group (group_id, word_id)
                     values`;
             for (let i = 0, l = words.length; i < l; i++) {
@@ -103,6 +104,27 @@ export class WordsService
                     resolve(result);
                 }
             });
+        });
+    }
+
+    removeWordsInGroup(group_id: number): Promise<boolean> {
+        console.info(`removing word in group id: ${group_id}`);
+        return new Promise((resolve, reject) => {
+            let dbClient = this.dbClient;
+
+            dbClient.query(
+                `delete
+                 from word_in_group
+                 where group_id = $1;`,
+                [group_id],
+                (e: DbError, result: WordInGroupResult) => {
+                    if (e) reject (e);
+                    else {
+                        console.info(`deleted rows successfully`);
+                        resolve(true);
+                    }
+                }
+            );
         });
     }
 

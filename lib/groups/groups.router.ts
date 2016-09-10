@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {GroupsController} from './groups.controller';
 import {GroupsService} from './server-groups.service';
 import {GroupsMiddleware} from './groups.middleware';
-import {ADD_GROUP_URL, GET_GROUPS_URL, GET_SINGLE_GROUP_URL, GET_EXPRESSION_VALUES_URL} from './groups.constants';
+import {ADD_GROUP_URL, MODIFY_GROUP_URL, GET_GROUPS_URL, GET_SINGLE_GROUP_URL, GET_EXPRESSION_VALUES_URL} from './groups.constants';
 
 @Injectable()
 export class GroupsRouter {
@@ -18,6 +18,11 @@ export class GroupsRouter {
             this.groupsMiddleware.validateRequest.bind(this.groupsMiddleware),
             this.groupsMiddleware.processGroup.bind(this.groupsMiddleware),
             this.groupsController.insertGroup.bind(this.groupsController));
+
+        app.post(MODIFY_GROUP_URL,
+            this.groupsMiddleware.validateModifyRequest.bind(this.groupsMiddleware),
+            this.groupsMiddleware.processGroup.bind(this.groupsMiddleware),
+            this.groupsController.updateGroup.bind(this.groupsController));
 
         app.get(GET_GROUPS_URL,
             this.groupsController.returnGroups.bind(this.groupsController));

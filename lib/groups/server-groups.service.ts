@@ -78,6 +78,22 @@ export class GroupsService
         });
     }
 
+    updateGroup(id: number, words: Word[]) : Promise <boolean> {
+        return new Promise((resolve, reject) => {
+            console.log(`start updating group ${id} with ${words.length} words.`);
+
+            this._wordsService.removeWordsInGroup(id)
+                .then(() => {
+                    return this._wordsService.insertWordsInGroup(words, id);
+                })
+                .then(wordPromisesRes => {
+                    console.log(`resolved all for ${id}`);
+                    resolve(true);
+                })
+                .catch(reject);
+        });
+    }
+
     /**
      * Select all groups
      */

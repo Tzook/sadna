@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var add_group_model_1 = require('./add-group.model');
+var modify_group_model_1 = require('./modify-group.model');
 var groups_constants_1 = require('./groups.constants');
 var params_validator_1 = require('../Components/params.validator');
 var words_separator_service_1 = require('../words/words-separator.service');
@@ -57,6 +58,24 @@ var GroupsMiddleware = (function () {
         else {
             next();
         }
+    };
+    GroupsMiddleware.prototype.validateModifyRequest = function (req, res, next) {
+        var model = new modify_group_model_1.ModifyGroup(req.params.id, req.body.words);
+        var error = this.validateModifyModel(model);
+        if (!error) {
+            req.body.model = model;
+            next();
+        }
+        else {
+            next("Invalid parameter: " + error);
+        }
+    };
+    GroupsMiddleware.prototype.validateModifyModel = function (model) {
+        var params = [
+            { name: "id", type: "string", min: 0, max: 9999999 },
+            { name: "words", type: "string", min: 0, max: groups_constants_1.MAX_WORDS_LENGTH },
+        ];
+        return this.paramsValidators.validateParams(model, params);
     };
     GroupsMiddleware = __decorate([
         core_1.Injectable(), 

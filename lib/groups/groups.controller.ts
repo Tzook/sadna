@@ -15,6 +15,12 @@ export class GroupsController {
             .catch(e => next(e));
     }
 
+    public updateGroup(req: e.Request, res: e.Response, next: Function) {
+        this.groupsService.updateGroup(req.body.model.id, req.body.words)
+            .then(() => res.send())
+            .catch(e => next(e));
+    }
+
     public returnGroups(req: e.Request, res: e.Response, next: Function) {
         this.groupsService.selectGroups()
             .then((result: GroupResult) => {

@@ -76,7 +76,9 @@ var WordsService = (function () {
         var _this = this;
         console.info("inserting word in group id: " + group_id + " and words length is: " + words.length);
         return new Promise(function (resolve, reject) {
-            var dbClient = _this.dbClient, bindings = [], query = "\n                INSERT INTO word_in_group (group_id, word_id)\n                    values";
+            var dbClient = _this.dbClient;
+            var bindings = [];
+            var query = "\n                INSERT INTO word_in_group (group_id, word_id)\n                    values";
             for (var i = 0, l = words.length; i < l; i++) {
                 query = query + "\n                        (" + group_id + ", (SELECT id FROM words\n                            WHERE value = $" + (i + 1) + ")\n                        )" + (i === l - 1 ? '' : ',');
                 bindings.push(words[i].value);
@@ -88,6 +90,21 @@ var WordsService = (function () {
                 else {
                     console.info("done inserting word in group id: " + group_id + " and words length was: " + words.length);
                     resolve(result);
+                }
+            });
+        });
+    };
+    WordsService.prototype.removeWordsInGroup = function (group_id) {
+        var _this = this;
+        console.info("removing word in group id: " + group_id);
+        return new Promise(function (resolve, reject) {
+            var dbClient = _this.dbClient;
+            dbClient.query("delete\n                 from word_in_group\n                 where group_id = $1;", [group_id], function (e, result) {
+                if (e)
+                    reject(e);
+                else {
+                    console.info("deleted rows successfully");
+                    resolve(true);
                 }
             });
         });

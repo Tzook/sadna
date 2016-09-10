@@ -23,6 +23,7 @@ var GroupsRouter = (function () {
         // init the needed functions to make sure they are in the DB
         this.groupsService.initNextWordFunctions();
         app.post(groups_constants_1.ADD_GROUP_URL, this.groupsMiddleware.validateRequest.bind(this.groupsMiddleware), this.groupsMiddleware.processGroup.bind(this.groupsMiddleware), this.groupsController.insertGroup.bind(this.groupsController));
+        app.post(groups_constants_1.MODIFY_GROUP_URL, this.groupsMiddleware.validateModifyRequest.bind(this.groupsMiddleware), this.groupsMiddleware.processGroup.bind(this.groupsMiddleware), this.groupsController.updateGroup.bind(this.groupsController));
         app.get(groups_constants_1.GET_GROUPS_URL, this.groupsController.returnGroups.bind(this.groupsController));
         app.get(groups_constants_1.GET_SINGLE_GROUP_URL, this.groupsController.returnSingleGroup.bind(this.groupsController));
         app.get(groups_constants_1.GET_EXPRESSION_VALUES_URL, this.groupsMiddleware.processExpression.bind(this.groupsMiddleware), this.groupsController.returnExpressionValues.bind(this.groupsController));

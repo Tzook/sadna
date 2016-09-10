@@ -19,6 +19,11 @@ var GroupsController = (function () {
             .then(function () { return res.send(); })
             .catch(function (e) { return next(e); });
     };
+    GroupsController.prototype.updateGroup = function (req, res, next) {
+        this.groupsService.updateGroup(req.body.model.id, req.body.words)
+            .then(function () { return res.send(); })
+            .catch(function (e) { return next(e); });
+    };
     GroupsController.prototype.returnGroups = function (req, res, next) {
         this.groupsService.selectGroups()
             .then(function (result) {

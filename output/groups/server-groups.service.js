@@ -63,6 +63,21 @@ var GroupsService = (function () {
                 .catch(reject);
         });
     };
+    GroupsService.prototype.updateGroup = function (id, words) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            console.log("start updating group " + id + " with " + words.length + " words.");
+            _this._wordsService.removeWordsInGroup(id)
+                .then(function () {
+                return _this._wordsService.insertWordsInGroup(words, id);
+            })
+                .then(function (wordPromisesRes) {
+                console.log("resolved all for " + id);
+                resolve(true);
+            })
+                .catch(reject);
+        });
+    };
     /**
      * Select all groups
      */
