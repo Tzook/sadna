@@ -1,4 +1,4 @@
-import {ADD_GROUP_URL, MODIFY_GROUP_URL, GET_GROUPS_URL, GET_SINGLE_GROUP_URL} from './groups.constants';
+import {ADD_GROUP_URL, MODIFY_GROUP_URL, GET_GROUPS_URL, GET_SINGLE_GROUP_URL, GET_EXPRESSION_VALUES_URL} from './groups.constants';
 import {AddGroup} from './add-group.model';
 import {ModifyGroup} from './modify-group.model';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
@@ -30,5 +30,9 @@ export class ClientGroupsService {
         let options = new RequestOptions({headers});
 
         return this.http.post(MODIFY_GROUP_URL.replace(":id", group.id), JSON.stringify(group), options);
+    }
+
+    public getExpressionPossibilities(words: string): Observable<Response> {
+        return this.http.get(GET_EXPRESSION_VALUES_URL.replace(":words", words));
     }
 }

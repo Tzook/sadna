@@ -14,7 +14,7 @@ var WordsSeparatorService = (function () {
     function WordsSeparatorService() {
     }
     WordsSeparatorService.prototype.separate = function (words) {
-        var wordsStrings = words.match(LETTERS);
+        var wordsStrings = this.separateToStrings(words);
         var i = 0;
         var result = [];
         for (var _i = 0, wordsStrings_1 = wordsStrings; _i < wordsStrings_1.length; _i++) {
@@ -24,6 +24,9 @@ var WordsSeparatorService = (function () {
             };
         }
         return result;
+    };
+    WordsSeparatorService.prototype.separateToStrings = function (words) {
+        return words.match(LETTERS);
     };
     WordsSeparatorService = __decorate([
         core_1.Injectable(), 

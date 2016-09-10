@@ -122,7 +122,10 @@ export class GroupsService
             let dbClient = this.dbClient;
             // running safe insert, since song name must be unique
             dbClient.query(`
-                select * from first_word($1, $2);
+                select distinct s.*
+                from first_word($1, $2) as f,
+                     songs as s
+                where f.song_id = s.id;
             `, [words.shift(), words],
             (e: DbError, result: WordInSongResult) => {
                 if (e) reject (e);

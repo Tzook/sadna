@@ -1,6 +1,6 @@
 import {SongsListService} from './songs-list.service';
 import {ViewSongService} from '../view-song/view-song.service';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Song} from '../db/server-db.model';
 
 @Component({
@@ -19,7 +19,7 @@ import {Song} from '../db/server-db.model';
         }
     `],
     template: `
-        <div *ngFor="let song of songsList" class="animated fadeInDown">
+        <div *ngFor="let song of list" class="animated fadeInDown">
             <song-info [song]="song"></song-info>
             <span>
                 <button [routerLink]="viewSongService.getSongUrl(song)">View song</button>
@@ -29,16 +29,18 @@ import {Song} from '../db/server-db.model';
     viewProviders: [ViewSongService, SongsListService]
 })
 export class SongsListComponent implements OnInit {
-    private songsList: Song[];
+    @Input() list: Song[];
 
     constructor(private songsListService: SongsListService,
                 private viewSongService: ViewSongService) {}
 
     ngOnInit() {
-        this.songsListService.getSongs()
-            .subscribe(
-                success => this.songsList = success.json(),
-                error => console.log(error)
-            );
+        if (!this.list) {
+            this.songsListService.getSongs()
+                .subscribe(
+                    success => this.list = success.json(),
+                    error => console.log(error)
+                );
+        }
     }
 }

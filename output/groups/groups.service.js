@@ -31,6 +31,9 @@ var ClientGroupsService = (function () {
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(groups_constants_1.MODIFY_GROUP_URL.replace(":id", group.id), JSON.stringify(group), options);
     };
+    ClientGroupsService.prototype.getExpressionPossibilities = function (words) {
+        return this.http.get(groups_constants_1.GET_EXPRESSION_VALUES_URL.replace(":words", words));
+    };
     ClientGroupsService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

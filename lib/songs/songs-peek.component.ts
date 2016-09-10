@@ -21,6 +21,9 @@ import {Song} from '../db/server-db.model';
             justify-content: space-between;
             width: 100%;
         }
+        button {
+            flex-shrink: 0;
+        }
         div:not(:last-child) {
             margin-bottom: 20px;
             padding-bottom: 20px;

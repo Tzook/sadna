@@ -10,17 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var server_groups_service_1 = require("./server-groups.service");
-var words_separator_service_1 = require('../words/words-separator.service');
 var GroupsController = (function () {
-    function GroupsController(groupsService, wordsSeparatorService) {
+    function GroupsController(groupsService) {
         this.groupsService = groupsService;
-        this.wordsSeparatorService = wordsSeparatorService;
     }
-    GroupsController.prototype.processGroup = function (req, res, next) {
-        var model = req.body.model;
-        req.body.words = this.wordsSeparatorService.separate(model.words);
-        next();
-    };
     GroupsController.prototype.insertGroup = function (req, res, next) {
         this.groupsService.loadGroup(req.body.model, req.body.words)
             .then(function () { return res.send(); })
@@ -44,9 +37,19 @@ var GroupsController = (function () {
             next("Error while fetching groups list" + e);
         });
     };
+    GroupsController.prototype.returnExpressionValues = function (req, res, next) {
+        this.groupsService.getWordGroupPossibilities(req.body.words)
+            .then(function (result) {
+            console.log(result.rows);
+            res.send(result.rows);
+        })
+            .catch(function (e) {
+            console.log("Error while fetching expression possibilities", e);
+        });
+    };
     GroupsController = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [server_groups_service_1.GroupsService, words_separator_service_1.WordsSeparatorService])
+        __metadata('design:paramtypes', [server_groups_service_1.GroupsService])
     ], GroupsController);
     return GroupsController;
 }());

@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import {AddGroup} from './add-group.model';
 import {MAX_GROUP_NAME_LENGTH, MAX_WORDS_LENGTH} from './groups.constants';
 import {ParamsValidators} from '../Components/params.validator';
+import {WordsSeparatorService} from '../words/words-separator.service';
 import * as e from "express";
 
 @Injectable()
 export class GroupsMiddleware {
 
-  	constructor(private paramsValidators: ParamsValidators) {}
+  	constructor(private paramsValidators: ParamsValidators,
+                private wordsSeparatorService: WordsSeparatorService) {}
 
     public validateRequest(req: e.Request, res: e.Response, next: Function) {
         let body = req.body;
@@ -28,5 +30,25 @@ export class GroupsMiddleware {
             { name: "is_expression", type: "boolean" },
         ]
         return this.paramsValidators.validateParams(model, params);
+    }
+
+    public processGroup(req: e.Request, res: e.Response, next: Function) {
+        let model: AddGroup = req.body.model;
+        req.body.words = this.wordsSeparatorService.separate(model.words);
+        if (req.body.words.length == 0) {
+            next("Had an empty list of words");
+        } else {
+            next();
+        }
+    }
+
+    public processExpression(req: e.Request, res: e.Response, next: Function) {
+        let words: string = req.params.words;
+        req.body.words = this.wordsSeparatorService.separateToStrings(words);
+        if (req.body.words.length == 0) {
+            next("Had an empty list of words");
+        } else {
+            next();
+        }
     }
 }

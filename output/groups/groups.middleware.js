@@ -12,9 +12,11 @@ var core_1 = require('@angular/core');
 var add_group_model_1 = require('./add-group.model');
 var groups_constants_1 = require('./groups.constants');
 var params_validator_1 = require('../Components/params.validator');
+var words_separator_service_1 = require('../words/words-separator.service');
 var GroupsMiddleware = (function () {
-    function GroupsMiddleware(paramsValidators) {
+    function GroupsMiddleware(paramsValidators, wordsSeparatorService) {
         this.paramsValidators = paramsValidators;
+        this.wordsSeparatorService = wordsSeparatorService;
     }
     GroupsMiddleware.prototype.validateRequest = function (req, res, next) {
         var body = req.body;
@@ -36,9 +38,29 @@ var GroupsMiddleware = (function () {
         ];
         return this.paramsValidators.validateParams(model, params);
     };
+    GroupsMiddleware.prototype.processGroup = function (req, res, next) {
+        var model = req.body.model;
+        req.body.words = this.wordsSeparatorService.separate(model.words);
+        if (req.body.words.length == 0) {
+            next("Had an empty list of words");
+        }
+        else {
+            next();
+        }
+    };
+    GroupsMiddleware.prototype.processExpression = function (req, res, next) {
+        var words = req.params.words;
+        req.body.words = this.wordsSeparatorService.separateToStrings(words);
+        if (req.body.words.length == 0) {
+            next("Had an empty list of words");
+        }
+        else {
+            next();
+        }
+    };
     GroupsMiddleware = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [params_validator_1.ParamsValidators])
+        __metadata('design:paramtypes', [params_validator_1.ParamsValidators, words_separator_service_1.WordsSeparatorService])
     ], GroupsMiddleware);
     return GroupsMiddleware;
 }());

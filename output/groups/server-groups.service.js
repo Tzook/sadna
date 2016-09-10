@@ -100,7 +100,7 @@ var GroupsService = (function () {
         return new Promise(function (resolve, reject) {
             var dbClient = _this.dbClient;
             // running safe insert, since song name must be unique
-            dbClient.query("\n                select * from first_word($1, $2);\n            ", [words.shift(), words], function (e, result) {
+            dbClient.query("\n                select distinct s.*\n                from first_word($1, $2) as f,\n                     songs as s\n                where f.song_id = s.id;\n            ", [words.shift(), words], function (e, result) {
                 if (e)
                     reject(e);
                 else {

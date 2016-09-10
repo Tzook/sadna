@@ -7,7 +7,7 @@ const LETTERS = /[\w'-]+/g;
 export class WordsSeparatorService {
 
     public separate(words: string): Word[] {
-        let wordsStrings = words.match(LETTERS);
+        let wordsStrings = this.separateToStrings(words);
         let i = 0;
         let result: Word[] = [];
         for (let word of wordsStrings) {
@@ -16,5 +16,9 @@ export class WordsSeparatorService {
             };
         }
         return result;
+    }
+
+    public separateToStrings(words: string): string[] {
+        return words.match(LETTERS);
     }
 }

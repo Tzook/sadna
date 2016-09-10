@@ -1,21 +1,13 @@
 import {Injectable} from '@angular/core';
 import {GroupsService} from "./server-groups.service";
 import {AddGroup} from './add-group.model';
-import {WordsSeparatorService} from '../words/words-separator.service';
 import {Word, GroupResult, CompleteWordInGroupResult} from '../db/server-db.model';
 import * as e from "express";
 
 @Injectable()
 export class GroupsController {
 
-    constructor(private groupsService: GroupsService,
-                private wordsSeparatorService: WordsSeparatorService) { }
-
-    public processGroup(req: e.Request, res: e.Response, next: Function) {
-        let model: AddGroup = req.body.model;
-        req.body.words = this.wordsSeparatorService.separate(model.words);
-        next();
-    }
+    constructor(private groupsService: GroupsService) { }
 
     public insertGroup(req: e.Request, res: e.Response, next: Function) {
         this.groupsService.loadGroup(req.body.model, req.body.words)
@@ -41,5 +33,16 @@ export class GroupsController {
             .catch(e => {
                 next("Error while fetching groups list" + e);
             });
+    }
+
+    public returnExpressionValues(req: e.Request, res: e.Response, next: Function) {
+        this.groupsService.getWordGroupPossibilities(req.body.words)
+           .then((result) => {
+               console.log(result.rows);
+               res.send(result.rows);
+           })
+           .catch(e => {
+               console.log("Error while fetching expression possibilities", e);
+           });
     }
 }
