@@ -1,3 +1,4 @@
+import {SongStatsComponent} from '../view-song/song-stats.component';
 import {SongsPeekComponent} from '../songs/songs-peek.component';
 import {WordsComponent} from '../view-words/view-words.component';
 import {WordByIndexComponent} from '../words/word-by-index.component';
@@ -36,7 +37,7 @@ import {ClientMainComponent} from './client-main';
 		SongInfoComponent,
 		WordPeekComponent,
 		SongsPeekComponent,
-		FullSongComponent,
+		FullSongComponent, SongStatsComponent,
 		WordByIndexComponent,
 		PreCalloutComponent, CalloutComponent, CalloutWrapComponent,
 		WordsComponent,
@@ -47,9 +48,7 @@ import {ClientMainComponent} from './client-main';
 		ViewSongComponent,
 		XmlComponent,
 	],
-	providers: [
-		// HeroService
-	],
+	providers: [],
 	bootstrap: [ ClientMainComponent ]
 })
 export class AppModule {}

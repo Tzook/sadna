@@ -35,7 +35,7 @@ var FullSongComponent = (function () {
             moduleId: module.id,
             selector: 'full-song',
             styles: ["\n        section {\n            text-align: center;\n            font-size: 18px;\n        }\n        div {\n            white-space: pre-line;\n        }\n        aside {\n            margin-top: 5px;\n            font-size: 15px;\n        }\n    "],
-            template: "\n        <section>\n            <button [hidden]=\"song\" (click)=\"viewFullSong()\">View full song</button>\n            <div *ngIf=\"song\">\n                <div>{{song}}</div>\n                <button (click)=\"showHighlighted()\">Show expression occurences*</button>\n                <aside>* Select a few words with the cursor, and click the button to view the expression occurences</aside>\n            </div>\n        </section>\n    "
+            template: "\n        <section>\n            <button [hidden]=\"song\" (click)=\"viewFullSong()\">View full song</button>\n            <div *ngIf=\"song\">\n                <div>{{song}}</div>\n                <button (click)=\"showHighlighted()\">Show expression occurences*</button>\n                <aside>* Select a few words with the cursor, and click the button to view the expression occurences</aside>\n                <song-stats [song]=\"song\"></song-stats>\n            </div>\n        </section>\n    "
         }), 
         __metadata('design:paramtypes', [router_1.Router, word_peek_service_1.WordPeekService])
     ], FullSongComponent);

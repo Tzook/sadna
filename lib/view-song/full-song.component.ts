@@ -27,6 +27,7 @@ import {Component} from '@angular/core';
                 <div>{{song}}</div>
                 <button (click)="showHighlighted()">Show expression occurences*</button>
                 <aside>* Select a few words with the cursor, and click the button to view the expression occurences</aside>
+                <song-stats [song]="song"></song-stats>
             </div>
         </section>
     `

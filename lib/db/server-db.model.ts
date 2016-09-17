@@ -68,6 +68,7 @@ export interface WordInSong extends Row {
 export interface CompleteWordInSong {
     words: Word[],
     wordsInSong: WordInSong[],
+    letters: number,
 }
 
 export interface WordInSongResult extends Result {
