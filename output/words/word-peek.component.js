@@ -27,7 +27,7 @@ var WordPeekComponent = (function () {
             moduleId: module.id,
             selector: 'word-peek',
             styles: ["\n        :host {\n            font-size: 18px;\n            line-height: 30px;\n            letter-spacing: 2px;\n        }\n        :host:not(:last-child):after {\n            content: \" | \";\n        }\n        .rows:not(:last-child) {\n            margin-bottom: 20px;\n            padding-bottom: 20px;\n            border-bottom: 2px dotted;\n        }\n    "],
-            template: "\n        <callout-wrap (calloutShown)=\"showRows()\">\n            <pre-callout>{{word}}</pre-callout>\n            <callout>\n                <div class=\"rows\" *ngFor=\"let wordRow of wordRows\">\n                    <div *ngFor=\"let row of wordRow\">\n                        {{row}}\n                    </div>\n                </div>\n            </callout>\n        </callout-wrap>\n    ",
+            template: "\n        <callout-wrap (calloutShown)=\"showRows()\">\n            <pre-callout>{{word}}</pre-callout>\n            <callout>\n                <div class=\"rows\">\n                    Appearances of \"<b>{{word}}</b>\" ({{word.length}} letters):\n                </div>\n                <div class=\"rows\" *ngFor=\"let wordRow of wordRows\">\n                    <div *ngFor=\"let row of wordRow\">\n                        {{row}}\n                    </div>\n                </div>\n            </callout>\n        </callout-wrap>\n    ",
         }), 
         __metadata('design:paramtypes', [word_peek_service_1.WordPeekService])
     ], WordPeekComponent);

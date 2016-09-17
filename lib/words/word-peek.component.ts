@@ -23,6 +23,9 @@ import {Component, OnInit, Input} from '@angular/core';
         <callout-wrap (calloutShown)="showRows()">
             <pre-callout>{{word}}</pre-callout>
             <callout>
+                <div class="rows">
+                    Appearances of "<b>{{word}}</b>" ({{word.length}} letters):
+                </div>
                 <div class="rows" *ngFor="let wordRow of wordRows">
                     <div *ngFor="let row of wordRow">
                         {{row}}
