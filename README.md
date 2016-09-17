@@ -1,4 +1,4 @@
-## Sadna https://sadna.herokuapp.com
+## [Sadna](https://sadna.herokuapp.com)
 A webapp for managing songs' lyrics, using Angular2 and Node.js.
 All code is written in TypeScript - making client-server code reusability easy.
 
