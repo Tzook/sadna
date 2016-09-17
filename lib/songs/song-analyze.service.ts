@@ -35,7 +35,7 @@ export class SongAnalyzeService {
                                 continue;
                             }
 
-                            let isPunctuation = PUNCTUATIONS_REGEX.test(wordPart);
+                            let isPunctuation = !!wordPart.match(PUNCTUATIONS_REGEX);
                             if (isPunctuation && skipPunctuation) {
                                 continue;
                             }

@@ -40,7 +40,7 @@ var SongAnalyzeService = (function () {
                             if (!wordPart.length) {
                                 continue;
                             }
-                            var isPunctuation = punctuation_constants_1.PUNCTUATIONS_REGEX.test(wordPart);
+                            var isPunctuation = !!wordPart.match(punctuation_constants_1.PUNCTUATIONS_REGEX);
                             if (isPunctuation && skipPunctuation) {
                                 continue;
                             }
